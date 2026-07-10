@@ -144,3 +144,48 @@ export async function deleteHighlight(formData: FormData): Promise<void> {
   revalidatePath('/')
   revalidatePath('/admin')
 }
+
+export async function uploadGalleryImage(formData: FormData): Promise<void> {
+  const supabase = await createClient()
+  const image = formData.get('image') as File | null
+  
+  if (!image || image.size === 0) {
+    throw new Error("No image provided")
+  }
+  
+  const fileExt = image.name.split('.').pop()
+  const fileName = `${Date.now()}_gallery.${fileExt}`
+  
+  const { error: uploadError } = await supabase.storage
+    .from('gallery')
+    .upload(fileName, image)
+    
+  if (uploadError) {
+    console.error("Error uploading gallery image:", uploadError)
+    throw new Error(uploadError.message)
+  }
+
+  revalidatePath('/')
+  revalidatePath('/admin')
+}
+
+export async function deleteGalleryImage(formData: FormData): Promise<void> {
+  const supabase = await createClient()
+  const filename = formData.get('filename') as string
+  
+  if (!filename) {
+    throw new Error("No filename provided")
+  }
+  
+  const { error } = await supabase.storage
+    .from('gallery')
+    .remove([filename])
+
+  if (error) {
+    console.error("Error deleting gallery image:", error)
+    throw new Error(error.message)
+  }
+
+  revalidatePath('/')
+  revalidatePath('/admin')
+}

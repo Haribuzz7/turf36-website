@@ -1,5 +1,5 @@
 import { createClient } from '@/utils/supabase/server'
-import { updateLiveMatch, addEvent, deleteEvent, addHighlight, deleteHighlight } from './actions'
+import { updateLiveMatch, addEvent, deleteEvent, addHighlight, deleteHighlight, uploadGalleryImage, deleteGalleryImage } from './actions'
 
 export default async function AdminDashboard() {
   const supabase = await createClient()
@@ -12,6 +12,15 @@ export default async function AdminDashboard() {
 
   // Fetch all highlights
   const { data: highlights } = await supabase.from('highlights').select('*').order('created_at', { ascending: false })
+
+  // Fetch Gallery Images
+  const { data: galleryFiles } = await supabase.storage.from('gallery').list();
+  const gallery = galleryFiles?.filter(file => !file.name.startsWith('.') && file.name.includes('.')).map(file => {
+    return {
+      name: file.name,
+      url: supabase.storage.from('gallery').getPublicUrl(file.name).data.publicUrl
+    }
+  }) || [];
 
   return (
     <div>
@@ -65,10 +74,46 @@ export default async function AdminDashboard() {
         
         {/* Placeholder Cards */}
         <div className="flex flex-col gap-5">
-          <div className="bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[16px] p-6 opacity-60 grayscale hover:grayscale-0 transition-all duration-300">
-            <div className="font-bebas text-[24px] mb-2 flex items-center gap-2">📸 Gallery Manager <span className="text-[10px] bg-white/10 px-2 py-1 rounded font-space tracking-wider ml-auto">SOON</span></div>
-            <p className="text-[var(--color-muted)] text-[13px]">Upload and delete photos directly from your phone. Database & Storage are already configured.</p>
+          {/* Gallery Manager */}
+          <div className="bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[16px] p-6 shadow-xl">
+            <div className="font-bebas text-[28px] mb-2 flex items-center gap-3">
+              📸 Gallery Manager
+            </div>
+            <p className="text-[var(--color-muted)] text-[13.5px] mb-6 leading-relaxed">
+              Upload photos directly to your turf gallery. Images will appear instantly on the homepage.
+            </p>
+
+            <form action={uploadGalleryImage} className="flex flex-col gap-4 mb-8">
+              <div>
+                <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Select Image</label>
+                <input required type="file" name="image" accept="image/*" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-[9px] text-[13px] text-[var(--color-muted)] file:mr-4 file:py-[2px] file:px-3 file:rounded file:border-0 file:text-[11px] file:font-space file:bg-[var(--color-gold)] file:text-black hover:file:bg-white cursor-pointer" />
+              </div>
+
+              <button type="submit" className="mt-2 bg-white/5 hover:bg-[var(--color-gold)] hover:text-black border border-[var(--color-card-stroke)] hover:border-transparent text-white font-space text-[12.5px] uppercase tracking-[.1em] py-[14px] rounded-lg transition-all duration-300">
+                Upload Photo
+              </button>
+            </form>
+
+            <div className="space-y-3">
+              <h3 className="font-space text-[11px] text-[var(--color-gold)] uppercase tracking-[.05em] mb-3">Live Gallery Photos</h3>
+              <div className="grid grid-cols-2 gap-3">
+                {gallery.length > 0 ? gallery.map((img) => (
+                  <div key={img.name} className="relative group rounded-lg overflow-hidden border border-[var(--color-card-stroke)]">
+                    <img src={img.url} alt="Gallery" className="w-full aspect-square object-cover" />
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <form action={deleteGalleryImage}>
+                        <input type="hidden" name="filename" value={img.name} />
+                        <button type="submit" className="text-white text-[11px] font-space uppercase tracking-widest px-3 py-2 bg-red-600 rounded hover:bg-red-500 transition-colors shadow-lg">Delete</button>
+                      </form>
+                    </div>
+                  </div>
+                )) : (
+                  <p className="text-[12px] text-[var(--color-muted)] p-3 bg-black/30 rounded border border-[var(--color-card-stroke)] col-span-2">No photos uploaded yet.</p>
+                )}
+              </div>
+            </div>
           </div>
+
           <div className="bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[16px] p-6 opacity-60 grayscale hover:grayscale-0 transition-all duration-300">
             <div className="font-bebas text-[24px] mb-2 flex items-center gap-2">🏆 Hall of Fame <span className="text-[10px] bg-white/10 px-2 py-1 rounded font-space tracking-wider ml-auto">SOON</span></div>
             <p className="text-[var(--color-muted)] text-[13px]">Add MVPs, best bowlers, and champions dynamically. Database table is already configured.</p>

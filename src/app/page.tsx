@@ -32,8 +32,8 @@ export default async function Home() {
   // Fetch Gallery Images
   const { data: galleryFiles } = await supabase.storage.from('gallery').list();
   
-  // Filter out hidden files and generate public URLs
-  const gallery = galleryFiles?.filter(file => !file.name.startsWith('.')).map(file => {
+  // Filter out hidden files, folders (no extension), and generate public URLs
+  const gallery = galleryFiles?.filter(file => !file.name.startsWith('.') && file.name.includes('.')).map(file => {
     return supabase.storage.from('gallery').getPublicUrl(file.name).data.publicUrl;
   }) || [];
 
