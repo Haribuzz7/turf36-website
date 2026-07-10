@@ -66,18 +66,23 @@ export default function EventsSection({ events }: EventsProps) {
 
           return (
             <Reveal key={event.id} delay={index * 0.1}>
-              <div className="grid grid-cols-1 sm:grid-cols-[120px_1fr_auto] items-center gap-[22px] p-[22px] mt-[16px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[14px] backdrop-blur-md">
-                <div className="font-space text-center p-[12px_8px] border border-[var(--color-card-stroke)] rounded-[10px]">
-                  <b className="block text-[26px] text-[var(--color-gold-hot)] font-bold">{month}</b>
-                  <span className="text-[10px] uppercase text-[var(--color-muted)] tracking-[.1em]">{year}</span>
+              <div className="flex flex-col gap-0 mt-[16px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[14px] backdrop-blur-md overflow-hidden transition-colors hover:border-[var(--color-gold)]/30">
+                {event.poster_url && (
+                  <img src={event.poster_url} alt={event.title} className="w-full h-[200px] sm:h-[300px] object-cover object-center border-b border-[var(--color-card-stroke)]" />
+                )}
+                <div className="grid grid-cols-1 sm:grid-cols-[120px_1fr_auto] items-center gap-[22px] p-[22px]">
+                  <div className="font-space text-center p-[12px_8px] border border-[var(--color-card-stroke)] rounded-[10px] bg-black/40">
+                    <b className="block text-[26px] text-[var(--color-gold-hot)] font-bold leading-none mb-1">{month}</b>
+                    <span className="text-[10px] uppercase text-[var(--color-muted)] tracking-[.1em]">{year}</span>
+                  </div>
+                  <div>
+                    <h3 className="font-bebas text-[22px] sm:text-[28px] tracking-[.02em] mb-[4px] text-white">{event.title}</h3>
+                    <p className="text-[13px] sm:text-[14px] text-[var(--color-muted)]">{event.subtitle}</p>
+                  </div>
+                  <a href="#book" className="font-space text-[12.5px] tracking-[.08em] uppercase py-[14px] px-[26px] rounded-lg inline-flex items-center gap-[10px] cursor-pointer border border-[var(--color-card-stroke)] text-[var(--color-white)] hover:bg-[var(--color-gold)] hover:text-black hover:border-[var(--color-gold)] transition-all duration-300 justify-center text-center">
+                    Register Now
+                  </a>
                 </div>
-                <div>
-                  <h3 className="font-bebas text-[22px] tracking-[.02em] mb-[4px]">{event.title}</h3>
-                  <p className="text-[13px] text-[var(--color-muted)]">{event.subtitle}</p>
-                </div>
-                <a href="#book" className="font-space text-[12.5px] tracking-[.08em] uppercase py-[14px] px-[26px] rounded-lg inline-flex items-center gap-[10px] cursor-pointer border border-[var(--color-card-stroke)] text-[var(--color-white)] hover:border-[var(--color-gold)] transition-colors justify-center text-center">
-                  Register
-                </a>
               </div>
             </Reveal>
           );

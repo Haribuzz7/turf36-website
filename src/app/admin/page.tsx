@@ -1,11 +1,14 @@
 import { createClient } from '@/utils/supabase/server'
-import { updateLiveMatch } from './actions'
+import { updateLiveMatch, addEvent, deleteEvent } from './actions'
 
 export default async function AdminDashboard() {
   const supabase = await createClient()
   
   // Fetch the current live match state
   const { data: liveMatch } = await supabase.from('live_match').select('*').single()
+
+  // Fetch all events
+  const { data: events } = await supabase.from('events').select('*').order('event_date', { ascending: true })
 
   return (
     <div>
@@ -67,9 +70,69 @@ export default async function AdminDashboard() {
             <div className="font-bebas text-[24px] mb-2 flex items-center gap-2">🏆 Hall of Fame <span className="text-[10px] bg-white/10 px-2 py-1 rounded font-space tracking-wider ml-auto">SOON</span></div>
             <p className="text-[var(--color-muted)] text-[13px]">Add MVPs, best bowlers, and champions dynamically. Database table is already configured.</p>
           </div>
-          <div className="bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[16px] p-6 opacity-60 grayscale hover:grayscale-0 transition-all duration-300">
-            <div className="font-bebas text-[24px] mb-2 flex items-center gap-2">📅 Events Manager <span className="text-[10px] bg-white/10 px-2 py-1 rounded font-space tracking-wider ml-auto">SOON</span></div>
-            <p className="text-[var(--color-muted)] text-[13px]">Schedule tournaments to automatically update the homepage countdown.</p>
+          
+          {/* Events Manager */}
+          <div className="bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[16px] p-6 shadow-xl">
+            <div className="font-bebas text-[28px] mb-2 flex items-center gap-3">
+              📅 Events Manager
+            </div>
+            <p className="text-[var(--color-muted)] text-[13.5px] mb-6 leading-relaxed">
+              Add upcoming tournaments to automatically update the countdown timer on the homepage.
+            </p>
+
+            <form action={addEvent} className="flex flex-col gap-4 mb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Event Title</label>
+                  <input required type="text" name="title" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-3 text-[13px] text-white focus:outline-none focus:border-[var(--color-gold)]" placeholder="e.g. TSL Season 3" />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Subtitle</label>
+                  <input required type="text" name="subtitle" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-3 text-[13px] text-white focus:outline-none focus:border-[var(--color-gold)]" placeholder="e.g. Registrations open now!" />
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Event Date</label>
+                  <input required type="date" name="event_date" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-3 text-[13px] text-[var(--color-muted)] focus:outline-none focus:border-[var(--color-gold)] [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert" />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Poster Image (Optional)</label>
+                  <input type="file" name="poster" accept="image/*" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-[9px] text-[13px] text-[var(--color-muted)] file:mr-4 file:py-[2px] file:px-3 file:rounded file:border-0 file:text-[11px] file:font-space file:bg-[var(--color-gold)] file:text-black hover:file:bg-white cursor-pointer" />
+                </div>
+              </div>
+
+              <button type="submit" className="mt-2 bg-white/5 hover:bg-[var(--color-gold)] hover:text-black border border-[var(--color-card-stroke)] hover:border-transparent text-white font-space text-[12.5px] uppercase tracking-[.1em] py-[14px] rounded-lg transition-all duration-300">
+                Add Event
+              </button>
+            </form>
+
+            {/* Event List */}
+            <div className="space-y-3">
+              <h3 className="font-space text-[11px] text-[var(--color-gold)] uppercase tracking-[.05em] mb-3">Scheduled Events</h3>
+              {events && events.length > 0 ? events.map((evt: any) => (
+                <div key={evt.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 bg-black/50 border border-[var(--color-card-stroke)] rounded-lg gap-3">
+                  <div className="flex items-center gap-3">
+                    {evt.poster_url ? (
+                      <img src={evt.poster_url} className="w-12 h-12 object-cover rounded bg-[#111] border border-[var(--color-card-stroke)]" alt="poster" />
+                    ) : (
+                      <div className="w-12 h-12 rounded bg-[#111] border border-[var(--color-card-stroke)] flex items-center justify-center text-[20px]">📅</div>
+                    )}
+                    <div>
+                      <h4 className="text-white text-[14px] font-bold">{evt.title}</h4>
+                      <p className="text-[var(--color-muted)] text-[12px]">{new Date(evt.event_date).toLocaleDateString()} · {evt.subtitle}</p>
+                    </div>
+                  </div>
+                  <form action={deleteEvent}>
+                    <input type="hidden" name="id" value={evt.id} />
+                    <button type="submit" className="text-red-400 hover:text-red-300 text-[12px] font-space uppercase tracking-widest px-3 py-2 bg-red-500/10 rounded transition-colors w-full sm:w-auto">Delete</button>
+                  </form>
+                </div>
+              )) : (
+                <p className="text-[12px] text-[var(--color-muted)] p-3 bg-black/30 rounded border border-[var(--color-card-stroke)]">No events scheduled. Add one above!</p>
+              )}
+            </div>
           </div>
         </div>
       </div>
