@@ -3,7 +3,7 @@
 import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 
-export async function updateLiveMatch(formData: FormData) {
+export async function updateLiveMatch(formData: FormData): Promise<void> {
   const supabase = await createClient()
   
   const iframe_url = formData.get('iframe_url') as string
@@ -16,10 +16,9 @@ export async function updateLiveMatch(formData: FormData) {
 
   if (error) {
     console.error("Error updating live match:", error)
-    return { error: error.message }
+    throw new Error(error.message)
   }
 
   // Revalidate the homepage so the new iframe shows up instantly for all visitors
   revalidatePath('/')
-  return { success: true }
 }
