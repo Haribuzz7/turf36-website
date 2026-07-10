@@ -7,13 +7,13 @@ export default function BookingSection() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [date, setDate] = useState("");
-  const [session, setSession] = useState("");
+  const [time, setTime] = useState("");
   const [sport, setSport] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const message = `Hi Turf 36! I'd like to book a slot.\n\nName: ${name}\nPhone: ${phone}\nDate: ${date}\nSession: ${session}\nSport: ${sport}`;
-    const whatsappUrl = `https://wa.me/910000000000?text=${encodeURIComponent(message)}`;
+    const message = `Hi Turf 36! I'd like to book a slot.\n\nName: ${name}\nPhone: ${phone}\nDate: ${date}\nTime: ${time}\nSport: ${sport}`;
+    const whatsappUrl = `https://wa.me/917708929267?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
   };
 
@@ -38,14 +38,15 @@ export default function BookingSection() {
               <div className="p-[20px] rounded-xl border border-[var(--color-card-stroke)] bg-[var(--color-card)]">
                 <div className="text-[20px] mb-[10px]">☀️</div>
                 Morning Session
-                <b className="font-space text-[var(--color-gold-hot)] text-[20px] block mt-[6px] font-bold">₹800 / hr</b>
+                <b className="font-space text-[var(--color-gold-hot)] text-[20px] block mt-[6px] font-bold">₹400 / hr</b>
               </div>
               <div className="p-[20px] rounded-xl border border-[var(--color-card-stroke)] bg-[var(--color-card)]">
                 <div className="text-[20px] mb-[10px]">🌙</div>
                 Evening (Floodlit)
-                <b className="font-space text-[var(--color-gold-hot)] text-[20px] block mt-[6px] font-bold">₹1200 / hr</b>
+                <b className="font-space text-[var(--color-gold-hot)] text-[20px] block mt-[6px] font-bold">₹500 / hr</b>
               </div>
             </div>
+            <p className="text-[12px] text-[var(--color-muted-2)] font-space tracking-[.05em] mt-[12px]">* In weekends price may vary</p>
             <div className="flex gap-[14px] mt-[20px] p-[14px_16px] border border-[var(--color-card-stroke)] rounded-[10px] bg-[var(--color-card)] text-[13px] text-[var(--color-muted)]">
               <span>ℹ️</span>
               <span><b className="text-[var(--color-gold-hot)]">Direct WhatsApp Booking</b> — Submitting this form will open WhatsApp with your pre-filled details. Just hit send!</span>
@@ -69,12 +70,8 @@ export default function BookingSection() {
                 <input type="date" required value={date} onChange={e => setDate(e.target.value)} className="w-full bg-[rgba(255,255,255,0.03)] border border-[var(--color-line)] text-[var(--color-white)] p-[13px_14px] rounded-lg font-poppins text-[14px] font-light focus:outline-none focus:border-[var(--color-gold)] [&>option]:bg-[var(--color-charcoal)]" />
               </div>
               <div>
-                <label className="text-[11px] tracking-[.08em] uppercase text-[var(--color-muted)] mb-[6px] block">Session</label>
-                <select required value={session} onChange={e => setSession(e.target.value)} className="w-full bg-[rgba(255,255,255,0.03)] border border-[var(--color-line)] text-[var(--color-white)] p-[13px_14px] rounded-lg font-poppins text-[14px] font-light focus:outline-none focus:border-[var(--color-gold)] [&>option]:bg-[var(--color-charcoal)]">
-                  <option value="" disabled>Choose</option>
-                  <option value="Morning (6 AM - 12 PM)">Morning (6 AM – 12 PM)</option>
-                  <option value="Evening (5 PM - 10 PM)">Evening / Floodlit (5 PM – 10 PM)</option>
-                </select>
+                <label className="text-[11px] tracking-[.08em] uppercase text-[var(--color-muted)] mb-[6px] block">Time Slot</label>
+                <input type="text" placeholder="e.g. 6:00 PM - 8:00 PM" required value={time} onChange={e => setTime(e.target.value)} className="w-full bg-[rgba(255,255,255,0.03)] border border-[var(--color-line)] text-[var(--color-white)] p-[13px_14px] rounded-lg font-poppins text-[14px] font-light focus:outline-none focus:border-[var(--color-gold)]" />
               </div>
             </div>
             <div>
