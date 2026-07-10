@@ -14,7 +14,7 @@ export default function BookingSection() {
     e.preventDefault();
     const message = `Hi Turf 36! I'd like to book a slot.\n\nName: ${name}\nPhone: ${phone}\nDate: ${date}\nTime: ${time}\nSport: ${sport}`;
     const whatsappUrl = `https://wa.me/917708929267?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, "_blank");
+    window.location.href = whatsappUrl;
   };
 
   return (
