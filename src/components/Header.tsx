@@ -1,4 +1,5 @@
 "use client";
+import { MessageCircle, Phone, MapPin } from "lucide-react";
 
 export default function Header() {
   return (
@@ -25,14 +26,14 @@ export default function Header() {
         <a href="#book" className="w-auto h-[50px] rounded-[30px] px-[18px] flex items-center justify-center gap-[8px] font-space text-[12px] tracking-[.08em] font-bold bg-[var(--color-gold)] text-[#0a0a0a] shadow-[0_6px_20px_rgba(0,0,0,0.5)] hover:-translate-y-[3px] hover:scale-105 transition-transform">
           ⚡ Book Now
         </a>
-        <a href="https://wa.me/910000000000" target="_blank" rel="noreferrer" title="WhatsApp" className="w-[50px] h-[50px] rounded-full flex items-center justify-center bg-[var(--color-charcoal-2)] border border-[var(--color-card-stroke)] text-[var(--color-gold-hot)] shadow-[0_6px_20px_rgba(0,0,0,0.5)] hover:-translate-y-[3px] hover:scale-105 hover:bg-[var(--color-gold)] hover:text-[#0a0a0a] transition-all">
-          💬
+        <a href="https://wa.me/917708929267" target="_blank" rel="noreferrer" title="WhatsApp" className="w-[50px] h-[50px] rounded-full flex items-center justify-center bg-[var(--color-charcoal-2)] border border-[var(--color-card-stroke)] text-[var(--color-gold-hot)] shadow-[0_6px_20px_rgba(0,0,0,0.5)] hover:-translate-y-[3px] hover:scale-105 hover:bg-[var(--color-gold)] hover:text-[#0a0a0a] transition-all">
+          <MessageCircle size={20} />
         </a>
-        <a href="tel:+910000000000" title="Call" className="w-[50px] h-[50px] rounded-full flex items-center justify-center bg-[var(--color-charcoal-2)] border border-[var(--color-card-stroke)] text-[var(--color-gold-hot)] shadow-[0_6px_20px_rgba(0,0,0,0.5)] hover:-translate-y-[3px] hover:scale-105 hover:bg-[var(--color-gold)] hover:text-[#0a0a0a] transition-all">
-          📞
+        <a href="tel:+917708929267" title="Call" className="w-[50px] h-[50px] rounded-full flex items-center justify-center bg-[var(--color-charcoal-2)] border border-[var(--color-card-stroke)] text-[var(--color-gold-hot)] shadow-[0_6px_20px_rgba(0,0,0,0.5)] hover:-translate-y-[3px] hover:scale-105 hover:bg-[var(--color-gold)] hover:text-[#0a0a0a] transition-all">
+          <Phone size={20} />
         </a>
-        <a href="https://maps.google.com" target="_blank" rel="noreferrer" title="Directions" className="w-[50px] h-[50px] rounded-full flex items-center justify-center bg-[var(--color-charcoal-2)] border border-[var(--color-card-stroke)] text-[var(--color-gold-hot)] shadow-[0_6px_20px_rgba(0,0,0,0.5)] hover:-translate-y-[3px] hover:scale-105 hover:bg-[var(--color-gold)] hover:text-[#0a0a0a] transition-all">
-          📍
+        <a href="https://maps.app.goo.gl/nfdANdBq9Gnu66ij9" target="_blank" rel="noreferrer" title="Directions" className="w-[50px] h-[50px] rounded-full flex items-center justify-center bg-[var(--color-charcoal-2)] border border-[var(--color-card-stroke)] text-[var(--color-gold-hot)] shadow-[0_6px_20px_rgba(0,0,0,0.5)] hover:-translate-y-[3px] hover:scale-105 hover:bg-[var(--color-gold)] hover:text-[#0a0a0a] transition-all">
+          <MapPin size={20} />
         </a>
       </div>
     </>

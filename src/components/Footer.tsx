@@ -16,7 +16,7 @@ export default function Footer() {
           <div className="flex flex-col">
             <h5 className="font-space text-[11px] tracking-[.12em] text-[var(--color-gold)] uppercase mb-[16px]">Connects With</h5>
             <a href="#" className="text-[13.5px] text-[var(--color-muted)] mb-[10px] hover:text-[var(--color-gold-hot)] transition-colors">CricHeroes</a>
-            <a href="#" className="text-[13.5px] text-[var(--color-muted)] mb-[10px] hover:text-[var(--color-gold-hot)] transition-colors">Google Maps</a>
+            <a href="https://maps.app.goo.gl/nfdANdBq9Gnu66ij9" target="_blank" rel="noreferrer" className="text-[13.5px] text-[var(--color-muted)] mb-[10px] hover:text-[var(--color-gold-hot)] transition-colors">Google Maps</a>
             <a href="#" className="text-[13.5px] text-[var(--color-muted)] mb-[10px] hover:text-[var(--color-gold-hot)] transition-colors">WhatsApp</a>
             <a href="#" className="text-[13.5px] text-[var(--color-muted)] mb-[10px] hover:text-[var(--color-gold-hot)] transition-colors">Instagram — @stories.hxri</a>
           </div>

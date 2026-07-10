@@ -2,6 +2,7 @@
 
 import Reveal from "./Reveal";
 import { useState } from "react";
+import { Sun, Moon, Info } from "lucide-react";
 
 export default function BookingSection() {
   const [name, setName] = useState("");
@@ -36,19 +37,19 @@ export default function BookingSection() {
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-[14px] mt-[20px]">
               <div className="p-[20px] rounded-xl border border-[var(--color-card-stroke)] bg-[var(--color-card)]">
-                <div className="text-[20px] mb-[10px]">☀️</div>
+                <div className="mb-[10px]"><Sun size={20} className="text-[var(--color-gold-hot)]" /></div>
                 Morning Session
                 <b className="font-space text-[var(--color-gold-hot)] text-[20px] block mt-[6px] font-bold">₹400 / hr</b>
               </div>
               <div className="p-[20px] rounded-xl border border-[var(--color-card-stroke)] bg-[var(--color-card)]">
-                <div className="text-[20px] mb-[10px]">🌙</div>
+                <div className="mb-[10px]"><Moon size={20} className="text-[var(--color-muted)]" /></div>
                 Evening (Floodlit)
                 <b className="font-space text-[var(--color-gold-hot)] text-[20px] block mt-[6px] font-bold">₹500 / hr</b>
               </div>
             </div>
             <p className="text-[12px] text-[var(--color-muted-2)] font-space tracking-[.05em] mt-[12px]">* In weekends price may vary</p>
             <div className="flex gap-[14px] mt-[20px] p-[14px_16px] border border-[var(--color-card-stroke)] rounded-[10px] bg-[var(--color-card)] text-[13px] text-[var(--color-muted)]">
-              <span>ℹ️</span>
+              <span className="mt-[2px]"><Info size={16} /></span>
               <span><b className="text-[var(--color-gold-hot)]">Direct WhatsApp Booking</b> — Submitting this form will open WhatsApp with your pre-filled details. Just hit send!</span>
             </div>
           </div>
@@ -71,7 +72,7 @@ export default function BookingSection() {
               </div>
               <div>
                 <label className="text-[11px] tracking-[.08em] uppercase text-[var(--color-muted)] mb-[6px] block">Time Slot</label>
-                <input type="text" placeholder="e.g. 6:00 PM - 8:00 PM" required value={time} onChange={e => setTime(e.target.value)} className="w-full bg-[rgba(255,255,255,0.03)] border border-[var(--color-line)] text-[var(--color-white)] p-[13px_14px] rounded-lg font-poppins text-[14px] font-light focus:outline-none focus:border-[var(--color-gold)]" />
+                <input type="time" required value={time} onChange={e => setTime(e.target.value)} className="w-full bg-[rgba(255,255,255,0.03)] border border-[var(--color-line)] text-[var(--color-white)] p-[13px_14px] rounded-lg font-poppins text-[14px] font-light focus:outline-none focus:border-[var(--color-gold)] [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert" />
               </div>
             </div>
             <div>
