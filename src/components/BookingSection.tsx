@@ -8,12 +8,27 @@ export default function BookingSection() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
   const [sport, setSport] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const message = `Hi Turf 36! I'd like to book a slot.\n\nName: ${name}\nPhone: ${phone}\nDate: ${date}\nTime: ${time}\nSport: ${sport}`;
+    
+    // Format the time nicely for WhatsApp
+    // The browser time input gives 24h format (e.g. "14:30"). 
+    // We can parse it into 12h format for the WhatsApp message to make it readable.
+    const formatTime = (time24: string) => {
+      if (!time24) return "";
+      const [hours, minutes] = time24.split(":");
+      const h = parseInt(hours);
+      const ampm = h >= 12 ? "PM" : "AM";
+      const h12 = h % 12 || 12;
+      return `${h12}:${minutes} ${ampm}`;
+    };
+    
+    const formattedTime = `${formatTime(startTime)} to ${formatTime(endTime)}`;
+    const message = `Hi Turf 36! I'd like to book a slot.\n\nName: ${name}\nPhone: ${phone}\nDate: ${date}\nTime: ${formattedTime}\nSport: ${sport}`;
     const whatsappUrl = `https://wa.me/917708929267?text=${encodeURIComponent(message)}`;
     window.location.href = whatsappUrl;
   };
@@ -72,7 +87,11 @@ export default function BookingSection() {
               </div>
               <div>
                 <label className="text-[11px] tracking-[.08em] uppercase text-[var(--color-muted)] mb-[6px] block">Time Slot</label>
-                <input type="time" required value={time} onChange={e => setTime(e.target.value)} className="w-full bg-[rgba(255,255,255,0.03)] border border-[var(--color-line)] text-[var(--color-white)] p-[13px_14px] rounded-lg font-poppins text-[14px] font-light focus:outline-none focus:border-[var(--color-gold)] [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert" />
+                <div className="flex items-center gap-[10px]">
+                  <input type="time" required value={startTime} onChange={e => setStartTime(e.target.value)} className="flex-1 min-w-0 bg-[rgba(255,255,255,0.03)] border border-[var(--color-line)] text-[var(--color-white)] p-[13px_14px] rounded-lg font-poppins text-[14px] font-light focus:outline-none focus:border-[var(--color-gold)] [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert" />
+                  <span className="text-[var(--color-muted)] text-[12px] uppercase">to</span>
+                  <input type="time" required value={endTime} onChange={e => setEndTime(e.target.value)} className="flex-1 min-w-0 bg-[rgba(255,255,255,0.03)] border border-[var(--color-line)] text-[var(--color-white)] p-[13px_14px] rounded-lg font-poppins text-[14px] font-light focus:outline-none focus:border-[var(--color-gold)] [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert" />
+                </div>
               </div>
             </div>
             <div>
