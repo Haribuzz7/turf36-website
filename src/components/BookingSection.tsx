@@ -8,21 +8,13 @@ export default function BookingSection() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [date, setDate] = useState("");
-  const [startHour, setStartHour] = useState("");
-  const [startAmpm, setStartAmpm] = useState("AM");
-  const [endHour, setEndHour] = useState("");
-  const [endAmpm, setEndAmpm] = useState("PM");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
   const [sport, setSport] = useState("");
-
-  const hoursList = [];
-  for (let i = 1; i <= 12; i++) {
-    hoursList.push(`${i}:00`);
-    hoursList.push(`${i}:30`);
-  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const formattedTime = `${startHour} ${startAmpm} to ${endHour} ${endAmpm}`;
+    const formattedTime = `${startTime} to ${endTime}`;
     const message = `Hi Turf 36! I'd like to book a slot.\n\nName: ${name}\nPhone: ${phone}\nDate: ${date}\nTime: ${formattedTime}\nSport: ${sport}`;
     const whatsappUrl = `https://wa.me/917708929267?text=${encodeURIComponent(message)}`;
     window.location.href = whatsappUrl;
@@ -85,25 +77,11 @@ export default function BookingSection() {
                 <div className="flex flex-col gap-[10px]">
                   <div className="flex items-center gap-[6px]">
                     <span className="text-[var(--color-muted)] text-[11px] uppercase w-[35px]">From</span>
-                    <select required value={startHour} onChange={e => setStartHour(e.target.value)} className="flex-1 bg-[rgba(255,255,255,0.03)] border border-[var(--color-line)] text-[var(--color-white)] p-[12px_10px] rounded-lg font-poppins text-[13px] font-light focus:outline-none focus:border-[var(--color-gold)] [&>option]:bg-[var(--color-charcoal)]">
-                      <option value="" disabled>Time</option>
-                      {hoursList.map(h => <option key={`sh-${h}`} value={h}>{h}</option>)}
-                    </select>
-                    <select required value={startAmpm} onChange={e => setStartAmpm(e.target.value)} className="w-[70px] bg-[rgba(255,255,255,0.03)] border border-[var(--color-line)] text-[var(--color-white)] p-[12px_10px] rounded-lg font-poppins text-[13px] font-light focus:outline-none focus:border-[var(--color-gold)] [&>option]:bg-[var(--color-charcoal)]">
-                      <option value="AM">AM</option>
-                      <option value="PM">PM</option>
-                    </select>
+                    <input type="text" placeholder="e.g. 6:00 PM" required value={startTime} onChange={e => setStartTime(e.target.value)} className="flex-1 bg-[rgba(255,255,255,0.03)] border border-[var(--color-line)] text-[var(--color-white)] p-[12px_14px] rounded-lg font-poppins text-[13px] font-light focus:outline-none focus:border-[var(--color-gold)]" />
                   </div>
                   <div className="flex items-center gap-[6px]">
                     <span className="text-[var(--color-muted)] text-[11px] uppercase w-[35px]">To</span>
-                    <select required value={endHour} onChange={e => setEndHour(e.target.value)} className="flex-1 bg-[rgba(255,255,255,0.03)] border border-[var(--color-line)] text-[var(--color-white)] p-[12px_10px] rounded-lg font-poppins text-[13px] font-light focus:outline-none focus:border-[var(--color-gold)] [&>option]:bg-[var(--color-charcoal)]">
-                      <option value="" disabled>Time</option>
-                      {hoursList.map(h => <option key={`eh-${h}`} value={h}>{h}</option>)}
-                    </select>
-                    <select required value={endAmpm} onChange={e => setEndAmpm(e.target.value)} className="w-[70px] bg-[rgba(255,255,255,0.03)] border border-[var(--color-line)] text-[var(--color-white)] p-[12px_10px] rounded-lg font-poppins text-[13px] font-light focus:outline-none focus:border-[var(--color-gold)] [&>option]:bg-[var(--color-charcoal)]">
-                      <option value="AM">AM</option>
-                      <option value="PM">PM</option>
-                    </select>
+                    <input type="text" placeholder="e.g. 8:00 PM" required value={endTime} onChange={e => setEndTime(e.target.value)} className="flex-1 bg-[rgba(255,255,255,0.03)] border border-[var(--color-line)] text-[var(--color-white)] p-[12px_14px] rounded-lg font-poppins text-[13px] font-light focus:outline-none focus:border-[var(--color-gold)]" />
                   </div>
                 </div>
               </div>
