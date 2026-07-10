@@ -26,6 +26,9 @@ export default async function Home() {
   // Fetch Hall of Fame
   const { data: hallOfFame } = await supabase.from('hall_of_fame').select('*').order('order_index', { ascending: true });
 
+  // Fetch Highlights
+  const { data: highlights } = await supabase.from('highlights').select('*').order('created_at', { ascending: false });
+
   // Fetch Gallery Images
   const { data: galleryFiles } = await supabase.storage.from('gallery').list();
   
@@ -42,7 +45,7 @@ export default async function Home() {
       <LiveMatchSection liveMatch={liveMatch} />
       <AchievementsSection />
       <GallerySection images={gallery} />
-      <HighlightsSection />
+      <HighlightsSection highlights={highlights || []} />
       <HallOfFameSection hallOfFame={hallOfFame || []} />
       <TeamsSection />
       <FacilitiesSection />

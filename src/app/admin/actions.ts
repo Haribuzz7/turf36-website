@@ -83,3 +83,64 @@ export async function deleteEvent(formData: FormData): Promise<void> {
   revalidatePath('/')
   revalidatePath('/admin')
 }
+
+export async function addHighlight(formData: FormData): Promise<void> {
+  const supabase = await createClient()
+  
+  const title = formData.get('title') as string
+  const subtitle = formData.get('subtitle') as string
+  const video_url = formData.get('video_url') as string
+  const thumbnail = formData.get('thumbnail') as File | null
+  
+  let thumbnail_url = null
+  
+  if (thumbnail && thumbnail.size > 0) {
+    const fileExt = thumbnail.name.split('.').pop()
+    const fileName = `${Date.now()}_thumb.${fileExt}`
+    
+    const { data, error: uploadError } = await supabase.storage
+      .from('gallery')
+      .upload(`highlights/${fileName}`, thumbnail)
+      
+    if (uploadError) {
+      console.error("Error uploading thumbnail:", uploadError)
+      throw new Error(uploadError.message)
+    }
+    
+    const { data: publicUrlData } = supabase.storage
+      .from('gallery')
+      .getPublicUrl(`highlights/${fileName}`)
+      
+    thumbnail_url = publicUrlData.publicUrl
+  }
+
+  const { error } = await supabase
+    .from('highlights')
+    .insert([{ title, subtitle, video_url, thumbnail_url }])
+
+  if (error) {
+    console.error("Error adding highlight:", error)
+    throw new Error(error.message)
+  }
+
+  revalidatePath('/')
+  revalidatePath('/admin')
+}
+
+export async function deleteHighlight(formData: FormData): Promise<void> {
+  const supabase = await createClient()
+  const id = formData.get('id') as string
+  
+  const { error } = await supabase
+    .from('highlights')
+    .delete()
+    .eq('id', id)
+
+  if (error) {
+    console.error("Error deleting highlight:", error)
+    throw new Error(error.message)
+  }
+
+  revalidatePath('/')
+  revalidatePath('/admin')
+}
