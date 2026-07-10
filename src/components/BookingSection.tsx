@@ -79,6 +79,7 @@ export default function BookingSection() {
               <select required value={sport} onChange={e => setSport(e.target.value)} className="w-full bg-[rgba(255,255,255,0.03)] border border-[var(--color-line)] text-[var(--color-white)] p-[13px_14px] rounded-lg font-poppins text-[14px] font-light focus:outline-none focus:border-[var(--color-gold)] [&>option]:bg-[var(--color-charcoal)]">
                 <option value="" disabled>Choose</option>
                 <option value="Cricket">Cricket</option>
+                <option value="Football">Football</option>
                 <option value="Pickleball">Pickleball</option>
               </select>
             </div>
