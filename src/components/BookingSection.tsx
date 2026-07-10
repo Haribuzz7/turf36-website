@@ -1,0 +1,96 @@
+"use client";
+
+import Reveal from "./Reveal";
+import { useState } from "react";
+
+export default function BookingSection() {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [date, setDate] = useState("");
+  const [session, setSession] = useState("");
+  const [sport, setSport] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const message = `Hi Turf 36! I'd like to book a slot.\n\nName: ${name}\nPhone: ${phone}\nDate: ${date}\nSession: ${session}\nSport: ${sport}`;
+    const whatsappUrl = `https://wa.me/910000000000?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, "_blank");
+  };
+
+  return (
+    <section id="book" className="relative py-[110px] border-b border-[var(--color-line)]">
+      <div className="max-w-[1120px] mx-auto px-7">
+        <div className="font-space tracking-[.22em] uppercase text-[11.5px] text-[var(--color-gold)] flex items-center gap-[10px] mb-[16px] before:content-[''] before:w-[26px] before:h-[1px] before:bg-[var(--color-gold)]">
+          Reserve a slot
+        </div>
+        <Reveal>
+          <h2 className="font-bebas font-normal tracking-[.01em] text-[clamp(34px,5.4vw,58px)] leading-[1.02] uppercase">
+            Book The <span className="text-[var(--color-gold-hot)]">Turf</span>
+          </h2>
+        </Reveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-[44px] mt-[52px]">
+          <div>
+            <p className="text-[var(--color-muted)] font-light text-[15.5px] leading-[1.7] max-w-[560px]">
+              Pick a session, tell us who's playing, and you're confirmed. No more calling around to check if the slot is free.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-[14px] mt-[20px]">
+              <div className="p-[20px] rounded-xl border border-[var(--color-card-stroke)] bg-[var(--color-card)]">
+                <div className="text-[20px] mb-[10px]">☀️</div>
+                Morning Session
+                <b className="font-space text-[var(--color-gold-hot)] text-[20px] block mt-[6px] font-bold">₹800 / hr</b>
+              </div>
+              <div className="p-[20px] rounded-xl border border-[var(--color-card-stroke)] bg-[var(--color-card)]">
+                <div className="text-[20px] mb-[10px]">🌙</div>
+                Evening (Floodlit)
+                <b className="font-space text-[var(--color-gold-hot)] text-[20px] block mt-[6px] font-bold">₹1200 / hr</b>
+              </div>
+            </div>
+            <div className="flex gap-[14px] mt-[20px] p-[14px_16px] border border-[var(--color-card-stroke)] rounded-[10px] bg-[var(--color-card)] text-[13px] text-[var(--color-muted)]">
+              <span>ℹ️</span>
+              <span><b className="text-[var(--color-gold-hot)]">Direct WhatsApp Booking</b> — Submitting this form will open WhatsApp with your pre-filled details. Just hit send!</span>
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit} className="bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[14px] p-[26px] backdrop-blur-md flex flex-col gap-[14px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-[14px]">
+              <div>
+                <label className="text-[11px] tracking-[.08em] uppercase text-[var(--color-muted)] mb-[6px] block">Name</label>
+                <input type="text" placeholder="Your name" required value={name} onChange={e => setName(e.target.value)} className="w-full bg-[rgba(255,255,255,0.03)] border border-[var(--color-line)] text-[var(--color-white)] p-[13px_14px] rounded-lg font-poppins text-[14px] font-light focus:outline-none focus:border-[var(--color-gold)]" />
+              </div>
+              <div>
+                <label className="text-[11px] tracking-[.08em] uppercase text-[var(--color-muted)] mb-[6px] block">Phone</label>
+                <input type="tel" placeholder="9xxxxxxxxx" required value={phone} onChange={e => setPhone(e.target.value)} className="w-full bg-[rgba(255,255,255,0.03)] border border-[var(--color-line)] text-[var(--color-white)] p-[13px_14px] rounded-lg font-poppins text-[14px] font-light focus:outline-none focus:border-[var(--color-gold)]" />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-[14px]">
+              <div>
+                <label className="text-[11px] tracking-[.08em] uppercase text-[var(--color-muted)] mb-[6px] block">Date</label>
+                <input type="date" required value={date} onChange={e => setDate(e.target.value)} className="w-full bg-[rgba(255,255,255,0.03)] border border-[var(--color-line)] text-[var(--color-white)] p-[13px_14px] rounded-lg font-poppins text-[14px] font-light focus:outline-none focus:border-[var(--color-gold)] [&>option]:bg-[var(--color-charcoal)]" />
+              </div>
+              <div>
+                <label className="text-[11px] tracking-[.08em] uppercase text-[var(--color-muted)] mb-[6px] block">Session</label>
+                <select required value={session} onChange={e => setSession(e.target.value)} className="w-full bg-[rgba(255,255,255,0.03)] border border-[var(--color-line)] text-[var(--color-white)] p-[13px_14px] rounded-lg font-poppins text-[14px] font-light focus:outline-none focus:border-[var(--color-gold)] [&>option]:bg-[var(--color-charcoal)]">
+                  <option value="" disabled>Choose</option>
+                  <option value="Morning (6 AM - 12 PM)">Morning (6 AM – 12 PM)</option>
+                  <option value="Evening (5 PM - 10 PM)">Evening / Floodlit (5 PM – 10 PM)</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label className="text-[11px] tracking-[.08em] uppercase text-[var(--color-muted)] mb-[6px] block">Sport</label>
+              <select required value={sport} onChange={e => setSport(e.target.value)} className="w-full bg-[rgba(255,255,255,0.03)] border border-[var(--color-line)] text-[var(--color-white)] p-[13px_14px] rounded-lg font-poppins text-[14px] font-light focus:outline-none focus:border-[var(--color-gold)] [&>option]:bg-[var(--color-charcoal)]">
+                <option value="" disabled>Choose</option>
+                <option value="Cricket">Cricket</option>
+                <option value="Pickleball">Pickleball</option>
+              </select>
+            </div>
+            <button type="submit" className="font-space text-[12.5px] tracking-[.08em] uppercase py-[14px] px-[26px] rounded-lg flex items-center justify-center gap-[10px] cursor-pointer bg-[var(--color-gold)] text-[#0a0a0a] font-bold hover:bg-[var(--color-gold-hot)] transition-colors border-none mt-[6px]">
+              Proceed to WhatsApp
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+}
