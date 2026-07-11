@@ -189,3 +189,64 @@ export async function deleteGalleryImage(formData: FormData): Promise<void> {
   revalidatePath('/')
   revalidatePath('/admin')
 }
+
+export async function addHallOfFame(formData: FormData): Promise<void> {
+  const supabase = await createClient()
+  
+  const name = formData.get('name') as string
+  const role = formData.get('role') as string
+  const metadata = formData.get('metadata') as string
+  const image = formData.get('image') as File | null
+  
+  let image_url = null
+  
+  if (image && image.size > 0) {
+    const fileExt = image.name.split('.').pop()
+    const fileName = `${Date.now()}_hof.${fileExt}`
+    
+    const { error: uploadError } = await supabase.storage
+      .from('gallery')
+      .upload(`hof/${fileName}`, image)
+      
+    if (uploadError) {
+      console.error("Error uploading HOF image:", uploadError)
+      throw new Error(uploadError.message)
+    }
+    
+    const { data: publicUrlData } = supabase.storage
+      .from('gallery')
+      .getPublicUrl(`hof/${fileName}`)
+      
+    image_url = publicUrlData.publicUrl
+  }
+
+  const { error } = await supabase
+    .from('hall_of_fame')
+    .insert([{ name, role, metadata, image_url }])
+
+  if (error) {
+    console.error("Error adding to Hall of Fame:", error)
+    throw new Error(error.message)
+  }
+
+  revalidatePath('/')
+  revalidatePath('/admin')
+}
+
+export async function deleteHallOfFame(formData: FormData): Promise<void> {
+  const supabase = await createClient()
+  const id = formData.get('id') as string
+  
+  const { error } = await supabase
+    .from('hall_of_fame')
+    .delete()
+    .eq('id', id)
+
+  if (error) {
+    console.error("Error deleting from Hall of Fame:", error)
+    throw new Error(error.message)
+  }
+
+  revalidatePath('/')
+  revalidatePath('/admin')
+}

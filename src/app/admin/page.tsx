@@ -1,5 +1,5 @@
 import { createClient } from '@/utils/supabase/server'
-import { updateLiveMatch, addEvent, deleteEvent, addHighlight, deleteHighlight, uploadGalleryImage, deleteGalleryImage } from './actions'
+import { updateLiveMatch, addEvent, deleteEvent, addHighlight, deleteHighlight, uploadGalleryImage, deleteGalleryImage, addHallOfFame, deleteHallOfFame } from './actions'
 
 export default async function AdminDashboard() {
   const supabase = await createClient()
@@ -12,6 +12,9 @@ export default async function AdminDashboard() {
 
   // Fetch all highlights
   const { data: highlights } = await supabase.from('highlights').select('*').order('created_at', { ascending: false })
+
+  // Fetch Hall of Fame
+  const { data: hallOfFame } = await supabase.from('hall_of_fame').select('*').order('order_index', { ascending: true })
 
   // Fetch Gallery Images
   const { data: galleryFiles } = await supabase.storage.from('gallery').list();
@@ -114,9 +117,67 @@ export default async function AdminDashboard() {
             </div>
           </div>
 
-          <div className="bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[16px] p-6 opacity-60 grayscale hover:grayscale-0 transition-all duration-300">
-            <div className="font-bebas text-[24px] mb-2 flex items-center gap-2">🏆 Hall of Fame <span className="text-[10px] bg-white/10 px-2 py-1 rounded font-space tracking-wider ml-auto">SOON</span></div>
-            <p className="text-[var(--color-muted)] text-[13px]">Add MVPs, best bowlers, and champions dynamically. Database table is already configured.</p>
+          {/* Hall of Fame Manager */}
+          <div className="bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[16px] p-6 shadow-xl">
+            <div className="font-bebas text-[28px] mb-2 flex items-center gap-3">
+              🏆 Tournament Winners (Hall of Fame)
+            </div>
+            <p className="text-[var(--color-muted)] text-[13.5px] mb-6 leading-relaxed">
+              Add past tournament winners and champions to the Hall of Fame section.
+            </p>
+
+            <form action={addHallOfFame} className="flex flex-col gap-4 mb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Team Name</label>
+                  <input required type="text" name="name" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-3 text-[13px] text-white focus:outline-none focus:border-[var(--color-gold)]" placeholder="e.g. Spartans FC" />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Tournament Name</label>
+                  <input required type="text" name="role" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-3 text-[13px] text-white focus:outline-none focus:border-[var(--color-gold)]" placeholder="e.g. TSL Summer Cup 2024" />
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Status / Extra Info</label>
+                  <input type="text" name="metadata" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-3 text-[13px] text-white focus:outline-none focus:border-[var(--color-gold)]" placeholder="e.g. Champions" defaultValue="Champions" />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Team Logo / Photo (Optional)</label>
+                  <input type="file" name="image" accept="image/*" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-[9px] text-[13px] text-[var(--color-muted)] file:mr-4 file:py-[2px] file:px-3 file:rounded file:border-0 file:text-[11px] file:font-space file:bg-[var(--color-gold)] file:text-black hover:file:bg-white cursor-pointer" />
+                </div>
+              </div>
+
+              <button type="submit" className="mt-2 bg-white/5 hover:bg-[var(--color-gold)] hover:text-black border border-[var(--color-card-stroke)] hover:border-transparent text-white font-space text-[12.5px] uppercase tracking-[.1em] py-[14px] rounded-lg transition-all duration-300">
+                Add to Hall of Fame
+              </button>
+            </form>
+
+            <div className="space-y-3">
+              <h3 className="font-space text-[11px] text-[var(--color-gold)] uppercase tracking-[.05em] mb-3">Current Winners</h3>
+              {hallOfFame && hallOfFame.length > 0 ? hallOfFame.map((item: any) => (
+                <div key={item.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 bg-black/50 border border-[var(--color-card-stroke)] rounded-lg gap-3">
+                  <div className="flex items-center gap-3">
+                    {item.image_url ? (
+                      <img src={item.image_url} className="w-12 h-12 object-cover rounded-full bg-[#111] border border-[var(--color-card-stroke)]" alt="logo" />
+                    ) : (
+                      <div className="w-12 h-12 rounded-full bg-[#111] border border-[var(--color-card-stroke)] flex items-center justify-center font-bebas text-[20px] text-[var(--color-gold)]">{item.name.charAt(0)}</div>
+                    )}
+                    <div>
+                      <h4 className="text-white text-[14px] font-bold">{item.name} <span className="text-[11px] text-[var(--color-gold)] font-normal ml-2">{item.metadata}</span></h4>
+                      <p className="text-[var(--color-muted)] text-[12px]">{item.role}</p>
+                    </div>
+                  </div>
+                  <form action={deleteHallOfFame}>
+                    <input type="hidden" name="id" value={item.id} />
+                    <button type="submit" className="text-red-400 hover:text-red-300 text-[12px] font-space uppercase tracking-widest px-3 py-2 bg-red-500/10 rounded transition-colors w-full sm:w-auto">Delete</button>
+                  </form>
+                </div>
+              )) : (
+                <p className="text-[12px] text-[var(--color-muted)] p-3 bg-black/30 rounded border border-[var(--color-card-stroke)]">No tournament winners added yet.</p>
+              )}
+            </div>
           </div>
           
           {/* Events Manager */}
