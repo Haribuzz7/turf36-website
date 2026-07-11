@@ -148,6 +148,7 @@ export async function deleteHighlight(formData: FormData): Promise<void> {
 export async function uploadGalleryImage(formData: FormData): Promise<void> {
   const supabase = await createClient()
   const image = formData.get('image') as File | null
+  const event_date = formData.get('event_date') as string
   
   if (!image || image.size === 0) {
     throw new Error("No image provided")
@@ -165,6 +166,21 @@ export async function uploadGalleryImage(formData: FormData): Promise<void> {
     throw new Error(uploadError.message)
   }
 
+  const { data: publicUrlData } = supabase.storage
+    .from('gallery')
+    .getPublicUrl(fileName)
+    
+  const image_url = publicUrlData.publicUrl
+
+  const { error: dbError } = await supabase
+    .from('gallery')
+    .insert([{ image_url, file_name: fileName, event_date }])
+
+  if (dbError) {
+    console.error("Error saving gallery metadata:", dbError)
+    throw new Error(dbError.message)
+  }
+
   revalidatePath('/')
   revalidatePath('/admin')
 }
@@ -172,6 +188,7 @@ export async function uploadGalleryImage(formData: FormData): Promise<void> {
 export async function deleteGalleryImage(formData: FormData): Promise<void> {
   const supabase = await createClient()
   const filename = formData.get('filename') as string
+  const id = formData.get('id') as string
   
   if (!filename) {
     throw new Error("No filename provided")
@@ -182,8 +199,18 @@ export async function deleteGalleryImage(formData: FormData): Promise<void> {
     .remove([filename])
 
   if (error) {
-    console.error("Error deleting gallery image:", error)
-    throw new Error(error.message)
+    console.error("Error deleting gallery image from storage:", error)
+  }
+
+  if (id) {
+    const { error: dbError } = await supabase
+      .from('gallery')
+      .delete()
+      .eq('id', id)
+      
+    if (dbError) {
+      console.error("Error deleting gallery metadata from DB:", dbError)
+    }
   }
 
   revalidatePath('/')

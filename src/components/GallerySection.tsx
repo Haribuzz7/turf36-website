@@ -3,12 +3,12 @@
 import Reveal from "./Reveal";
 
 type GalleryProps = {
-  images: string[];
+  images: any[];
 };
 
 export default function GallerySection({ images }: GalleryProps) {
   // If no dynamic images are provided from Supabase yet, show placeholders
-  const displayImages = images.length > 0 ? images : Array(6).fill('/placeholder');
+  const displayImages = images.length > 0 ? images : Array(6).fill({ isPlaceholder: true, image_url: '/placeholder' });
 
   return (
     <section id="gallery" className="relative py-[110px] border-b border-[var(--color-line)]">
@@ -26,23 +26,27 @@ export default function GallerySection({ images }: GalleryProps) {
         </p>
         
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-[12px] mt-[44px]">
-          {displayImages.map((src, idx) => {
+          {displayImages.map((img, idx) => {
             // Give specific sizes to certain indices to create a masonry-like grid
             const isLarge = idx === 0 || idx === 5;
             
             return (
               <div 
                 key={idx} 
-                className={`\${isLarge ? 'col-span-2 row-span-2' : ''} aspect-square rounded-[12px] relative overflow-hidden border border-[var(--color-card-stroke)] flex items-end p-[14px] cursor-pointer bg-[var(--color-card)]`}
+                className={`\${isLarge ? 'col-span-2 row-span-2' : ''} aspect-square rounded-[12px] relative overflow-hidden border border-[var(--color-card-stroke)] flex items-end p-[14px] cursor-pointer bg-[var(--color-card)] group`}
               >
-                {src !== '/placeholder' ? (
+                {img.image_url !== '/placeholder' ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={src} alt="Gallery image" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 hover:scale-110" />
+                  <img src={img.image_url} alt="Gallery image" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
                 ) : (
                   <div className="absolute inset-0 bg-gradient-to-br from-[#1a1712] to-[#2b2313] before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-b before:from-transparent before:from-40% before:to-[rgba(0,0,0,0.75)] before:z-0"></div>
                 )}
-                <span className="font-space text-[11px] tracking-[.05em] text-[var(--color-white)] relative z-10 opacity-70 drop-shadow-md">
-                  {src === '/placeholder' ? 'MEMORY' : ''}
+                
+                {/* Always show a dark gradient at bottom so text is readable */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+
+                <span className="font-space text-[12px] tracking-[.05em] text-[var(--color-gold)] relative z-10 font-bold drop-shadow-md">
+                  {img.isPlaceholder ? 'MEMORY' : new Date(img.event_date).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }).toUpperCase()}
                 </span>
               </div>
             );
