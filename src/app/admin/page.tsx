@@ -84,8 +84,8 @@ export default async function AdminDashboard() {
             <form action={uploadGalleryImage} className="flex flex-col gap-4 mb-8">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Select Image</label>
-                  <input required type="file" name="image" accept="image/*" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-[9px] text-[13px] text-[var(--color-muted)] file:mr-4 file:py-[2px] file:px-3 file:rounded file:border-0 file:text-[11px] file:font-space file:bg-[var(--color-gold)] file:text-black hover:file:bg-white cursor-pointer" />
+                  <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Select Image(s)</label>
+                  <input required multiple type="file" name="image" accept="image/*" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-[9px] text-[13px] text-[var(--color-muted)] file:mr-4 file:py-[2px] file:px-3 file:rounded file:border-0 file:text-[11px] file:font-space file:bg-[var(--color-gold)] file:text-black hover:file:bg-white cursor-pointer" />
                 </div>
                 <div>
                   <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Event Date</label>
@@ -94,7 +94,7 @@ export default async function AdminDashboard() {
               </div>
 
               <button type="submit" className="mt-2 bg-white/5 hover:bg-[var(--color-gold)] hover:text-black border border-[var(--color-card-stroke)] hover:border-transparent text-white font-space text-[12.5px] uppercase tracking-[.1em] py-[14px] rounded-lg transition-all duration-300">
-                Upload Photo
+                Upload Photo(s)
               </button>
             </form>
 
@@ -103,7 +103,7 @@ export default async function AdminDashboard() {
               <div className="grid grid-cols-2 gap-3">
                 {gallery.length > 0 ? gallery.map((img: any) => (
                   <div key={img.id} className="relative group rounded-lg overflow-hidden border border-[var(--color-card-stroke)]">
-                    <img src={img.image_url} alt="Gallery" className="w-full aspect-square object-cover" />
+                    <img src={img.image_url} alt="Gallery" className="w-full aspect-[16/9] object-cover" />
                     <div className="absolute top-2 left-2 bg-black/60 backdrop-blur-md px-2 py-1 rounded text-[10px] text-[var(--color-gold)] font-space uppercase tracking-wider">
                       {new Date(img.event_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                     </div>

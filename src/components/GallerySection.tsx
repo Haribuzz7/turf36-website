@@ -25,15 +25,12 @@ export default function GallerySection({ images }: GalleryProps) {
           Latest action from the ground. Updates directly from the Admin dashboard.
         </p>
         
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-[12px] mt-[44px]">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-[16px] mt-[44px]">
           {displayImages.map((img, idx) => {
-            // Give specific sizes to certain indices to create a masonry-like grid
-            const isLarge = idx === 0 || idx === 5;
-            
             return (
               <div 
                 key={idx} 
-                className={`\${isLarge ? 'col-span-2 row-span-2' : ''} aspect-square rounded-[12px] relative overflow-hidden border border-[var(--color-card-stroke)] flex items-end p-[14px] cursor-pointer bg-[var(--color-card)] group`}
+                className={`aspect-[16/9] rounded-[12px] relative overflow-hidden border border-[var(--color-card-stroke)] flex items-end p-[14px] cursor-pointer bg-[var(--color-card)] group`}
               >
                 {img.image_url !== '/placeholder' ? (
                   // eslint-disable-next-line @next/next/no-img-element

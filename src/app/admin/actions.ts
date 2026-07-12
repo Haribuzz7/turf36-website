@@ -147,38 +147,40 @@ export async function deleteHighlight(formData: FormData): Promise<void> {
 
 export async function uploadGalleryImage(formData: FormData): Promise<void> {
   const supabase = await createClient()
-  const image = formData.get('image') as File | null
+  const images = formData.getAll('image') as File[]
   const event_date = formData.get('event_date') as string
   
-  if (!image || image.size === 0) {
-    throw new Error("No image provided")
+  const validImages = images.filter(img => img.size > 0)
+  if (validImages.length === 0) {
+    throw new Error("No images provided")
   }
   
-  const fileExt = image.name.split('.').pop()
-  const fileName = `${Date.now()}_gallery.${fileExt}`
-  
-  const { error: uploadError } = await supabase.storage
-    .from('gallery')
-    .upload(fileName, image)
+  for (const image of validImages) {
+    const fileExt = image.name.split('.').pop()
+    const fileName = `${Date.now()}_${Math.random().toString(36).substring(2,9)}_gallery.${fileExt}`
     
-  if (uploadError) {
-    console.error("Error uploading gallery image:", uploadError)
-    throw new Error(uploadError.message)
-  }
+    const { error: uploadError } = await supabase.storage
+      .from('gallery')
+      .upload(fileName, image)
+      
+    if (uploadError) {
+      console.error("Error uploading gallery image:", uploadError)
+      continue
+    }
 
-  const { data: publicUrlData } = supabase.storage
-    .from('gallery')
-    .getPublicUrl(fileName)
-    
-  const image_url = publicUrlData.publicUrl
+    const { data: publicUrlData } = supabase.storage
+      .from('gallery')
+      .getPublicUrl(fileName)
+      
+    const image_url = publicUrlData.publicUrl
 
-  const { error: dbError } = await supabase
-    .from('gallery')
-    .insert([{ image_url, file_name: fileName, event_date }])
+    const { error: dbError } = await supabase
+      .from('gallery')
+      .insert([{ image_url, file_name: fileName, event_date }])
 
-  if (dbError) {
-    console.error("Error saving gallery metadata:", dbError)
-    throw new Error(dbError.message)
+    if (dbError) {
+      console.error("Error saving gallery metadata:", dbError)
+    }
   }
 
   revalidatePath('/')
