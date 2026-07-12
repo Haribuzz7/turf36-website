@@ -30,9 +30,15 @@ export type IconName =
   | "play"
   | "sun"
   | "moon"
-  | "info";
+  | "info"
+  | "message";
 
 export const IconPaths: Record<IconName, React.ReactNode> = {
+  message: (
+    <>
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    </>
+  ),
   play: (
     <>
       <polygon points="5 3 19 12 5 21 5 3" />

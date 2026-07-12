@@ -27,7 +27,7 @@ export default function Header() {
           <PremiumIcon name="lightning" noContainer className="w-[18px] h-[18px]" /> Book Now
         </a>
         <a href="https://wa.me/917708929267" target="_blank" rel="noreferrer" title="WhatsApp" className="w-[50px] h-[50px] rounded-full flex items-center justify-center bg-[var(--color-charcoal-2)] border border-[var(--color-card-stroke)] text-[var(--color-gold-hot)] shadow-[0_6px_20px_rgba(0,0,0,0.5)] hover:-translate-y-[3px] hover:scale-105 hover:bg-[var(--color-gold)] hover:text-[#0a0a0a] transition-all">
-          <PremiumIcon name="contact" noContainer className="w-[20px] h-[20px]" />
+          <PremiumIcon name="message" noContainer className="w-[20px] h-[20px]" />
         </a>
         <a href="tel:+917708929267" title="Call" className="w-[50px] h-[50px] rounded-full flex items-center justify-center bg-[var(--color-charcoal-2)] border border-[var(--color-card-stroke)] text-[var(--color-gold-hot)] shadow-[0_6px_20px_rgba(0,0,0,0.5)] hover:-translate-y-[3px] hover:scale-105 hover:bg-[var(--color-gold)] hover:text-[#0a0a0a] transition-all">
           <PremiumIcon name="contact" noContainer className="w-[20px] h-[20px]" />
