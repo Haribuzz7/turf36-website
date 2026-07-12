@@ -51,31 +51,31 @@ export default function FacilitiesSection() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-[14px] mt-[44px]">
           <Reveal>
             <div className="flex flex-col items-center justify-center text-center p-[26px_12px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[14px] backdrop-blur-md">
-              <PremiumIcon src="/icons/icon_floodlight.png" alt="Floodlights" size="md" className="mb-[12px]" />
+              <PremiumIcon name="floodlight" size="md" containerClassName="mb-[12px]" />
               <b className="text-[13px] font-medium block mt-[8px]">Floodlights</b>
             </div>
           </Reveal>
           <Reveal delay={0.1}>
             <div className="flex flex-col items-center justify-center text-center p-[26px_12px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[14px] backdrop-blur-md">
-              <PremiumIcon src="/icons/icon_parking.png" alt="Parking" size="md" className="mb-[12px]" />
+              <PremiumIcon name="parking" size="md" containerClassName="mb-[12px]" />
               <b className="text-[13px] font-medium block mt-[8px]">Parking</b>
             </div>
           </Reveal>
           <Reveal delay={0.2}>
             <div className="flex flex-col items-center justify-center text-center p-[26px_12px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[14px] backdrop-blur-md">
-              <PremiumIcon src="/icons/icon_seat.png" alt="Seating" size="md" className="mb-[12px]" />
+              <PremiumIcon name="seat" size="md" containerClassName="mb-[12px]" />
               <b className="text-[13px] font-medium block mt-[8px]">Seating</b>
             </div>
           </Reveal>
           <Reveal delay={0.3}>
             <div className="flex flex-col items-center justify-center text-center p-[26px_12px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[14px] backdrop-blur-md">
-              <PremiumIcon src="/icons/icon_restroom.png" alt="Washrooms" size="md" className="mb-[12px]" />
+              <PremiumIcon name="restroom" size="md" containerClassName="mb-[12px]" />
               <b className="text-[13px] font-medium block mt-[8px]">Washrooms</b>
             </div>
           </Reveal>
           <Reveal delay={0.4}>
             <div className="flex flex-col items-center justify-center text-center p-[26px_12px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[14px] backdrop-blur-md">
-              <PremiumIcon src="/icons/icon_water.png" alt="Drinking Water" size="md" className="mb-[12px]" />
+              <PremiumIcon name="water" size="md" containerClassName="mb-[12px]" />
               <b className="text-[13px] font-medium block mt-[8px]">Drinking Water</b>
             </div>
           </Reveal>

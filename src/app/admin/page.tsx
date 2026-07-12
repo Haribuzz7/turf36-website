@@ -31,7 +31,7 @@ export default async function AdminDashboard() {
           <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-[radial-gradient(circle_at_top_right,rgba(201,162,39,0.1),transparent_70%)] pointer-events-none"></div>
           
           <div className="font-bebas text-[28px] mb-2 flex items-center gap-3">
-            <PremiumIcon src="/icons/icon_cricket.png" alt="Live Match" size="md" /> 
+            <PremiumIcon name="cricket" size="md" /> 
             Live Match Center
           </div>
           <p className="text-[var(--color-muted)] text-[13.5px] mb-6 leading-relaxed">
@@ -75,7 +75,7 @@ export default async function AdminDashboard() {
         <div className="flex flex-col gap-5">
           <div className="bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[16px] p-6 shadow-xl">
             <div className="font-bebas text-[28px] mb-2 flex items-center gap-3">
-              <PremiumIcon src="/icons/icon_camera.png" alt="Match Memory" size="md" /> 
+              <PremiumIcon name="camera" size="md" /> 
               Match Memory
             </div>
             <p className="text-[var(--color-muted)] text-[13.5px] mb-6 leading-relaxed">
@@ -130,7 +130,7 @@ export default async function AdminDashboard() {
           {/* Hall of Fame Manager */}
           <div className="bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[16px] p-6 shadow-xl">
             <div className="font-bebas text-[28px] mb-2 flex items-center gap-3">
-              <PremiumIcon src="/icons/icon_trophy.png" alt="Trophy" size="md" /> 
+              <PremiumIcon name="trophy" size="md" /> 
               Tournament Winners (Hall of Fame)
             </div>
             <p className="text-[var(--color-muted)] text-[13.5px] mb-6 leading-relaxed">
@@ -194,7 +194,7 @@ export default async function AdminDashboard() {
           {/* Events Manager */}
           <div className="bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[16px] p-6 shadow-xl">
             <div className="font-bebas text-[28px] mb-2 flex items-center gap-3">
-              <PremiumIcon src="/icons/icon_calendar.png" alt="Calendar" size="md" /> 
+              <PremiumIcon name="calendar" size="md" /> 
               Events Manager
             </div>
             <p className="text-[var(--color-muted)] text-[13.5px] mb-6 leading-relaxed">
@@ -205,18 +205,18 @@ export default async function AdminDashboard() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Event Title</label>
-                  <input required type="text" name="title" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-3 text-[13px] text-white focus:outline-none focus:border-[var(--color-gold)]" placeholder="e.g. TSL Season 3" />
+                  <input required type="text" name="title" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-3 text-[13px] text-white focus:outline-none focus:border-[var(--color-gold)]" placeholder="e.g. Summer Cup 2024" />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Subtitle</label>
-                  <input required type="text" name="subtitle" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-3 text-[13px] text-white focus:outline-none focus:border-[var(--color-gold)]" placeholder="e.g. Registrations open now!" />
+                  <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Subtitle / Info</label>
+                  <input required type="text" name="subtitle" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-3 text-[13px] text-white focus:outline-none focus:border-[var(--color-gold)]" placeholder="e.g. 5v5 Box Cricket Tournament" />
                 </div>
               </div>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Event Date</label>
-                  <input required type="date" name="event_date" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-3 text-[13px] text-[var(--color-muted)] focus:outline-none focus:border-[var(--color-gold)] [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:invert" />
+                  <input required type="date" name="event_date" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-3 text-[13px] text-white focus:outline-none focus:border-[var(--color-gold)]" />
                 </div>
                 <div>
                   <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Poster Image (Optional)</label>
@@ -238,7 +238,7 @@ export default async function AdminDashboard() {
                     {evt.poster_url ? (
                       <img src={evt.poster_url} className="w-12 h-12 object-cover rounded bg-[#111] border border-[var(--color-card-stroke)]" alt="poster" />
                     ) : (
-                      <div className="w-12 h-12 rounded bg-[#111] border border-[var(--color-card-stroke)] flex items-center justify-center text-[20px]">📅</div>
+                      <PremiumIcon name="calendar" size="sm" containerClassName="!rounded" />
                     )}
                     <div>
                       <h4 className="text-white text-[14px] font-bold">{evt.title}</h4>

@@ -44,7 +44,7 @@ export default function EventsSection({ events }: EventsProps) {
           } else if (diffDays === 0) {
             statusContent = (
               <div className="flex items-center gap-2">
-                <PremiumIcon src="/icons/icon_badge.png" alt="Live Badge" size="sm" className="!w-[16px] !h-[16px] md:!w-[16px] md:!h-[16px]" />
+                <PremiumIcon name="live" noContainer className="w-[16px] h-[16px]" />
                 Tournament is Live
               </div>
             );
