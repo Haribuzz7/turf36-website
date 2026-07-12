@@ -2,7 +2,7 @@
 
 import Reveal from "./Reveal";
 import { useState } from "react";
-import { Sun, Moon, Info } from "lucide-react";
+import PremiumIcon from "./PremiumIcon";
 
 export default function BookingSection() {
   const [name, setName] = useState("");
@@ -39,19 +39,19 @@ export default function BookingSection() {
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-[14px] mt-[20px]">
               <div className="p-[20px] rounded-xl border border-[var(--color-card-stroke)] bg-[var(--color-card)]">
-                <div className="mb-[10px]"><Sun size={20} className="text-[var(--color-gold-hot)]" /></div>
+                <div className="mb-[10px]"><PremiumIcon name="sun" noContainer className="w-[20px] h-[20px]" /></div>
                 Morning Session
                 <b className="font-space text-[var(--color-gold-hot)] text-[20px] block mt-[6px] font-bold">₹400 / hr</b>
               </div>
               <div className="p-[20px] rounded-xl border border-[var(--color-card-stroke)] bg-[var(--color-card)]">
-                <div className="mb-[10px]"><Moon size={20} className="text-[var(--color-muted)]" /></div>
+                <div className="mb-[10px]"><PremiumIcon name="moon" noContainer className="w-[20px] h-[20px] text-[var(--color-muted)] stroke-[var(--color-muted)] drop-shadow-none" /></div>
                 Evening (Floodlit)
                 <b className="font-space text-[var(--color-gold-hot)] text-[20px] block mt-[6px] font-bold">₹500 / hr</b>
               </div>
             </div>
             <p className="text-[12px] text-[var(--color-muted-2)] font-space tracking-[.05em] mt-[12px]">* In weekends price may vary</p>
             <div className="flex gap-[14px] mt-[20px] p-[14px_16px] border border-[var(--color-card-stroke)] rounded-[10px] bg-[var(--color-card)] text-[13px] text-[var(--color-muted)]">
-              <span className="mt-[2px]"><Info size={16} /></span>
+              <span className="mt-[2px]"><PremiumIcon name="info" noContainer className="w-[16px] h-[16px] stroke-[var(--color-gold-hot)] drop-shadow-none" /></span>
               <span><b className="text-[var(--color-gold-hot)]">Direct WhatsApp Booking</b> — Submitting this form will open WhatsApp with your pre-filled details. Just hit send!</span>
             </div>
           </div>

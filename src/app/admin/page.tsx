@@ -259,7 +259,8 @@ export default async function AdminDashboard() {
           {/* Highlights Manager */}
           <div className="bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[16px] p-6 shadow-xl">
             <div className="font-bebas text-[28px] mb-2 flex items-center gap-3">
-              ▶️ Highlights Manager
+              <PremiumIcon name="play" size="md" /> 
+              Highlights Manager
             </div>
             <p className="text-[var(--color-muted)] text-[13.5px] mb-6 leading-relaxed">
               Add Instagram Reels or YouTube video links to show on the homepage.
