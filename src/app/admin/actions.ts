@@ -149,6 +149,7 @@ export async function uploadGalleryImage(formData: FormData): Promise<void> {
   const supabase = await createClient()
   const images = formData.getAll('image') as File[]
   const event_date = formData.get('event_date') as string
+  const subtitle = formData.get('subtitle') as string || ''
   
   const validImages = images.filter(img => img.size > 0)
   if (validImages.length === 0) {
@@ -176,7 +177,7 @@ export async function uploadGalleryImage(formData: FormData): Promise<void> {
 
     const { error: dbError } = await supabase
       .from('gallery')
-      .insert([{ image_url, file_name: fileName, event_date }])
+      .insert([{ image_url, file_name: fileName, event_date, subtitle }])
 
     if (dbError) {
       console.error("Error saving gallery metadata:", dbError)

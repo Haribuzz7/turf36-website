@@ -70,22 +70,25 @@ export default async function AdminDashboard() {
           </form>
         </div>
         
-        {/* Placeholder Cards */}
+        {/* Match Memory */}
         <div className="flex flex-col gap-5">
-          {/* Gallery Manager */}
           <div className="bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[16px] p-6 shadow-xl">
             <div className="font-bebas text-[28px] mb-2 flex items-center gap-3">
-              📸 Gallery Manager
+              📸 Match Memory
             </div>
             <p className="text-[var(--color-muted)] text-[13.5px] mb-6 leading-relaxed">
-              Upload photos directly to your turf gallery. Images will appear instantly on the homepage.
+              Upload photos directly to your turf's Match Memory section. Images will appear instantly on the homepage.
             </p>
 
             <form action={uploadGalleryImage} className="flex flex-col gap-4 mb-8">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                   <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Select Image(s)</label>
                   <input required multiple type="file" name="image" accept="image/*" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-[9px] text-[13px] text-[var(--color-muted)] file:mr-4 file:py-[2px] file:px-3 file:rounded file:border-0 file:text-[11px] file:font-space file:bg-[var(--color-gold)] file:text-black hover:file:bg-white cursor-pointer" />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Subtitle</label>
+                  <input type="text" name="subtitle" placeholder="e.g. Final match winning moment!" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-3 text-[13px] text-white focus:outline-none focus:border-[var(--color-gold)]" />
                 </div>
                 <div>
                   <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Event Date</label>
@@ -99,7 +102,7 @@ export default async function AdminDashboard() {
             </form>
 
             <div className="space-y-3">
-              <h3 className="font-space text-[11px] text-[var(--color-gold)] uppercase tracking-[.05em] mb-3">Live Gallery Photos</h3>
+              <h3 className="font-space text-[11px] text-[var(--color-gold)] uppercase tracking-[.05em] mb-3">Live Match Memory</h3>
               <div className="grid grid-cols-2 gap-3">
                 {gallery.length > 0 ? gallery.map((img: any) => (
                   <div key={img.id} className="relative group rounded-lg overflow-hidden border border-[var(--color-card-stroke)]">
