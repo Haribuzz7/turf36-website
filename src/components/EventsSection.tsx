@@ -1,6 +1,7 @@
 "use client";
 
 import Reveal from "./Reveal";
+import PremiumIcon from "./PremiumIcon";
 
 type EventsProps = {
   events: any[];
@@ -32,19 +33,24 @@ export default function EventsSection({ events }: EventsProps) {
           const diffTime = eventDayTime - today;
           const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
           
-          let statusText = "";
+          let statusContent: React.ReactNode = "";
           let statusClasses = "";
           let isPast = false;
           
           if (diffDays < 0) {
-            statusText = "Past Tournament";
+            statusContent = "Past Tournament";
             statusClasses = "text-[var(--color-muted)] border-[var(--color-card-stroke)] bg-black/40";
             isPast = true;
           } else if (diffDays === 0) {
-            statusText = "🔴 Tournament is Live";
+            statusContent = (
+              <div className="flex items-center gap-2">
+                <PremiumIcon src="/icons/icon_badge.png" alt="Live Badge" size="sm" className="!w-[16px] !h-[16px] md:!w-[16px] md:!h-[16px]" />
+                Tournament is Live
+              </div>
+            );
             statusClasses = "text-red-400 border-red-500/30 bg-red-500/10";
           } else {
-            statusText = `${diffDays} Days to go`;
+            statusContent = `${diffDays} Days to go`;
             statusClasses = "text-[var(--color-gold)] border-[var(--color-gold)]/30 bg-[var(--color-gold)]/10";
           }
 
@@ -63,8 +69,8 @@ export default function EventsSection({ events }: EventsProps) {
                   <div>
                     <div className="flex items-center gap-3 mb-2 flex-wrap">
                       <h3 className={`font-bebas text-[22px] sm:text-[28px] tracking-[.02em] text-white ${isPast ? 'opacity-70' : ''}`}>{event.title}</h3>
-                      <span className={`font-space text-[10px] uppercase tracking-wider px-2 py-1 rounded-md border ${statusClasses}`}>
-                        {statusText}
+                      <span className={`font-space text-[10px] uppercase tracking-wider px-2 py-1 rounded-md border flex items-center ${statusClasses}`}>
+                        {statusContent}
                       </span>
                     </div>
                     <p className="text-[13px] sm:text-[14px] text-[var(--color-muted)]">{event.subtitle}</p>

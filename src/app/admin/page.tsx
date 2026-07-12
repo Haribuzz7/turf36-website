@@ -1,5 +1,6 @@
 import { createClient } from '@/utils/supabase/server'
 import { updateLiveMatch, addEvent, deleteEvent, addHighlight, deleteHighlight, uploadGalleryImage, deleteGalleryImage, addHallOfFame, deleteHallOfFame } from './actions'
+import PremiumIcon from '@/components/PremiumIcon'
 
 export default async function AdminDashboard() {
   const supabase = await createClient()
@@ -30,7 +31,7 @@ export default async function AdminDashboard() {
           <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-[radial-gradient(circle_at_top_right,rgba(201,162,39,0.1),transparent_70%)] pointer-events-none"></div>
           
           <div className="font-bebas text-[28px] mb-2 flex items-center gap-3">
-            <span className="w-3 h-3 rounded-full bg-red-500 animate-pulse"></span> 
+            <PremiumIcon src="/icons/icon_cricket.png" alt="Live Match" size="md" /> 
             Live Match Center
           </div>
           <p className="text-[var(--color-muted)] text-[13.5px] mb-6 leading-relaxed">
@@ -74,7 +75,8 @@ export default async function AdminDashboard() {
         <div className="flex flex-col gap-5">
           <div className="bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[16px] p-6 shadow-xl">
             <div className="font-bebas text-[28px] mb-2 flex items-center gap-3">
-              📸 Match Memory
+              <PremiumIcon src="/icons/icon_camera.png" alt="Match Memory" size="md" /> 
+              Match Memory
             </div>
             <p className="text-[var(--color-muted)] text-[13.5px] mb-6 leading-relaxed">
               Upload photos directly to your turf's Match Memory section. Images will appear instantly on the homepage.
@@ -128,7 +130,8 @@ export default async function AdminDashboard() {
           {/* Hall of Fame Manager */}
           <div className="bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[16px] p-6 shadow-xl">
             <div className="font-bebas text-[28px] mb-2 flex items-center gap-3">
-              🏆 Tournament Winners (Hall of Fame)
+              <PremiumIcon src="/icons/icon_trophy.png" alt="Trophy" size="md" /> 
+              Tournament Winners (Hall of Fame)
             </div>
             <p className="text-[var(--color-muted)] text-[13.5px] mb-6 leading-relaxed">
               Add past tournament winners and champions to the Hall of Fame section.
@@ -191,7 +194,8 @@ export default async function AdminDashboard() {
           {/* Events Manager */}
           <div className="bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[16px] p-6 shadow-xl">
             <div className="font-bebas text-[28px] mb-2 flex items-center gap-3">
-              📅 Events Manager
+              <PremiumIcon src="/icons/icon_calendar.png" alt="Calendar" size="md" /> 
+              Events Manager
             </div>
             <p className="text-[var(--color-muted)] text-[13.5px] mb-6 leading-relaxed">
               Add upcoming tournaments to automatically update the countdown timer on the homepage.

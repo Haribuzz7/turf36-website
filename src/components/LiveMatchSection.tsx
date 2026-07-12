@@ -1,6 +1,7 @@
 "use client";
 
 import Reveal from "./Reveal";
+import PremiumIcon from "./PremiumIcon";
 
 type LiveMatchProps = {
   liveMatch: any;
@@ -46,7 +47,7 @@ export default function LiveMatchSection({ liveMatch }: LiveMatchProps) {
             ) : (
               // Offline fallback UI
               <div className="p-[60px_22px] text-center flex flex-col items-center justify-center min-h-[300px]">
-                <div className="w-[64px] h-[64px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#2a2310,#0e0c09)] border border-[var(--color-card-stroke)] flex items-center justify-center text-[24px] mb-[16px] opacity-60">🏏</div>
+                <PremiumIcon src="/icons/icon_cricket.png" alt="Offline Cricket" size="lg" className="mb-[16px] opacity-60" />
                 <h3 className="font-bebas text-[24px] text-[var(--color-muted-2)]">No matches currently live</h3>
                 <p className="text-[13px] text-[var(--color-muted)] mt-[8px]">When a match goes live on CricHeroes, the scorecard will appear here.</p>
               </div>
