@@ -36,7 +36,7 @@ export default function LiveMatchSection({ liveMatch }: LiveMatchProps) {
         </div>
         
         <Reveal>
-          <div className="border border-[var(--color-card-stroke)] rounded-[16px] bg-[var(--color-card)] p-0 overflow-hidden mt-[32px]">
+          <div className="glass-panel overflow-hidden p-0 overflow-hidden mt-[32px]">
             {hasLiveMatch ? (
               <div className="w-full h-[600px] bg-black">
                  {/* Try to parse as iframe HTML string first, otherwise use as URL */}

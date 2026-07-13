@@ -40,25 +40,25 @@ export default function BookingSection() {
               Pick a session, tell us who's playing, and you're confirmed. No more calling around to check if the slot is free.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-[14px] mt-[20px]">
-              <div className="p-[20px] rounded-xl border border-[var(--color-card-stroke)] bg-[var(--color-card)]">
+              <div className="p-[20px] rounded-xl glass-panel">
                 <div className="mb-[10px]"><PremiumIcon name="sun" noContainer className="w-[20px] h-[20px]" /></div>
                 Morning Session
                 <b className="font-space text-[var(--color-gold-hot)] text-[20px] block mt-[6px] font-bold">₹400 / hr</b>
               </div>
-              <div className="p-[20px] rounded-xl border border-[var(--color-card-stroke)] bg-[var(--color-card)]">
+              <div className="p-[20px] rounded-xl glass-panel">
                 <div className="mb-[10px]"><PremiumIcon name="moon" noContainer className="w-[20px] h-[20px] text-[var(--color-muted)] stroke-[var(--color-muted)] drop-shadow-none" /></div>
                 Evening (Floodlit)
                 <b className="font-space text-[var(--color-gold-hot)] text-[20px] block mt-[6px] font-bold">₹500 / hr</b>
               </div>
             </div>
             <p className="text-[12px] text-[var(--color-muted-2)] font-space tracking-[.05em] mt-[12px]">* In weekends price may vary</p>
-            <div className="flex gap-[14px] mt-[20px] p-[14px_16px] border border-[var(--color-card-stroke)] rounded-[10px] bg-[var(--color-card)] text-[13px] text-[var(--color-muted)]">
+            <div className="flex gap-[14px] mt-[20px] p-[14px_16px] glass-panel text-[13px] text-[var(--color-muted)]">
               <span className="mt-[2px]"><PremiumIcon name="info" noContainer className="w-[16px] h-[16px] stroke-[var(--color-gold-hot)] drop-shadow-none" /></span>
               <span><b className="text-[var(--color-gold-hot)]">Direct WhatsApp Booking</b> — Submitting this form will open WhatsApp with your pre-filled details. Just hit send!</span>
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[14px] p-[26px] backdrop-blur-md flex flex-col gap-[14px]">
+          <form onSubmit={handleSubmit} className="glass-panel p-[26px] flex flex-col gap-[14px]">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-[14px]">
               <div>
                 <label className="text-[11px] tracking-[.08em] uppercase text-[var(--color-muted)] mb-[6px] block">Name</label>
@@ -97,7 +97,7 @@ export default function BookingSection() {
                 <option value="Pickleball">Pickleball</option>
               </select>
             </div>
-            <button type="submit" className="font-space text-[12.5px] tracking-[.08em] uppercase py-[14px] px-[26px] rounded-lg flex items-center justify-center gap-[10px] cursor-pointer bg-[var(--color-gold)] text-[#0a0a0a] font-bold hover:bg-[var(--color-gold-hot)] transition-colors border-none mt-[6px]">
+            <button type="submit" className="font-space text-[12.5px] tracking-[.08em] uppercase py-[14px] px-[26px] rounded-lg flex items-center justify-center gap-[10px] cursor-pointer glass-button mt-[6px]">
               Proceed to WhatsApp
             </button>
           </form>

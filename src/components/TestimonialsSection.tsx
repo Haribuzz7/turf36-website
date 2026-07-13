@@ -19,7 +19,7 @@ export default function TestimonialsSection() {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-[16px] mt-[44px]">
           <Reveal>
-            <div className="p-[26px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[14px] backdrop-blur-md">
+            <div className="p-[26px] glass-panel">
               <p className="text-[14px] leading-[1.7] text-[var(--color-white)] italic mb-[16px]">
                 "Booking used to mean five WhatsApp messages back and forth. Now I just pick a slot and I'm done."
               </p>
@@ -33,7 +33,7 @@ export default function TestimonialsSection() {
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="p-[26px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[14px] backdrop-blur-md">
+            <div className="p-[26px] glass-panel">
               <p className="text-[14px] leading-[1.7] text-[var(--color-white)] italic mb-[16px]">
                 "Best floodlit turf in Gobi for a night match. Surface holds up even after heavy use."
               </p>
@@ -47,7 +47,7 @@ export default function TestimonialsSection() {
             </div>
           </Reveal>
           <Reveal delay={0.2}>
-            <div className="p-[26px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[14px] backdrop-blur-md">
+            <div className="p-[26px] glass-panel">
               <p className="text-[14px] leading-[1.7] text-[var(--color-white)] italic mb-[16px]">
                 "Ran our whole auction night here — projector, sound, everything just worked."
               </p>

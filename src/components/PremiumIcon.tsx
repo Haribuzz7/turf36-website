@@ -36,14 +36,14 @@ export default function PremiumIcon({
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="#D4AF37"
+      stroke="#8CFF5A"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
       className={`
         transition-all duration-300
-        drop-shadow-[0_0_8px_rgba(255,215,0,0.45)]
-        group-hover:drop-shadow-[0_0_20px_rgba(255,215,0,0.8)]
+        drop-shadow-[0_0_8px_rgba(140,255,90,0.6)]
+        group-hover:drop-shadow-[0_0_20px_rgba(140,255,90,1)]
         ${iconSizeClasses[size]} 
         ${className}
       `}
@@ -61,17 +61,17 @@ export default function PremiumIcon({
       className={`
         relative flex items-center justify-center 
         rounded-[18px] 
-        bg-[rgba(255,255,255,0.04)]
+        bg-[rgba(0,230,118,0.06)]
         backdrop-blur-[18px]
-        border border-[rgba(255,255,255,0.08)]
-        shadow-[0_12px_40px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.08)]
+        border border-[rgba(140,255,90,0.15)]
+        shadow-[0_12px_40px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(140,255,90,0.1)]
         group 
         transition-all duration-300 ease-out flex-shrink-0
         hover:-translate-y-[3px] hover:scale-[1.08]
-        hover:bg-[rgba(255,255,255,0.08)]
-        hover:border-[#D4AF37]
-        active:bg-[rgba(255,255,255,0.12)] active:border-[#D4AF37]
-        focus:outline-none focus:ring-0 focus-visible:drop-shadow-[0_0_12px_rgba(255,215,0,0.6)]
+        hover:bg-[rgba(0,230,118,0.12)]
+        hover:border-[rgba(140,255,90,0.4)]
+        active:bg-[rgba(0,230,118,0.18)] active:border-[rgba(140,255,90,0.6)]
+        focus:outline-none focus:ring-0 focus-visible:drop-shadow-[0_0_12px_rgba(140,255,90,0.6)]
         ${containerSizeClasses[size]} 
         ${containerClassName}
       `}

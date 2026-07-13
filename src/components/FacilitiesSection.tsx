@@ -50,31 +50,31 @@ export default function FacilitiesSection() {
         
         <div className="grid grid-cols-2 md:grid-cols-5 gap-[14px] mt-[44px]">
           <Reveal>
-            <div className="flex flex-col items-center justify-center text-center p-[26px_12px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[14px] backdrop-blur-md">
+            <div className="flex flex-col items-center justify-center text-center p-[26px_12px] glass-panel">
               <PremiumIcon name="floodlight" size="md" containerClassName="mb-[12px]" />
               <b className="text-[13px] font-medium block mt-[8px]">Floodlights</b>
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="flex flex-col items-center justify-center text-center p-[26px_12px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[14px] backdrop-blur-md">
+            <div className="flex flex-col items-center justify-center text-center p-[26px_12px] glass-panel">
               <PremiumIcon name="parking" size="md" containerClassName="mb-[12px]" />
               <b className="text-[13px] font-medium block mt-[8px]">Parking</b>
             </div>
           </Reveal>
           <Reveal delay={0.2}>
-            <div className="flex flex-col items-center justify-center text-center p-[26px_12px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[14px] backdrop-blur-md">
+            <div className="flex flex-col items-center justify-center text-center p-[26px_12px] glass-panel">
               <PremiumIcon name="seat" size="md" containerClassName="mb-[12px]" />
               <b className="text-[13px] font-medium block mt-[8px]">Seating</b>
             </div>
           </Reveal>
           <Reveal delay={0.3}>
-            <div className="flex flex-col items-center justify-center text-center p-[26px_12px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[14px] backdrop-blur-md">
+            <div className="flex flex-col items-center justify-center text-center p-[26px_12px] glass-panel">
               <PremiumIcon name="restroom" size="md" containerClassName="mb-[12px]" />
               <b className="text-[13px] font-medium block mt-[8px]">Washrooms</b>
             </div>
           </Reveal>
           <Reveal delay={0.4}>
-            <div className="flex flex-col items-center justify-center text-center p-[26px_12px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[14px] backdrop-blur-md">
+            <div className="flex flex-col items-center justify-center text-center p-[26px_12px] glass-panel">
               <PremiumIcon name="water" size="md" containerClassName="mb-[12px]" />
               <b className="text-[13px] font-medium block mt-[8px]">Drinking Water</b>
             </div>

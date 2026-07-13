@@ -22,7 +22,7 @@ export default function HighlightsSection({ highlights = [] }: { highlights?: { 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-[16px] mt-[44px]">
           {highlights.map((hl, index) => (
             <Reveal key={hl.id} delay={index * 0.1}>
-              <a href={hl.video_url} target="_blank" rel="noreferrer" className="block rounded-[12px] overflow-hidden border border-[var(--color-card-stroke)] bg-[var(--color-card)] hover:border-[var(--color-gold)] transition-colors group cursor-pointer">
+              <a href={hl.video_url} target="_blank" rel="noreferrer" className="block rounded-[12px] overflow-hidden glass-panel hover:border-[var(--color-gold)] transition-colors group cursor-pointer">
                 <div className="aspect-square bg-gradient-to-br from-[#171310] to-[#2a2010] relative flex items-center justify-center overflow-hidden">
                   {hl.thumbnail_url && (
                     <img src={hl.thumbnail_url} alt={hl.title} className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500" />

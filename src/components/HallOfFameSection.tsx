@@ -24,7 +24,7 @@ export default function HallOfFameSection({ hallOfFame }: HallOfFameProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-[14px] mt-[44px]">
           {hallOfFame.map((item, index) => (
             <Reveal key={item.id} delay={index * 0.1}>
-              <div className="text-center p-[28px_16px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[14px] backdrop-blur-md">
+              <div className="text-center p-[28px_16px] glass-panel">
                 <div className="font-space text-[10.5px] tracking-[.14em] text-[var(--color-gold)] uppercase mb-[14px]">{item.role}</div>
                 
                 {item.image_url ? (

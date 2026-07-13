@@ -58,7 +58,7 @@ export default function EventsSection({ events }: EventsProps) {
 
           return (
             <Reveal key={event.id} delay={index * 0.1}>
-              <div className={`flex flex-col gap-0 mt-[16px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[14px] backdrop-blur-md overflow-hidden transition-colors ${!isPast ? 'hover:border-[var(--color-gold)]/30' : ''}`}>
+              <div className={`flex flex-col gap-0 mt-[16px] glass-panel overflow-hidden transition-colors ${!isPast ? 'hover:border-[var(--color-gold)]/30' : ''}`}>
                 {event.poster_url && (
                   <img src={event.poster_url} alt={event.title} className={`w-full h-[200px] sm:h-[300px] object-cover object-center border-b border-[var(--color-card-stroke)] ${isPast ? 'grayscale opacity-70' : ''}`} />
                 )}
@@ -79,7 +79,7 @@ export default function EventsSection({ events }: EventsProps) {
                   </div>
                   
                   {!isPast && (
-                    <a href="#book" className="font-space text-[12.5px] tracking-[.08em] uppercase py-[14px] px-[26px] rounded-lg inline-flex items-center gap-[10px] cursor-pointer border border-[var(--color-card-stroke)] text-[var(--color-white)] hover:bg-[var(--color-gold)] hover:text-black hover:border-[var(--color-gold)] transition-all duration-300 justify-center text-center">
+                    <a href="#book" className="font-space text-[12.5px] tracking-[.08em] uppercase py-[14px] px-[26px] rounded-lg inline-flex items-center gap-[10px] cursor-pointer glass-button justify-center text-center">
                       Register Now
                     </a>
                   )}
