@@ -80,11 +80,11 @@ export default function HeroSection() {
           TURF <span className="text-[var(--color-gold-hot)] ml-2">36</span>
         </div>
 
-        <h1 className="font-bebas font-normal tracking-[.02em] text-[clamp(50px,9vw,110px)] leading-[0.9] uppercase text-center drop-shadow-[0_0_20px_rgba(0,230,118,0.2)]">
+        <h1 className="font-bebas font-normal tracking-[.02em] text-[clamp(50px,9vw,110px)] leading-[0.9] uppercase text-center">
           <span className="block mb-[-2px]">FROM</span>
           <span className="block mb-[-2px]">FIRST BALL</span>
           <span className="block mb-[-2px]">TO</span>
-          <span className="block text-[var(--color-gold-hot)] neon-text drop-shadow-[0_0_20px_rgba(140,255,90,0.6)]">
+          <span className="block text-[#00E676] text-sweep-container">
             FINAL WHISTLE.
           </span>
         </h1>
@@ -102,30 +102,81 @@ export default function HeroSection() {
 
         <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-[1px] mt-[80px] bg-[var(--color-line)] border border-[var(--color-line)] rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.5)] opacity-0 animate-[fadeInUp_1.5s_ease-out_5.2s_forwards]">
           <div className="bg-[rgba(0,230,118,0.03)] backdrop-blur-md py-[22px] px-[20px] text-center">
-            <b className="font-space text-[clamp(24px,3vw,34px)] text-[var(--color-gold-hot)] block font-bold neon-text">{matches}+</b>
+            <b className="font-space text-[clamp(24px,3vw,34px)] text-[var(--color-gold-hot)] block font-bold">{matches}+</b>
             <span className="text-[11px] text-[var(--color-muted)] uppercase tracking-[.08em]">Matches Played</span>
           </div>
           <div className="bg-[rgba(0,230,118,0.03)] backdrop-blur-md py-[22px] px-[20px] text-center">
-            <b className="font-space text-[clamp(24px,3vw,34px)] text-[var(--color-gold-hot)] block font-bold neon-text">{tournaments}+</b>
+            <b className="font-space text-[clamp(24px,3vw,34px)] text-[var(--color-gold-hot)] block font-bold">{tournaments}+</b>
             <span className="text-[11px] text-[var(--color-muted)] uppercase tracking-[.08em]">Tournaments Hosted</span>
           </div>
           <div className="bg-[rgba(0,230,118,0.03)] backdrop-blur-md py-[22px] px-[20px] text-center">
-            <b className="font-space text-[clamp(24px,3vw,34px)] text-[var(--color-gold-hot)] block font-bold neon-text">{teams}+</b>
+            <b className="font-space text-[clamp(24px,3vw,34px)] text-[var(--color-gold-hot)] block font-bold">{teams}+</b>
             <span className="text-[11px] text-[var(--color-muted)] uppercase tracking-[.08em]">Teams Played</span>
           </div>
           <div className="bg-[rgba(0,230,118,0.03)] backdrop-blur-md py-[22px] px-[20px] text-center">
-            <b className="font-space text-[clamp(24px,3vw,34px)] text-[var(--color-gold-hot)] block font-bold neon-text">365</b>
+            <b className="font-space text-[clamp(24px,3vw,34px)] text-[var(--color-gold-hot)] block font-bold">365</b>
             <span className="text-[11px] text-[var(--color-muted)] uppercase tracking-[.08em]">Days of Game On</span>
           </div>
         </div>
       </div>
 
-      <div className="absolute bottom-[26px] left-1/2 -translate-x-1/2 z-10 font-space text-[11px] tracking-[.2em] text-[var(--color-gold-hot)] opacity-0 drop-shadow-[0_0_8px_rgba(140,255,90,0.5)] animate-[fadeIn_2s_ease-out_6s_forwards]">
+      <div className="absolute bottom-[26px] left-1/2 -translate-x-1/2 z-10 font-space text-[11px] tracking-[.2em] text-[var(--color-muted)] opacity-0 drop-shadow-[0_0_4px_rgba(0,0,0,0.5)] animate-[fadeIn_2s_ease-out_6s_forwards]">
         SCROLL TO EXPLORE
-        <div className="w-[1px] h-[30px] bg-gradient-to-b from-[var(--color-gold-hot)] to-transparent mx-auto mt-2"></div>
+        <div className="w-[1px] h-[30px] bg-gradient-to-b from-[var(--color-muted)] to-transparent mx-auto mt-2"></div>
       </div>
       
       <style jsx>{`
+        .text-sweep-container {
+          position: relative;
+          display: inline-block;
+          color: #00E676; /* Matte green */
+        }
+        .text-sweep-container::after {
+          content: "FINAL WHISTLE.";
+          position: absolute;
+          top: 0; left: 0;
+          width: 100%; height: 100%;
+          color: transparent;
+          background: linear-gradient(
+            90deg,
+            transparent 0%,
+            transparent 40%,
+            rgba(255,255,255,0.9) 50%,
+            transparent 60%,
+            transparent 100%
+          );
+          background-size: 200% 100%;
+          -webkit-background-clip: text;
+          background-clip: text;
+          animation: metalSweep 14s ease-in-out infinite;
+          z-index: 2;
+          opacity: 0.8;
+        }
+        .text-sweep-container::before {
+          content: "";
+          position: absolute;
+          top: 0; left: 0;
+          width: 100%; height: 100%;
+          background: linear-gradient(
+            90deg,
+            transparent 0%,
+            transparent 35%,
+            rgba(140,255,90,0.25) 50%,
+            transparent 65%,
+            transparent 100%
+          );
+          background-size: 200% 100%;
+          filter: blur(14px);
+          animation: metalSweep 14s ease-in-out infinite;
+          z-index: 0;
+          pointer-events: none;
+        }
+
+        @keyframes metalSweep {
+          0%, 75% { background-position: -150% 0; }
+          90%, 100% { background-position: 150% 0; }
+        }
+
         @keyframes lightFlicker {
           0% { opacity: 0; }
           10% { opacity: 0.8; }
