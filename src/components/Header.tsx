@@ -1,77 +1,40 @@
 "use client";
-import { motion, useScroll, useTransform } from "framer-motion";
-import NeonIcon from "./NeonIcon";
-import { Zap, MessageCircle, Phone, MapPin } from "lucide-react";
+import PremiumIcon from "./PremiumIcon";
 
 export default function Header() {
-  const { scrollYProgress } = useScroll();
-  
-  // As user scrolls down the page (0 to 1), transition background and border
-  const backgroundColor = useTransform(scrollYProgress, [0, 0.05], ["rgba(13, 24, 20, 0)", "rgba(13, 24, 20, 0.6)"]);
-  const borderColor = useTransform(scrollYProgress, [0, 0.05], ["rgba(20, 255, 114, 0)", "rgba(20, 255, 114, 0.15)"]);
-  const backdropBlur = useTransform(scrollYProgress, [0, 0.05], ["blur(0px)", "blur(24px)"]);
-  const shadow = useTransform(scrollYProgress, [0, 0.05], ["0 0 0 rgba(0,0,0,0)", "0 8px 32px 0 rgba(0, 0, 0, 0.37)"]);
-  const scale = useTransform(scrollYProgress, [0, 0.05], [1, 0.98]);
-  const yOffset = useTransform(scrollYProgress, [0, 0.05], [0, 16]);
-
   return (
     <>
-      <motion.div
-        className="fixed top-0 left-0 right-0 z-50 flex justify-center w-full pointer-events-none px-4"
-        style={{ y: yOffset }}
-      >
-        <motion.header 
-          initial={{ y: -100 }}
-          animate={{ y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          style={{ 
-            backgroundColor, 
-            borderColor,
-            backdropFilter: backdropBlur,
-            WebkitBackdropFilter: backdropBlur,
-            boxShadow: shadow,
-            scale,
-          }}
-          className="flex items-center justify-between py-[12px] px-8 border transition-all rounded-[30px] w-full max-w-[1120px] pointer-events-auto"
-        >
-          <div className="font-bebas text-[28px] tracking-widest flex items-center gap-[8px] text-[var(--color-text-main)]">
-            TURF<span className="text-[var(--color-neon-primary)] drop-shadow-[0_0_10px_rgba(20,255,114,0.5)]">36</span>
-          </div>
-          <nav className="hidden md:flex gap-[32px] text-[10px] tracking-[.15em] uppercase font-space text-[var(--color-text-main)]">
-            {["Book", "Live", "Gallery", "Teams", "Events", "Facilities"].map((item) => (
-              <a 
-                key={item}
-                href={`#${item.toLowerCase()}`} 
-                className="opacity-60 hover:opacity-100 hover:text-[var(--color-neon-primary)] transition-all duration-300 hover:drop-shadow-[0_0_8px_rgba(20,255,114,0.6)]"
-              >
-                {item}
-              </a>
-            ))}
-          </nav>
-          <a href="#book" className="font-space text-[10px] tracking-[.15em] uppercase py-[10px] px-[24px] rounded-full bg-[rgba(20,255,114,0.05)] border border-[var(--color-neon-primary)] text-[var(--color-neon-primary)] hover:bg-[var(--color-neon-primary)] hover:text-[var(--color-bg-deep)] hover:shadow-[0_0_25px_rgba(20,255,114,0.5)] transition-all duration-300">
-            Book Slot
-          </a>
-        </motion.header>
-      </motion.div>
+      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between py-[18px] px-7 backdrop-blur-md bg-gradient-to-b from-[rgba(6,6,5,0.85)] to-transparent">
+        <div className="font-bebas text-[22px] tracking-[.06em] flex items-center gap-[8px]">
+          TURF<span className="text-[var(--color-gold-hot)]">36</span>
+        </div>
+        <nav className="hidden md:flex gap-[26px] text-[12.5px] tracking-[.05em] uppercase text-[var(--color-muted)]">
+          <a href="#book" className="hover:text-[var(--color-gold-hot)] transition-colors">Book</a>
+          <a href="#live" className="hover:text-[var(--color-gold-hot)] transition-colors">Live</a>
+          <a href="#gallery" className="hover:text-[var(--color-gold-hot)] transition-colors">Gallery</a>
+          <a href="#teams" className="hover:text-[var(--color-gold-hot)] transition-colors">Teams</a>
+          <a href="#events" className="hover:text-[var(--color-gold-hot)] transition-colors">Events</a>
+          <a href="#facilities" className="hover:text-[var(--color-gold-hot)] transition-colors">Facilities</a>
+        </nav>
+        <a href="#book" className="font-space text-[12.5px] tracking-[.08em] uppercase py-[9px] px-[18px] rounded-lg border border-[var(--color-card-stroke)] text-[var(--color-white)] hover:border-[var(--color-gold)] transition-colors">
+          Book Now
+        </a>
+      </header>
 
       {/* Floating Quick Actions */}
-      <div className="fixed right-5 bottom-5 z-[80] flex flex-col gap-[12px] items-end">
-        <a href="#book" className="h-[50px] rounded-full px-[24px] flex items-center justify-center gap-[10px] font-space text-[10px] tracking-[.15em] font-bold bg-[var(--color-neon-primary)] text-[var(--color-bg-deep)] shadow-[0_0_30px_rgba(20,255,114,0.3)] hover:scale-105 transition-transform duration-300">
-          <Zap size={16} strokeWidth={2.5} /> Book Now
+      <div className="fixed right-5 bottom-5 z-[80] flex flex-col gap-[10px] items-end">
+        <a href="#book" className="w-auto h-[50px] rounded-[30px] px-[18px] flex items-center justify-center gap-[8px] font-space text-[12px] tracking-[.08em] font-bold bg-[var(--color-gold)] text-[#0a0a0a] shadow-[0_6px_20px_rgba(0,0,0,0.5)] hover:-translate-y-[3px] hover:scale-105 transition-transform">
+          <PremiumIcon name="lightning" noContainer className="w-[18px] h-[18px]" /> Book Now
         </a>
-        
-        {/* Floating Icons */}
-        <div className="flex gap-[12px]">
-          <a href="https://wa.me/917708929267" target="_blank" rel="noreferrer" title="WhatsApp">
-            <NeonIcon Icon={MessageCircle} size={20} className="rounded-full" />
-          </a>
-          <a href="tel:+917708929267" title="Call">
-            <NeonIcon Icon={Phone} size={20} className="rounded-full" />
-          </a>
-          <a href="https://maps.app.goo.gl/nfdANdBq9Gnu66ij9" target="_blank" rel="noreferrer" title="Directions">
-            <NeonIcon Icon={MapPin} size={20} className="rounded-full" />
-          </a>
-        </div>
+        <a href="https://wa.me/917708929267" target="_blank" rel="noreferrer" title="WhatsApp" className="w-[50px] h-[50px] rounded-full flex items-center justify-center bg-[var(--color-charcoal-2)] border border-[var(--color-card-stroke)] text-[var(--color-gold-hot)] shadow-[0_6px_20px_rgba(0,0,0,0.5)] hover:-translate-y-[3px] hover:scale-105 hover:bg-[var(--color-gold)] hover:text-[#0a0a0a] transition-all">
+          <PremiumIcon name="message" noContainer className="w-[20px] h-[20px]" />
+        </a>
+        <a href="tel:+917708929267" title="Call" className="w-[50px] h-[50px] rounded-full flex items-center justify-center bg-[var(--color-charcoal-2)] border border-[var(--color-card-stroke)] text-[var(--color-gold-hot)] shadow-[0_6px_20px_rgba(0,0,0,0.5)] hover:-translate-y-[3px] hover:scale-105 hover:bg-[var(--color-gold)] hover:text-[#0a0a0a] transition-all">
+          <PremiumIcon name="contact" noContainer className="w-[20px] h-[20px]" />
+        </a>
+        <a href="https://maps.app.goo.gl/nfdANdBq9Gnu66ij9" target="_blank" rel="noreferrer" title="Directions" className="w-[50px] h-[50px] rounded-full flex items-center justify-center bg-[var(--color-charcoal-2)] border border-[var(--color-card-stroke)] text-[var(--color-gold-hot)] shadow-[0_6px_20px_rgba(0,0,0,0.5)] hover:-translate-y-[3px] hover:scale-105 hover:bg-[var(--color-gold)] hover:text-[#0a0a0a] transition-all">
+          <PremiumIcon name="location" noContainer className="w-[20px] h-[20px]" />
+        </a>
       </div>
     </>
   );
