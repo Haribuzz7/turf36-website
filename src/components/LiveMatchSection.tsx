@@ -25,11 +25,20 @@ export default function LiveMatchSection({ liveMatch }: LiveMatchProps) {
           Pulled straight from CricHeroes once a match is live — no extra scoring work on our end.
         </p>
         
-        <div className="inline-flex items-center gap-[8px] font-space text-[11px] tracking-[.15em] text-[#ff6b6b] uppercase mb-[20px] mt-[10px]">
+        <div className="inline-flex items-center gap-[8px] font-space text-[11px] tracking-[.15em] text-[#ff3333] uppercase mb-[20px] mt-[10px]">
           {hasLiveMatch ? (
-             <><span className="w-[8px] h-[8px] rounded-full bg-[#ff6b6b] animate-[pulse_1.4s_infinite]"></span> Live Now</>
+             <div className="flex items-center gap-2 bg-[rgba(255,51,51,0.1)] px-3 py-1.5 rounded-full border border-[rgba(255,51,51,0.2)] shadow-[0_0_15px_rgba(255,51,51,0.3)]">
+               <span className="relative flex h-[8px] w-[8px]">
+                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ff3333] opacity-75"></span>
+                 <span className="relative inline-flex rounded-full h-[8px] w-[8px] bg-[#ff3333]"></span>
+               </span>
+               <span className="text-[#ff3333] font-bold">Live Now</span>
+             </div>
           ) : (
-            <><span className="w-[8px] h-[8px] rounded-full bg-[var(--color-muted)]"></span> Offline</>
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-[var(--color-card-stroke)] bg-[var(--color-card)] text-[var(--color-muted)]">
+              <span className="w-[8px] h-[8px] rounded-full bg-[var(--color-muted)]"></span>
+              <span>Offline</span>
+            </div>
           )}
         </div>
         

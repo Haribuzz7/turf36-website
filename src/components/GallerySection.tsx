@@ -30,17 +30,20 @@ export default function GallerySection({ images }: GalleryProps) {
             return (
               <div 
                 key={idx} 
-                className={`aspect-[16/9] rounded-[12px] relative overflow-hidden border border-[var(--color-card-stroke)] flex flex-col justify-end p-[14px] cursor-pointer bg-[var(--color-card)] group`}
+                className={`aspect-[16/9] rounded-[16px] relative overflow-hidden border border-[var(--color-card-stroke)] flex flex-col justify-end p-[18px] cursor-pointer bg-[var(--color-card)] group transition-all duration-500 hover:border-[var(--color-gold)] hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)] hover:-translate-y-1`}
               >
                 {img.image_url !== '/placeholder' ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={img.image_url} alt="Gallery image" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                  <img src={img.image_url} alt="Gallery image" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110" />
                 ) : (
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#1a1712] to-[#2b2313] before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-b before:from-transparent before:from-40% before:to-[rgba(0,0,0,0.75)] before:z-0"></div>
+                  <div className="absolute inset-0 bg-[#090909] before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-br before:from-[rgba(212,175,55,0.05)] before:to-transparent before:z-0"></div>
                 )}
                 
                 {/* Always show a dark gradient at bottom so text is readable */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-70"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#090909] via-[#090909]/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
+
+                {/* Glassmorphic overlay on hover */}
+                <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 backdrop-blur-[2px] transition-all duration-500"></div>
 
                 <div className="relative z-10 flex flex-col">
                   {img.subtitle && (

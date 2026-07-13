@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, Space_Mono, Poppins } from "next/font/google";
 import "./globals.css";
+import SmoothScroll from "@/components/SmoothScroll";
+import SplashScreen from "@/components/SplashScreen";
 
 const bebas = Bebas_Neue({
   variable: "--font-bebas",
@@ -33,9 +35,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bebas.variable} ${spaceMono.variable} ${poppins.variable} h-full antialiased`}
+      className={`${bebas.variable} ${spaceMono.variable} ${poppins.variable} h-full antialiased bg-[#090909] text-[#f5f2ec]`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <SplashScreen />
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
+      </body>
     </html>
   );
 }
