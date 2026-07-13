@@ -46,7 +46,7 @@ export default function Header() {
           {["FACILITIES", "GALLERY", "LEGACY"].map((item) => (
             <a 
               key={item} 
-              href={#} 
+              href={`#${item.toLowerCase()}`} 
               className="font-space text-[10px] tracking-[.2em] text-[var(--color-text-muted)] hover:text-[var(--color-text-main)] transition-colors uppercase"
             >
               {item}
