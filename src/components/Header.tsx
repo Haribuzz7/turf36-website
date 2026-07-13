@@ -26,11 +26,14 @@ export default function Header() {
       }}
       animate={hidden ? "hidden" : "visible"}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className={ixed top-0 left-0 right-0 z-50 flex justify-center pt-[20px] px-6 transition-all duration-700}
+      className={`fixed top-0 left-0 right-0 z-50 flex justify-center pt-[20px] px-6 transition-all duration-700`}
     >
       <div 
-        className={lex items-center justify-between w-full max-w-[900px] px-[24px] py-[14px] rounded-full transition-all duration-700 
-          }
+        className={`flex items-center justify-between w-full max-w-[900px] px-[24px] py-[14px] rounded-full transition-all duration-700 
+          ${isScrolled 
+            ? "bg-[rgba(255,255,255,0.7)] backdrop-blur-xl border border-[rgba(0,0,0,0.06)] shadow-[0_10px_40px_rgba(0,0,0,0.04)]" 
+            : "bg-transparent border-transparent"
+          }`}
       >
         <div className="flex items-center gap-[12px]">
           {/* Logo with invert filter since the original is white */}
