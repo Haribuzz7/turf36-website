@@ -29,9 +29,9 @@ export default function GallerySection() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-[16px] md:gap-[24px] auto-rows-[300px]">
           {MOCK_GALLERY.map((img, idx) => (
-            <Reveal key={idx} type="scale" delay={idx * 0.1} className={w-full h-full  }>
+            <Reveal key={idx} type="scale" delay={idx * 0.1} className={`w-full h-full ${img.colSpan} ${img.rowSpan}`}>
               <div 
-                className={w-full h-full  relative overflow-hidden group bg-[#050505] cursor-none}
+                className={`w-full h-full ${img.aspect} relative overflow-hidden group bg-[#050505] cursor-none`}
               >
                 {img.image_url !== '/placeholder' ? (
                   // eslint-disable-next-line @next/next/no-img-element
