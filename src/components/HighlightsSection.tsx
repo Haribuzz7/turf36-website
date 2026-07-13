@@ -2,7 +2,15 @@
 
 import Reveal from "./Reveal";
 
-export default function HighlightsSection({ highlights = [] }: { highlights?: Record<string, unknown>[] }) {
+type Highlight = {
+  id?: string;
+  title?: string;
+  subtitle?: string;
+  video_url?: string;
+  thumbnail_url?: string;
+};
+
+export default function HighlightsSection({ highlights = [] }: { highlights?: Highlight[] }) {
   if (!highlights || highlights.length === 0) return null;
 
   return (

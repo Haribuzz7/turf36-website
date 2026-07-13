@@ -3,7 +3,12 @@
 import Reveal from "./Reveal";
 
 type GalleryProps = {
-  images: Record<string, unknown>[];
+  images: {
+    image_url: string;
+    subtitle?: string;
+    event_date: string;
+    isPlaceholder?: boolean;
+  }[];
 };
 
 export default function GallerySection({ images }: GalleryProps) {

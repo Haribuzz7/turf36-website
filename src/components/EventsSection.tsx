@@ -4,7 +4,13 @@ import Reveal from "./Reveal";
 import PremiumIcon from "./PremiumIcon";
 
 type EventsProps = {
-  events: Record<string, unknown>[];
+  events: {
+    id?: string;
+    title?: string;
+    subtitle?: string;
+    event_date: string;
+    poster_url?: string;
+  }[];
 };
 
 export default function EventsSection({ events }: EventsProps) {

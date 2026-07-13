@@ -57,10 +57,10 @@ export default function LiveMatchSection({ liveMatch }: LiveMatchProps) {
             {hasLiveMatch ? (
               <div className="w-full h-[600px] bg-[var(--color-warm-white)] rounded-[16px] overflow-hidden">
                  {/* Try to parse as iframe HTML string first, otherwise use as URL */}
-                 {liveMatch.iframe_url.includes('<iframe') ? (
+                 {liveMatch.iframe_url?.includes('<iframe') ? (
                     <div className="w-full h-full [&>iframe]:w-full [&>iframe]:h-full" dangerouslySetInnerHTML={{ __html: liveMatch.iframe_url }} />
                  ) : (
-                    <iframe src={liveMatch.iframe_url} className="w-full h-full border-0" allowFullScreen></iframe>
+                    <iframe src={liveMatch.iframe_url || ""} className="w-full h-full border-0" allowFullScreen></iframe>
                  )}
               </div>
             ) : (

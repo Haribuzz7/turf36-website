@@ -3,7 +3,13 @@
 import Reveal from "./Reveal";
 
 type HallOfFameProps = {
-  hallOfFame: Record<string, unknown>[];
+  hallOfFame: {
+    id?: string;
+    role?: string;
+    name: string;
+    metadata?: string;
+    image_url?: string;
+  }[];
 };
 
 export default function HallOfFameSection({ hallOfFame }: HallOfFameProps) {
