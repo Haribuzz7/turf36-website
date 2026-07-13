@@ -35,7 +35,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bebas.variable} ${spaceMono.variable} ${poppins.variable} h-full antialiased bg-[#090909] text-[#f5f2ec]`}
+      className={`${bebas.variable} ${spaceMono.variable} ${poppins.variable} h-full antialiased bg-black text-white`}
     >
       <body className="min-h-full flex flex-col">
         <SplashScreen />

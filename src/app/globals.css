@@ -3,35 +3,44 @@
 @tailwind utilities;
 
 :root {
-  /* Aman Resorts / Luxury Club Light Palette */
-  --color-warm-white: #F7F6F2;
-  --color-soft-stone: #E6E3DC;
-  --color-concrete: #D4D2CC;
-  --color-slate: #5E646A;
-  --color-forest: #315B44;
-  --color-accent: #D96C24;
+  /* Neon Glassmorphism Dark Palette */
+  --color-bg-deep: #08130F;
+  --color-bg-dark: #0D1814;
+  --color-black: #050a08;
   
-  --color-text-main: #2A2C2E;
-  --color-text-muted: #7A8086;
+  --color-neon-primary: #14FF72;
+  --color-neon-secondary: #A6FFCC;
+  
+  --color-text-main: #FFFFFF;
+  --color-text-muted: #8FA39A;
+  
+  --color-glass-border: rgba(20, 255, 114, 0.15);
+  --color-glass-bg: rgba(13, 24, 20, 0.4);
+  --color-glass-highlight: rgba(255, 255, 255, 0.05);
 
-  /* Legacy variable mappings to prevent breaking components while refactoring */
-  --color-bg-main: var(--color-warm-white);
-  --color-glass-bg: rgba(255, 255, 255, 0.4);
-  --color-glass-border: rgba(94, 100, 106, 0.15);
+  /* Legacy overrides to not break components that might still use them */
+  --color-warm-white: var(--color-bg-deep);
+  --color-soft-stone: var(--color-bg-dark);
+  --color-concrete: var(--color-bg-deep);
+  --color-slate: var(--color-text-muted);
+  --color-forest: var(--color-neon-primary);
+  --color-accent: var(--color-neon-primary);
 }
 
 html {
-  scroll-behavior: smooth;
-  background-color: var(--color-warm-white);
+  background-color: var(--color-bg-deep);
   color: var(--color-text-main);
+  /* Let Lenis handle scroll */
+  scroll-behavior: auto; 
 }
 
 body {
   font-family: var(--font-inter), sans-serif;
-  background-color: var(--color-warm-white);
+  background-color: var(--color-bg-deep);
   color: var(--color-text-main);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 /* Base Headings */
@@ -41,20 +50,66 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Subtle Custom Selection */
 ::selection {
-  background: var(--color-soft-stone);
-  color: var(--color-forest);
+  background: var(--color-neon-primary);
+  color: var(--color-bg-deep);
 }
 
-/* Reusable Architectural Glass */
+/* Reusable Glass Panel */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--color-glass-border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Reusable Natural Shadow */
-.natural-shadow {
-  box-shadow: 0 20px 40px -10px rgba(0,0,0,0.05);
+.glass-panel:hover {
+  border-color: rgba(20, 255, 114, 0.4);
+  box-shadow: 0 12px 40px 0 rgba(20, 255, 114, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(20, 255, 114, 0.2);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(20, 255, 114, 0.5);
+}
+
+/* Ambient Animations */
+@keyframes fog-drift {
+  0% { transform: translateX(-5%) translateY(0) scale(1); opacity: 0.3; }
+  50% { transform: translateX(5%) translateY(-2%) scale(1.05); opacity: 0.5; }
+  100% { transform: translateX(-5%) translateY(0) scale(1); opacity: 0.3; }
+}
+.animate-fog {
+  animation: fog-drift 20s infinite ease-in-out;
+}
+
+@keyframes neon-pulse {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 10px rgba(20, 255, 114, 0.3)); }
+  50% { opacity: 0.8; filter: drop-shadow(0 0 20px rgba(20, 255, 114, 0.6)); }
+}
+.animate-neon-pulse {
+  animation: neon-pulse 3s infinite ease-in-out;
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.15); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.15); }
+  70% { transform: scale(1); }
+}
+.animate-heartbeat {
+  animation: heartbeat 1.5s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
 }
