@@ -1,124 +1,80 @@
 "use client";
 
 import Reveal from "./Reveal";
-import { useState, useRef, useEffect } from "react";
 import PremiumIcon from "./PremiumIcon";
 
 export default function FacilitiesSection() {
-  const [sliderPct, setSliderPct] = useState(50);
-  const wrapRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-
-  const handleMove = (clientX: number) => {
-    if (!wrapRef.current) return;
-    const rect = wrapRef.current.getBoundingClientRect();
-    let pct = ((clientX - rect.left) / rect.width) * 100;
-    pct = Math.max(4, Math.min(96, pct));
-    setSliderPct(pct);
-  };
-
-  useEffect(() => {
-    const onMouseMove = (e: MouseEvent) => isDragging && handleMove(e.clientX);
-    const onMouseUp = () => setIsDragging(false);
-    const onTouchMove = (e: TouchEvent) => isDragging && handleMove(e.touches[0].clientX);
-
-    if (isDragging) {
-      window.addEventListener("mousemove", onMouseMove);
-      window.addEventListener("mouseup", onMouseUp);
-      window.addEventListener("touchmove", onTouchMove, { passive: false });
-      window.addEventListener("touchend", onMouseUp);
-    }
-    return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseup", onMouseUp);
-      window.removeEventListener("touchmove", onTouchMove);
-      window.removeEventListener("touchend", onMouseUp);
-    };
-  }, [isDragging]);
-
   return (
-    <section id="facilities" className="relative py-[110px] border-b border-[var(--color-line)]">
-      <div className="max-w-[1120px] mx-auto px-7">
-        <div className="font-space tracking-[.22em] uppercase text-[11.5px] text-[var(--color-gold)] flex items-center gap-[10px] mb-[16px] before:content-[''] before:w-[26px] before:h-[1px] before:bg-[var(--color-gold)]">
-          On the ground
-        </div>
-        <Reveal>
-          <h2 className="font-bebas font-normal tracking-[.01em] text-[clamp(34px,5.4vw,58px)] leading-[1.02] uppercase">
-            Turf <span className="text-[var(--color-gold-hot)]">Facilities</span>
-          </h2>
-        </Reveal>
-        
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-[14px] mt-[44px]">
-          <Reveal>
-            <div className="flex flex-col items-center justify-center text-center p-[26px_12px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[16px] backdrop-blur-md transition-all duration-300 hover:border-[var(--color-gold)] hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)] hover:bg-white/5 group">
-              <PremiumIcon name="floodlight" size="md" containerClassName="mb-[12px]" />
-              <b className="text-[13px] font-medium block mt-[8px]">Floodlights</b>
-            </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <div className="flex flex-col items-center justify-center text-center p-[26px_12px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[16px] backdrop-blur-md transition-all duration-300 hover:border-[var(--color-gold)] hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)] hover:bg-white/5 group">
-              <PremiumIcon name="parking" size="md" containerClassName="mb-[12px]" />
-              <b className="text-[13px] font-medium block mt-[8px]">Parking</b>
-            </div>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <div className="flex flex-col items-center justify-center text-center p-[26px_12px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[16px] backdrop-blur-md transition-all duration-300 hover:border-[var(--color-gold)] hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)] hover:bg-white/5 group">
-              <PremiumIcon name="seat" size="md" containerClassName="mb-[12px]" />
-              <b className="text-[13px] font-medium block mt-[8px]">Seating</b>
-            </div>
-          </Reveal>
-          <Reveal delay={0.3}>
-            <div className="flex flex-col items-center justify-center text-center p-[26px_12px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[16px] backdrop-blur-md transition-all duration-300 hover:border-[var(--color-gold)] hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)] hover:bg-white/5 group">
-              <PremiumIcon name="restroom" size="md" containerClassName="mb-[12px]" />
-              <b className="text-[13px] font-medium block mt-[8px]">Washrooms</b>
-            </div>
-          </Reveal>
-          <Reveal delay={0.4}>
-            <div className="flex flex-col items-center justify-center text-center p-[26px_12px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[16px] backdrop-blur-md transition-all duration-300 hover:border-[var(--color-gold)] hover:-translate-y-2 hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)] hover:bg-white/5 group">
-              <PremiumIcon name="water" size="md" containerClassName="mb-[12px]" />
-              <b className="text-[13px] font-medium block mt-[8px]">Drinking Water</b>
-            </div>
-          </Reveal>
-        </div>
+    <section id="facilities" className="relative py-[140px] border-b border-[var(--color-glass-border)] bg-[#050505]">
+      
+      {/* Blueprint Grid Background */}
+      <div className="absolute inset-0 z-0 opacity-20 pointer-events-none" 
+           style={{ backgroundImage: 'linear-gradient(var(--color-steel) 1px, transparent 1px), linear-gradient(90deg, var(--color-steel) 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
+      </div>
 
-        <Reveal>
-          <div 
-            ref={wrapRef}
-            onMouseDown={(e) => { setIsDragging(true); handleMove(e.clientX); }}
-            onTouchStart={(e) => { setIsDragging(true); handleMove(e.touches[0].clientX); }}
-            className="relative mt-[44px] rounded-[16px] overflow-hidden border border-[var(--color-card-stroke)] aspect-[16/8] cursor-ew-resize select-none"
-          >
-            {/* Day Layer */}
-            <div className="absolute inset-0 z-0" style={{
-              background: `radial-gradient(circle at 80% 15%, rgba(255,236,180,.5), transparent 40%), linear-gradient(180deg,#bfe0f2 0%, #e8f3da 45%, #6f9e57 46%, #3f6b3a 100%)`
-            }}></div>
-            
-            {/* Night Layer */}
-            <div 
-              className="absolute inset-0 z-10" 
-              style={{
-                clipPath: `inset(0 0 0 ${sliderPct}%)`,
-                background: `linear-gradient(180deg,#050608 0%, #0b0d12 45%, #0c1f14 46%, #061007 100%)`
-              }}
-            >
-              <div className="absolute top-[8%] left-[15%] w-[70%] h-[40%] bg-[radial-gradient(ellipse_at_center,rgba(255,246,216,0.18),transparent_70%)]"></div>
-              <div className="absolute top-[6%] left-[10%] w-[8%] h-[14%] bg-[radial-gradient(circle,var(--color-flood),transparent_70%)]" style={{boxShadow: '82% 0 0 0 rgba(255,246,216,.7), 82% 0 40px 10px rgba(255,246,216,.25)'}}></div>
+      <div className="max-w-[1120px] mx-auto px-7 relative z-10">
+        <Reveal type="fade">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-[20px] mb-[60px]">
+            <div>
+              <span className="font-space tracking-[.3em] uppercase text-[10px] text-[var(--color-muted-2)] block mb-[16px] border-l-2 border-[var(--color-muted)] pl-[12px]">Infrastructure</span>
+              <h2 className="font-bebas font-normal tracking-[.01em] text-[clamp(40px,6vw,70px)] leading-[0.9] text-white">
+                FACILITIES <span className="text-[var(--color-muted-2)]">SPEC</span>
+              </h2>
             </div>
-
-            <div className="absolute bottom-[16px] left-[16px] font-space text-[11px] tracking-[.1em] uppercase p-[6px_12px] rounded-[20px] bg-[rgba(0,0,0,0.4)] z-20 text-[var(--color-white)]">DAY</div>
-            <div className="absolute bottom-[16px] right-[16px] font-space text-[11px] tracking-[.1em] uppercase p-[6px_12px] rounded-[20px] bg-[rgba(0,0,0,0.4)] z-20 text-[var(--color-white)]">NIGHT</div>
-
-            {/* Handle */}
-            <div 
-              className="absolute top-0 bottom-0 w-[2px] bg-[var(--color-gold-hot)] z-30 -translate-x-[1px]" 
-              style={{ left: `${sliderPct}%`, boxShadow: '0 0 12px rgba(240,201,74,.7)' }}
-            >
-              <div className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-[42px] h-[42px] rounded-full bg-[var(--color-gold-hot)] flex items-center justify-center text-[14px] text-[#0a0a0a] font-bold">
-                ⇔
-              </div>
+            <div className="font-space text-[10px] tracking-[.3em] uppercase text-[var(--color-muted-2)] border border-[var(--color-steel)] p-[12px_24px] rounded-sm bg-[rgba(0,0,0,0.5)]">
+              REV: 2.0 / 2026
             </div>
           </div>
         </Reveal>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-[1px] mt-[44px] bg-[var(--color-steel)] border border-[var(--color-steel)] rounded-[4px] overflow-hidden p-[1px]">
+          
+          <div className="flex flex-col p-[30px_24px] bg-[var(--color-carbon)] group hover:bg-[#080808] transition-colors duration-500">
+            <div className="flex justify-between items-start mb-[40px]">
+              <span className="font-space text-[9px] text-[var(--color-muted-2)]">F-01</span>
+              <PremiumIcon name="floodlight" noContainer className="w-[24px] h-[24px] opacity-40 group-hover:opacity-100 transition-opacity" />
+            </div>
+            <b className="font-bebas text-[24px] tracking-wide text-white block mt-auto">Floodlights</b>
+            <span className="font-space text-[9px] uppercase tracking-widest text-[var(--color-muted)] mt-2">D/N Capable</span>
+          </div>
+          
+          <div className="flex flex-col p-[30px_24px] bg-[var(--color-carbon)] group hover:bg-[#080808] transition-colors duration-500">
+            <div className="flex justify-between items-start mb-[40px]">
+              <span className="font-space text-[9px] text-[var(--color-muted-2)]">F-02</span>
+              <PremiumIcon name="parking" noContainer className="w-[24px] h-[24px] opacity-40 group-hover:opacity-100 transition-opacity" />
+            </div>
+            <b className="font-bebas text-[24px] tracking-wide text-white block mt-auto">Parking</b>
+            <span className="font-space text-[9px] uppercase tracking-widest text-[var(--color-muted)] mt-2">Ample Space</span>
+          </div>
+
+          <div className="flex flex-col p-[30px_24px] bg-[var(--color-carbon)] group hover:bg-[#080808] transition-colors duration-500">
+            <div className="flex justify-between items-start mb-[40px]">
+              <span className="font-space text-[9px] text-[var(--color-muted-2)]">F-03</span>
+              <PremiumIcon name="seat" noContainer className="w-[24px] h-[24px] opacity-40 group-hover:opacity-100 transition-opacity" />
+            </div>
+            <b className="font-bebas text-[24px] tracking-wide text-white block mt-auto">Seating</b>
+            <span className="font-space text-[9px] uppercase tracking-widest text-[var(--color-muted)] mt-2">Spectator Area</span>
+          </div>
+
+          <div className="flex flex-col p-[30px_24px] bg-[var(--color-carbon)] group hover:bg-[#080808] transition-colors duration-500">
+            <div className="flex justify-between items-start mb-[40px]">
+              <span className="font-space text-[9px] text-[var(--color-muted-2)]">F-04</span>
+              <PremiumIcon name="restroom" noContainer className="w-[24px] h-[24px] opacity-40 group-hover:opacity-100 transition-opacity" />
+            </div>
+            <b className="font-bebas text-[24px] tracking-wide text-white block mt-auto">Washrooms</b>
+            <span className="font-space text-[9px] uppercase tracking-widest text-[var(--color-muted)] mt-2">Maintained</span>
+          </div>
+
+          <div className="flex flex-col p-[30px_24px] bg-[var(--color-carbon)] group hover:bg-[#080808] transition-colors duration-500">
+            <div className="flex justify-between items-start mb-[40px]">
+              <span className="font-space text-[9px] text-[var(--color-muted-2)]">F-05</span>
+              <PremiumIcon name="water" noContainer className="w-[24px] h-[24px] opacity-40 group-hover:opacity-100 transition-opacity" />
+            </div>
+            <b className="font-bebas text-[24px] tracking-wide text-white block mt-auto">Water</b>
+            <span className="font-space text-[9px] uppercase tracking-widest text-[var(--color-muted)] mt-2">RO Purified</span>
+          </div>
+
+        </div>
       </div>
     </section>
   );

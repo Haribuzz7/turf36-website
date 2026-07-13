@@ -2,62 +2,54 @@
 
 import Reveal from "./Reveal";
 
-type GalleryProps = {
-  images: any[];
-};
+const MOCK_GALLERY = [
+  { image_url: "/placeholder", title: "Midnight Tournament", colSpan: "col-span-1 md:col-span-2", rowSpan: "row-span-2", aspect: "aspect-[16/9] md:aspect-auto" },
+  { image_url: "/placeholder", title: "Championship Finals", colSpan: "col-span-1", rowSpan: "row-span-1", aspect: "aspect-[4/3]" },
+  { image_url: "/placeholder", title: "Pre-match Warmup", colSpan: "col-span-1", rowSpan: "row-span-1", aspect: "aspect-[4/3]" },
+  { image_url: "/placeholder", title: "Trophy Presentation", colSpan: "col-span-1", rowSpan: "row-span-1", aspect: "aspect-[4/3]" },
+  { image_url: "/placeholder", title: "Crowd Under Lights", colSpan: "col-span-1 md:col-span-2", rowSpan: "row-span-1", aspect: "aspect-[21/9]" }
+];
 
-export default function GallerySection({ images }: GalleryProps) {
-  // If no dynamic images are provided from Supabase yet, show placeholders
-  const displayImages = images.length > 0 ? images : Array(6).fill({ isPlaceholder: true, image_url: '/placeholder' });
-
+export default function GallerySection() {
   return (
-    <section id="gallery" className="relative py-[110px] border-b border-[var(--color-line)]">
-      <div className="max-w-[1120px] mx-auto px-7">
-        <div className="font-space tracking-[.22em] uppercase text-[11.5px] text-[var(--color-gold)] flex items-center gap-[10px] mb-[16px] before:content-[''] before:w-[26px] before:h-[1px] before:bg-[var(--color-gold)]">
-          Match Memory
+    <section id="gallery" className="relative py-[140px] border-b border-[var(--color-glass-border)] bg-[var(--color-carbon)]">
+      <div className="max-w-[1400px] mx-auto px-7">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-[20px] mb-[60px]">
+          <Reveal type="blur">
+            <h2 className="font-bebas font-normal tracking-[.01em] text-[clamp(40px,6vw,70px)] leading-[0.9] text-white">
+              NIGHT <span className="text-[var(--color-muted-2)]">FRAMES</span>
+            </h2>
+          </Reveal>
+          <Reveal type="fade" delay={0.2}>
+            <a href="#" className="font-space text-[10px] tracking-[.2em] uppercase text-[var(--color-muted)] hover:text-white transition-colors border-b border-[var(--color-glass-border)] pb-[4px] w-fit">
+              Explore Documentary
+            </a>
+          </Reveal>
         </div>
-        <Reveal>
-          <h2 className="font-bebas font-normal tracking-[.01em] text-[clamp(34px,5.4vw,58px)] leading-[1.02] uppercase">
-            Every <span className="text-[var(--color-gold-hot)]">Match Memory</span>
-          </h2>
-        </Reveal>
-        <p className="text-[var(--color-muted)] font-light text-[15.5px] leading-[1.7] max-w-[560px]">
-          Latest action from the ground. Updates directly from the Admin dashboard.
-        </p>
-        
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-[16px] mt-[44px]">
-          {displayImages.map((img, idx) => {
-            return (
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-[16px] md:gap-[24px] auto-rows-[300px]">
+          {MOCK_GALLERY.map((img, idx) => (
+            <Reveal key={idx} type="scale" delay={idx * 0.1} className={w-full h-full  }>
               <div 
-                key={idx} 
-                className={`aspect-[16/9] rounded-[16px] relative overflow-hidden border border-[var(--color-card-stroke)] flex flex-col justify-end p-[18px] cursor-pointer bg-[var(--color-card)] group transition-all duration-500 hover:border-[var(--color-gold)] hover:shadow-[0_8px_30px_rgba(212,175,55,0.15)] hover:-translate-y-1`}
+                className={w-full h-full  relative overflow-hidden group bg-[#050505] cursor-none}
               >
                 {img.image_url !== '/placeholder' ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={img.image_url} alt="Gallery image" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110" />
+                  <img src={img.image_url} alt={img.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05] filter grayscale-[30%] group-hover:grayscale-0" />
                 ) : (
-                  <div className="absolute inset-0 bg-[#090909] before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-br before:from-[rgba(212,175,55,0.05)] before:to-transparent before:z-0"></div>
+                  <div className="absolute inset-0 bg-[#050505] before:content-[''] before:absolute before:inset-0 before:bg-[radial-gradient(ellipse_at_center,rgba(255,255,255,0.02),transparent_70%)] before:z-0 transition-transform duration-[1.5s] group-hover:scale-[1.05]"></div>
                 )}
                 
-                {/* Always show a dark gradient at bottom so text is readable */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#090909] via-[#090909]/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
+                {/* Cinematic Vignette Overlay */}
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.8)_100%)] opacity-80 group-hover:opacity-60 transition-opacity duration-700"></div>
 
-                {/* Glassmorphic overlay on hover */}
-                <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 backdrop-blur-[2px] transition-all duration-500"></div>
-
-                <div className="relative z-10 flex flex-col">
-                  {img.subtitle && (
-                    <span className="text-white font-medium text-[13px] sm:text-[14px] leading-tight mb-1 drop-shadow-md">
-                      {img.subtitle}
-                    </span>
-                  )}
-                  <span className="font-space text-[10px] sm:text-[11px] tracking-[.05em] text-[var(--color-gold)] font-bold drop-shadow-md uppercase">
-                    {img.isPlaceholder ? 'MEMORY' : new Date(img.event_date).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
-                  </span>
+                <div className="absolute inset-0 flex flex-col justify-end p-[30px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-t from-black/80 to-transparent">
+                  <span className="font-space text-[9px] uppercase tracking-[.3em] text-[var(--color-muted)] mb-2">Moments</span>
+                  <h4 className="font-bebas text-[28px] text-white tracking-wide">{img.title}</h4>
                 </div>
               </div>
-            );
-          })}
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
