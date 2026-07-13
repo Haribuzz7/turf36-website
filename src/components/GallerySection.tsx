@@ -2,54 +2,70 @@
 
 import Reveal from "./Reveal";
 
-const MOCK_GALLERY = [
-  { image_url: "/placeholder", title: "Morning Dew", colSpan: "col-span-1 md:col-span-2", rowSpan: "row-span-2", aspect: "aspect-[16/9] md:aspect-auto" },
-  { image_url: "/placeholder", title: "Clubhouse", colSpan: "col-span-1", rowSpan: "row-span-1", aspect: "aspect-[4/3]" },
-  { image_url: "/placeholder", title: "The Pitch", colSpan: "col-span-1", rowSpan: "row-span-1", aspect: "aspect-[4/3]" },
-  { image_url: "/placeholder", title: "Weekend Match", colSpan: "col-span-1", rowSpan: "row-span-1", aspect: "aspect-[4/3]" },
-  { image_url: "/placeholder", title: "Community", colSpan: "col-span-1 md:col-span-2", rowSpan: "row-span-1", aspect: "aspect-[21/9]" }
-];
+type GalleryProps = {
+  images: Record<string, unknown>[];
+};
 
-export default function GallerySection() {
+export default function GallerySection({ images }: GalleryProps) {
+  // If no dynamic images are provided from Supabase yet, show placeholders
+  const displayImages = images.length > 0 ? images : Array(6).fill({ isPlaceholder: true, image_url: '/placeholder' });
+
   return (
-    <section id="gallery" className="relative py-[140px] border-b border-[var(--color-concrete)] bg-[var(--color-warm-white)]">
-      <div className="max-w-[1400px] mx-auto px-7">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-[20px] mb-[80px]">
-          <Reveal type="blur">
-            <h2 className="font-bebas font-normal tracking-wide text-[clamp(40px,6vw,80px)] leading-[0.9] text-[var(--color-text-main)]">
-              VISUAL <span className="text-[var(--color-slate)] opacity-60">JOURNAL</span>
+    <section id="gallery" className="relative py-[140px] bg-[var(--color-concrete)] border-b border-[var(--color-slate)] border-opacity-20 overflow-hidden">
+      {/* Stone texture overlay */}
+      <div className="absolute inset-0 opacity-[0.04] pointer-events-none" style={{ backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')" }}></div>
+
+      <div className="max-w-[1280px] mx-auto px-7 relative z-10">
+        <div className="font-space tracking-[.25em] uppercase text-[10px] text-[var(--color-slate)] flex items-center gap-[12px] mb-[20px] before:content-[''] before:w-[30px] before:h-[1px] before:bg-[var(--color-slate)]">
+          Visual Archive
+        </div>
+        
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-[20px] mb-[60px]">
+          <Reveal>
+            <h2 className="font-bebas font-normal tracking-wide text-[clamp(40px,6vw,70px)] leading-[0.9] uppercase text-[var(--color-text-main)] max-w-[500px]">
+              Every Match Memory
             </h2>
           </Reveal>
-          <Reveal type="fade" delay={0.2}>
-            <a href="#" className="font-space text-[9px] tracking-[.2em] uppercase text-[var(--color-text-muted)] hover:text-[var(--color-text-main)] transition-colors border-b border-[var(--color-concrete)] pb-[4px] w-fit">
-              View Full Gallery
-            </a>
-          </Reveal>
+          <p className="text-[var(--color-text-main)] opacity-70 font-light text-[15px] leading-[1.8] max-w-[340px] pb-[4px]">
+            Latest action from the ground. Updates directly from the Admin dashboard.
+          </p>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px] md:gap-[40px] auto-rows-[300px]">
-          {MOCK_GALLERY.map((img, idx) => (
-            <Reveal key={idx} type="scale" delay={idx * 0.1} className={`w-full h-full ${img.colSpan} ${img.rowSpan}`}>
+        
+        {/* Magazine-style photography layout */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-[20px]">
+          {displayImages.map((img, idx) => {
+            // Give the first item and the 6th item a larger span for a magazine editorial look
+            const isFeatured = idx === 0 || idx === 5;
+            return (
               <div 
-                className={`w-full h-full ${img.aspect} relative overflow-hidden group bg-[var(--color-soft-stone)] cursor-none`}
+                key={idx} 
+                className={`group relative overflow-hidden bg-[var(--color-soft-stone)] cursor-pointer
+                  ${isFeatured ? 'col-span-2 row-span-2 aspect-[4/3] sm:aspect-auto sm:h-full' : 'aspect-square sm:aspect-[4/5]'}
+                `}
               >
                 {img.image_url !== '/placeholder' ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={img.image_url} alt={img.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03] filter contrast-[1.05]" />
+                  <img src={img.image_url} alt="Gallery image" className="absolute inset-0 w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]" />
                 ) : (
-                  <div className="absolute inset-0 bg-[var(--color-soft-stone)] transition-transform duration-[2s] group-hover:scale-[1.03]"></div>
+                  <div className="absolute inset-0 bg-[var(--color-slate)] opacity-10"></div>
                 )}
                 
-                {/* Elegant White Vignette Overlay */}
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_50%,rgba(247,246,242,0.4)_100%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+                {/* Magazine style elegant text overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-text-main)] via-[var(--color-text-main)]/20 to-transparent opacity-0 group-hover:opacity-80 transition-opacity duration-500"></div>
 
-                <div className="absolute inset-0 flex flex-col justify-end p-[40px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-t from-[var(--color-warm-white)]/80 to-transparent">
-                  <span className="font-space text-[9px] uppercase tracking-[.3em] text-[var(--color-forest)] mb-2">{String(idx + 1).padStart(2, '0')}</span>
-                  <h4 className="font-bebas text-[32px] text-[var(--color-text-main)] tracking-wide">{img.title}</h4>
+                <div className="absolute bottom-0 left-0 right-0 p-[24px] flex flex-col transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
+                  {img.subtitle && (
+                    <span className="text-[var(--color-warm-white)] font-inter font-light text-[16px] leading-tight mb-2">
+                      {img.subtitle}
+                    </span>
+                  )}
+                  <span className="font-space text-[9px] tracking-[.2em] text-[var(--color-warm-white)] opacity-60 uppercase">
+                    {img.isPlaceholder ? 'Visual Memory' : new Date(img.event_date).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
+                  </span>
                 </div>
               </div>
-            </Reveal>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

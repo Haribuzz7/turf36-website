@@ -79,7 +79,7 @@ export default async function AdminDashboard() {
               Match Memory
             </div>
             <p className="text-[var(--color-muted)] text-[13.5px] mb-6 leading-relaxed">
-              Upload photos directly to your turf's Match Memory section. Images will appear instantly on the homepage.
+              Upload photos directly to your turf&apos;s Match Memory section. Images will appear instantly on the homepage.
             </p>
 
             <form action={uploadGalleryImage} className="flex flex-col gap-4 mb-8">
@@ -106,7 +106,7 @@ export default async function AdminDashboard() {
             <div className="space-y-3">
               <h3 className="font-space text-[11px] text-[var(--color-gold)] uppercase tracking-[.05em] mb-3">Live Match Memory</h3>
               <div className="grid grid-cols-2 gap-3">
-                {gallery.length > 0 ? gallery.map((img: any) => (
+                {gallery.length > 0 ? gallery.map((img: { id: string; image_url: string; file_name: string; event_date: string }) => (
                   <div key={img.id} className="relative group rounded-lg overflow-hidden border border-[var(--color-card-stroke)]">
                     <img src={img.image_url} alt="Gallery" className="w-full aspect-[16/9] object-cover" />
                     <div className="absolute top-2 left-2 bg-black/60 backdrop-blur-md px-2 py-1 rounded text-[10px] text-[var(--color-gold)] font-space uppercase tracking-wider">
@@ -167,7 +167,7 @@ export default async function AdminDashboard() {
 
             <div className="space-y-3">
               <h3 className="font-space text-[11px] text-[var(--color-gold)] uppercase tracking-[.05em] mb-3">Current Winners</h3>
-              {hallOfFame && hallOfFame.length > 0 ? hallOfFame.map((item: any) => (
+              {hallOfFame && hallOfFame.length > 0 ? hallOfFame.map((item: { id: string; image_url: string; name: string; metadata: string; role: string }) => (
                 <div key={item.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 bg-black/50 border border-[var(--color-card-stroke)] rounded-lg gap-3">
                   <div className="flex items-center gap-3">
                     {item.image_url ? (
@@ -232,7 +232,7 @@ export default async function AdminDashboard() {
             {/* Event List */}
             <div className="space-y-3">
               <h3 className="font-space text-[11px] text-[var(--color-gold)] uppercase tracking-[.05em] mb-3">Scheduled Events</h3>
-              {events && events.length > 0 ? events.map((evt: any) => (
+              {events && events.length > 0 ? events.map((evt: { id: string; poster_url: string; title: string; event_date: string; subtitle: string }) => (
                 <div key={evt.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 bg-black/50 border border-[var(--color-card-stroke)] rounded-lg gap-3">
                   <div className="flex items-center gap-3">
                     {evt.poster_url ? (
@@ -296,7 +296,7 @@ export default async function AdminDashboard() {
 
             <div className="space-y-3">
               <h3 className="font-space text-[11px] text-[var(--color-gold)] uppercase tracking-[.05em] mb-3">Active Highlights</h3>
-              {highlights && highlights.length > 0 ? highlights.map((hl: any) => (
+              {highlights && highlights.length > 0 ? highlights.map((hl: { id: string; thumbnail_url: string; title: string; subtitle: string }) => (
                 <div key={hl.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-3 bg-black/50 border border-[var(--color-card-stroke)] rounded-lg gap-3">
                   <div className="flex items-center gap-3">
                     {hl.thumbnail_url ? (

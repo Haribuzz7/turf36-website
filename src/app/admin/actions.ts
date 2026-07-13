@@ -37,7 +37,7 @@ export async function addEvent(formData: FormData): Promise<void> {
     const fileExt = poster.name.split('.').pop()
     const fileName = `${Date.now()}.${fileExt}`
     
-    const { data, error: uploadError } = await supabase.storage
+    const { error: uploadError } = await supabase.storage
       .from('gallery')
       .upload(`posters/${fileName}`, poster)
       
@@ -98,7 +98,7 @@ export async function addHighlight(formData: FormData): Promise<void> {
     const fileExt = thumbnail.name.split('.').pop()
     const fileName = `${Date.now()}_thumb.${fileExt}`
     
-    const { data, error: uploadError } = await supabase.storage
+    const { error: uploadError } = await supabase.storage
       .from('gallery')
       .upload(`highlights/${fileName}`, thumbnail)
       

@@ -14,7 +14,7 @@ export default function MemorySection() {
                 On this date, Cream & Craze were crowned champions.
               </h3>
               <p className="text-[var(--color-muted)] max-w-[600px] leading-[1.7] text-[14.5px]">
-                A memory that resurfaces every year on its anniversary — old scorecards, highlights, and the moment a team lifted the trophy under these same lights. The page never goes quiet, even on the days nothing's booked.
+                A memory that resurfaces every year on its anniversary — old scorecards, highlights, and the moment a team lifted the trophy under these same lights. The page never goes quiet, even on the days nothing&apos;s booked.
               </p>
             </div>
             

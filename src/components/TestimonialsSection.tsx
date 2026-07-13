@@ -19,7 +19,7 @@ export default function TestimonialsSection() {
           <Reveal>
             <div className="p-[26px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[14px] backdrop-blur-md">
               <p className="text-[14px] leading-[1.7] text-[var(--color-white)] italic mb-[16px]">
-                "Booking used to mean five WhatsApp messages back and forth. Now I just pick a slot and I'm done."
+                &quot;Booking used to mean five WhatsApp messages back and forth. Now I just pick a slot and I&apos;m done.&quot;
               </p>
               <div className="flex items-center gap-[10px]">
                 <div className="w-[36px] h-[36px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#3a2f14,#0e0c09)] border border-[var(--color-card-stroke)]"></div>
@@ -33,7 +33,7 @@ export default function TestimonialsSection() {
           <Reveal delay={0.1}>
             <div className="p-[26px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[14px] backdrop-blur-md">
               <p className="text-[14px] leading-[1.7] text-[var(--color-white)] italic mb-[16px]">
-                "Best floodlit turf in Gobi for a night match. Surface holds up even after heavy use."
+                &quot;Best floodlit turf in Gobi for a night match. Surface holds up even after heavy use.&quot;
               </p>
               <div className="flex items-center gap-[10px]">
                 <div className="w-[36px] h-[36px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#3a2f14,#0e0c09)] border border-[var(--color-card-stroke)]"></div>
@@ -47,7 +47,7 @@ export default function TestimonialsSection() {
           <Reveal delay={0.2}>
             <div className="p-[26px] bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[14px] backdrop-blur-md">
               <p className="text-[14px] leading-[1.7] text-[var(--color-white)] italic mb-[16px]">
-                "Ran our whole auction night here — projector, sound, everything just worked."
+                &quot;Ran our whole auction night here — projector, sound, everything just worked.&quot;
               </p>
               <div className="flex items-center gap-[10px]">
                 <div className="w-[36px] h-[36px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#3a2f14,#0e0c09)] border border-[var(--color-card-stroke)]"></div>

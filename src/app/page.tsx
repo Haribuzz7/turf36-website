@@ -38,9 +38,9 @@ export default async function Home() {
       <Header />
       <HeroSection />
       <BookingSection />
-      <LiveMatchSection />
+      <LiveMatchSection liveMatch={liveMatch} />
       <AchievementsSection />
-      <GallerySection />
+      <GallerySection images={gallery} />
       <HighlightsSection highlights={highlights || []} />
       <HallOfFameSection hallOfFame={hallOfFame || []} />
       <TeamsSection />

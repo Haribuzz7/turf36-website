@@ -48,15 +48,24 @@ export default function HeroSection() {
   return (
     <section id="home" className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-[var(--color-warm-white)] pt-20 border-b border-[var(--color-concrete)]">
       
-      {/* BACKGROUND MEDIA CONTAINER - Ready for Drone Video */}
+      {/* BACKGROUND MEDIA CONTAINER - Ready for 16:9 .webm Drone Video */}
       <div className="absolute inset-[16px] md:inset-[24px] z-0 bg-[var(--color-soft-stone)] rounded-[20px] overflow-hidden">
-        {/* Placeholder Gradient instead of black */}
+        {/* Placeholder Gradient instead of black (Morning Mist) */}
         <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-soft-stone)] to-[var(--color-concrete)] opacity-50 z-0" />
         
         {/* Subtle lighting / glare */}
         <div className="absolute top-0 right-0 w-[70%] h-[70%] opacity-[0.15] mix-blend-overlay bg-[radial-gradient(circle,rgba(255,255,255,1)_0%,transparent_70%)] blur-[80px]"></div>
         
-        {/* Optional: Future <video> goes here, absolute inset-0 object-cover */}
+        {/* Video Placeholder */}
+        <video 
+          className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-multiply"
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+        >
+          {/* <source src="/drone-footage.webm" type="video/webm" /> */}
+        </video>
       </div>
 
       <div className="max-w-[1120px] w-full mx-auto px-7 relative z-20 flex flex-col items-center text-center mt-[-60px]">

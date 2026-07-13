@@ -1,66 +1,79 @@
 "use client";
-
-import { useEffect, useState } from "react";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import PremiumIcon from "./PremiumIcon";
+import { useState, useEffect } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function Header() {
-  const [hidden, setHidden] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const { scrollY } = useScroll();
+  const { scrollYProgress } = useScroll();
+  
+  // As user scrolls down the page (0 to 1), transition background, text, and border
+  const backgroundColor = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], ["rgba(247, 246, 242, 0)", "rgba(247, 246, 242, 0.8)", "rgba(94, 100, 106, 0.9)", "rgba(49, 91, 68, 0.95)"]);
+  const textColor = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], ["#2A2C2E", "#2A2C2E", "#F7F6F2", "#F7F6F2"]);
+  const borderColor = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], ["rgba(212, 210, 204, 0)", "rgba(212, 210, 204, 0.5)", "rgba(255, 255, 255, 0.1)", "rgba(255, 255, 255, 0.1)"]);
+  const backdropBlur = useTransform(scrollYProgress, [0, 0.1], ["blur(0px)", "blur(12px)"]);
 
-  useMotionValueEvent(scrollY, "change", (latest) => {
-    const previous = scrollY.getPrevious() ?? 0;
-    if (latest > previous && latest > 150) {
-      setHidden(true);
-    } else {
-      setHidden(false);
-    }
-    setIsScrolled(latest > 50);
-  });
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    return scrollYProgress.onChange((latest) => {
+      setIsScrolled(latest > 0.05);
+    });
+  }, [scrollYProgress]);
 
   return (
-    <motion.header
-      variants={{
-        visible: { y: 0, opacity: 1 },
-        hidden: { y: "-100%", opacity: 0 }
-      }}
-      animate={hidden ? "hidden" : "visible"}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 flex justify-center pt-[20px] px-6 transition-all duration-700`}
-    >
-      <div 
-        className={`flex items-center justify-between w-full max-w-[900px] px-[24px] py-[14px] rounded-full transition-all duration-700 
-          ${isScrolled 
-            ? "bg-[rgba(255,255,255,0.7)] backdrop-blur-xl border border-[rgba(0,0,0,0.06)] shadow-[0_10px_40px_rgba(0,0,0,0.04)]" 
-            : "bg-transparent border-transparent"
-          }`}
+    <>
+      <motion.header 
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        style={{ 
+          backgroundColor, 
+          color: textColor,
+          borderColor,
+          backdropFilter: backdropBlur,
+          WebkitBackdropFilter: backdropBlur
+        }}
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between py-[18px] px-7 border-b transition-shadow"
       >
-        <div className="flex items-center gap-[12px]">
-          {/* Logo with invert filter since the original is white */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.png" alt="Turf 36" className="w-[30px] opacity-90 filter invert sepia-[20%] hue-rotate-[190deg] saturate-[30%]" />
-          <span className="font-bebas text-[20px] tracking-[.05em] text-[var(--color-text-main)]">TURF 36</span>
+        <div className="font-bebas text-[24px] tracking-widest flex items-center gap-[8px]">
+          TURF<span className="opacity-60">36</span>
         </div>
-
-        <nav className="hidden md:flex items-center gap-[30px]">
-          {["FACILITIES", "GALLERY", "LEGACY"].map((item) => (
-            <a 
-              key={item} 
+        <nav className="hidden md:flex gap-[32px] text-[10px] tracking-[.15em] uppercase font-space">
+          {["Book", "Live", "Gallery", "Teams", "Events", "Facilities"].map((item) => (
+            <motion.a 
+              key={item}
               href={`#${item.toLowerCase()}`} 
-              className="font-space text-[10px] tracking-[.2em] text-[var(--color-text-muted)] hover:text-[var(--color-text-main)] transition-colors uppercase"
+              style={{ color: textColor }}
+              className="opacity-70 hover:opacity-100 transition-opacity"
             >
               {item}
-            </a>
+            </motion.a>
           ))}
         </nav>
-
-        <a 
-          href="#book" 
-          className="font-space text-[10px] tracking-[.15em] uppercase px-[20px] py-[12px] bg-[var(--color-forest)] text-white rounded-full hover:scale-[1.02] transition-transform duration-500 shadow-[0_4px_15px_rgba(49,91,68,0.2)]"
-        >
-          Book Now
+        <a href="#book" className="font-space text-[10px] tracking-[.15em] uppercase py-[10px] px-[24px] rounded-full bg-[var(--color-forest)] text-white hover:scale-[1.02] shadow-[0_4px_15px_rgba(49,91,68,0.15)] transition-transform">
+          Book Slot
         </a>
+      </motion.header>
+
+      {/* Floating Quick Actions */}
+      <div className="fixed right-5 bottom-5 z-[80] flex flex-col gap-[12px] items-end">
+        <a href="#book" className="w-auto h-[50px] rounded-full px-[24px] flex items-center justify-center gap-[10px] font-space text-[10px] tracking-[.15em] font-bold bg-[var(--color-forest)] text-white shadow-[0_10px_30px_rgba(49,91,68,0.3)] hover:-translate-y-[3px] transition-transform">
+          <PremiumIcon name="lightning" noContainer className="w-[16px] h-[16px]" /> Book Now
+        </a>
+        
+        {/* Floating Icons */}
+        <div className="flex gap-[10px]">
+          <a href="https://wa.me/917708929267" target="_blank" rel="noreferrer" title="WhatsApp" className="w-[45px] h-[45px] rounded-full flex items-center justify-center bg-[var(--color-warm-white)] border border-[var(--color-concrete)] text-[var(--color-forest)] shadow-[0_10px_20px_rgba(0,0,0,0.05)] hover:-translate-y-[2px] transition-transform">
+            <PremiumIcon name="message" noContainer className="w-[18px] h-[18px]" />
+          </a>
+          <a href="tel:+917708929267" title="Call" className="w-[45px] h-[45px] rounded-full flex items-center justify-center bg-[var(--color-warm-white)] border border-[var(--color-concrete)] text-[var(--color-forest)] shadow-[0_10px_20px_rgba(0,0,0,0.05)] hover:-translate-y-[2px] transition-transform">
+            <PremiumIcon name="contact" noContainer className="w-[18px] h-[18px]" />
+          </a>
+          <a href="https://maps.app.goo.gl/nfdANdBq9Gnu66ij9" target="_blank" rel="noreferrer" title="Directions" className="w-[45px] h-[45px] rounded-full flex items-center justify-center bg-[var(--color-warm-white)] border border-[var(--color-concrete)] text-[var(--color-forest)] shadow-[0_10px_20px_rgba(0,0,0,0.05)] hover:-translate-y-[2px] transition-transform">
+            <PremiumIcon name="location" noContainer className="w-[18px] h-[18px]" />
+          </a>
+        </div>
       </div>
-    </motion.header>
+    </>
   );
 }
