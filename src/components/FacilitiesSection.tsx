@@ -1,4 +1,5 @@
-"use client";
+
+import SectionHighlight from "./SectionHighlight";
 
 import Reveal from "./Reveal";
 import { useState, useRef, useEffect } from "react";
@@ -38,7 +39,8 @@ export default function FacilitiesSection() {
   }, [isDragging]);
 
   return (
-    <section id="facilities" className="relative z-10 py-[110px] border-b border-[rgba(255,255,255,0.05)] ">
+    <section id="facilities" className="relative z-10  border-b border-[rgba(255,255,255,0.05)] ">
+      <SectionHighlight glowColor="emerald" glowPosition="left" className="py-[110px]">
       <div className="max-w-[1120px] mx-auto px-7">
         <div className="font-space tracking-[.22em] uppercase text-[11.5px] text-[var(--color-gold)] flex items-center gap-[10px] mb-[16px] before:content-[''] before:w-[26px] before:h-[1px] before:bg-[var(--color-gold)]">
           On the ground
@@ -131,6 +133,7 @@ export default function FacilitiesSection() {
           </div>
         </Reveal>
       </div>
+          </SectionHighlight>
     </section>
   );
 }

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/no-unescaped-entities */
-"use client";
+
+import SectionHighlight from "./SectionHighlight";
 
 import Reveal from "./Reveal";
 
@@ -13,7 +14,8 @@ export default function GallerySection({ images }: GalleryProps) {
   const displayImages = images.length > 0 ? images : Array(6).fill({ isPlaceholder: true, image_url: '/placeholder' });
 
   return (
-    <section id="gallery" className="relative z-10 py-[110px] border-b border-[rgba(255,255,255,0.05)] ">
+    <section id="gallery" className="relative z-10  border-b border-[rgba(255,255,255,0.05)] ">
+      <SectionHighlight glowColor="emerald" glowPosition="left" className="py-[110px]">
       <div className="max-w-[1120px] mx-auto px-7">
         <div className="font-space tracking-[.22em] uppercase text-[11.5px] text-[var(--color-gold)] flex items-center gap-[10px] mb-[16px] before:content-[''] before:w-[26px] before:h-[1px] before:bg-[var(--color-gold)]">
           Turf Memory
@@ -59,6 +61,7 @@ export default function GallerySection({ images }: GalleryProps) {
           })}
         </div>
       </div>
+          </SectionHighlight>
     </section>
   );
 }
