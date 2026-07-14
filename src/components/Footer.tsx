@@ -41,7 +41,7 @@ export default function Footer() {
                 </span>
                 WhatsApp
               </a>
-              <a href="#" className="group flex items-center gap-3 text-[14.5px] text-[var(--color-muted)] hover:text-white transition-colors">
+              <a href="https://www.instagram.com/turf_36?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noreferrer" className="group flex items-center gap-3 text-[14.5px] text-[var(--color-muted)] hover:text-white transition-colors">
                 <span className="w-9 h-9 rounded-full border border-[rgba(255,255,255,0.1)] group-hover:border-[var(--color-gold)] group-hover:bg-[rgba(140,255,90,0.1)] flex items-center justify-center transition-all duration-300">
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:text-[var(--color-gold)] transition-colors"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                 </span>
