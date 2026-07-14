@@ -37,6 +37,7 @@ export default function HeroSection() {
           y: backgroundY,
           background: "repeating-linear-gradient(90deg, rgba(0,230,118,.05) 0 2px, transparent 2px 90px)",
           maskImage: "linear-gradient(180deg, transparent, black 40%, black 70%, transparent)",
+          WebkitMaskImage: "linear-gradient(180deg, transparent, black 40%, black 70%, transparent)",
         }}
       ></motion.div>
 
