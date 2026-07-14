@@ -26,19 +26,21 @@ export default function SectionHighlight({
   }
 
   // Idea 1: Static Ambient Glow 
-  // Slightly brighter so it's visible without the dark backdrop
+  // Increased opacity heavily so it is visible against the dark green gradient
   const ambientColor = glowColor === "emerald" 
-    ? "rgba(0, 230, 118, 0.04)" 
-    : "rgba(140, 255, 90, 0.04)";
+    ? "rgba(0, 230, 118, 0.12)" 
+    : "rgba(140, 255, 90, 0.12)";
 
+  // Fixed massive circle dimensions so it doesn't get squished by short sections
   const positionClasses = glowPosition === "left" 
-    ? "left-[-15%] top-[10%]" 
-    : "right-[-15%] bottom-[10%]";
+    ? "left-[-400px] top-1/2 -translate-y-1/2" 
+    : "right-[-400px] top-1/2 -translate-y-1/2";
 
   // Idea 2: Interactive Hover Spotlight
+  // Increased opacity to 0.18 to make the mouse spotlight stand out
   const spotlightColor = glowColor === "emerald" 
-    ? "rgba(0, 230, 118, 0.08)" 
-    : "rgba(140, 255, 90, 0.08)";
+    ? "rgba(0, 230, 118, 0.18)" 
+    : "rgba(140, 255, 90, 0.18)";
 
   return (
     <div 
@@ -50,7 +52,7 @@ export default function SectionHighlight({
         
         {/* Ambient Glow */}
         <div 
-          className={`absolute ${positionClasses} w-[50%] h-[80%] rounded-full blur-[130px] opacity-70`}
+          className={`absolute ${positionClasses} w-[800px] h-[800px] rounded-full blur-[140px]`}
           style={{ background: ambientColor }}
         />
 
