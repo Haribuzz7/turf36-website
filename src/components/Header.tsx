@@ -17,7 +17,7 @@ export default function Header() {
     <>
       <header className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between py-[18px] px-7 transition-all duration-500 ${scrolled ? 'bg-[rgba(0,230,118,0.05)] backdrop-blur-xl border-b border-[rgba(140,255,90,0.15)] shadow-[0_4px_30px_rgba(0,0,0,0.5)]' : 'bg-transparent border-b border-transparent'}`}>
         <a href="#" className="flex items-center">
-          <img src="/turf%2036%20white%20logo.png" alt="TURF 36" className="h-[38px] w-auto opacity-90 transition-opacity hover:opacity-100" />
+          <img src="/turf%2036%20white%20logo.png" alt="TURF 36" className="h-[64px] w-auto opacity-90 transition-opacity hover:opacity-100" />
         </a>
         <nav className="hidden md:flex gap-[26px] text-[12.5px] tracking-[.05em] uppercase text-[var(--color-muted)]">
           <a href="#book" className="hover:text-[var(--color-gold-hot)] hover:drop-shadow-[0_0_8px_rgba(140,255,90,0.8)] transition-all">Book</a>

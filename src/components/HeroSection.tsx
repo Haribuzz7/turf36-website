@@ -76,8 +76,8 @@ export default function HeroSection() {
 
       <div className="max-w-[1120px] mx-auto px-7 relative z-70 w-full flex flex-col items-center opacity-0 animate-[fadeInUp_1.5s_ease-out_3.8s_forwards]">
         
-        <div className="mb-6 font-bebas text-[28px] tracking-[.15em] text-[var(--color-muted)] flex items-center justify-center opacity-0 animate-[fadeIn_1s_ease-out_4s_forwards]">
-          TURF <span className="text-[var(--color-gold-hot)] ml-2">36</span>
+        <div className="mb-6 flex items-center justify-center opacity-0 animate-[fadeIn_1s_ease-out_4s_forwards]">
+          <img src="/turf%2036%20white%20logo.png" alt="TURF 36" className="h-[90px] w-auto opacity-90 drop-shadow-[0_0_15px_rgba(140,255,90,0.15)]" />
         </div>
 
         <h1 className="font-bebas font-normal tracking-[.02em] text-[clamp(50px,9vw,110px)] leading-[0.9] uppercase text-center">
