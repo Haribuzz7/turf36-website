@@ -2,6 +2,14 @@
 
 import Reveal from "./Reveal";
 
+const teamsData = [
+  { name: "Team GCC", desc: "Dark Horse trophy", initial: "G" },
+  { name: "Team Extreme", desc: "AK Trophy", initial: "E" },
+  { name: "NST game changers", desc: "TSL Special Edition: 2", initial: "N" },
+  { name: "Team Extreme", desc: "TSL legends Edition", initial: "E" },
+  { name: "Team Nova", desc: "TSL Premium Edition: 1", initial: "N" },
+];
+
 export default function TeamsSection() {
   return (
     <section id="teams" className="relative py-[110px] border-b border-[var(--color-line)]">
@@ -15,37 +23,37 @@ export default function TeamsSection() {
           </h2>
         </Reveal>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-[14px] mt-[44px]">
-          <Reveal>
-            <div className="p-[22px_18px] glass-panel">
-              <div className="w-[44px] h-[44px] rounded-[10px] bg-gradient-to-br from-[var(--color-gold)] to-[#7a5f18] mb-[14px] flex items-center justify-center font-bebas text-[#0a0a0a] text-[16px]">F</div>
-              <h4 className="font-bebas text-[19px] tracking-[.02em] mb-[4px]">Team Falcons</h4>
-              <p className="text-[12.5px] text-[var(--color-muted)]">Captain to be added</p>
+        <Reveal delay={0.2}>
+          <div className="overflow-hidden w-full relative mt-[44px] group">
+            {/* 
+              We use a CSS animation to scroll the content. 
+              The container must be twice as wide or have duplicate content to loop seamlessly.
+            */}
+            <div className="flex w-max gap-[14px] marquee-scroll group-hover:pause">
+              {[...teamsData, ...teamsData, ...teamsData].map((team, idx) => (
+                <div key={idx} className="p-[22px_18px] glass-panel w-[280px] flex-shrink-0">
+                  <div className="w-[44px] h-[44px] rounded-[10px] bg-gradient-to-br from-[var(--color-gold)] to-[#04331C] mb-[14px] flex items-center justify-center font-bebas text-[#0a0a0a] text-[16px]">{team.initial}</div>
+                  <h4 className="font-bebas text-[19px] tracking-[.02em] mb-[4px]">{team.name}</h4>
+                  <p className="text-[12.5px] text-[var(--color-muted)]">{team.desc}</p>
+                </div>
+              ))}
             </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <div className="p-[22px_18px] glass-panel">
-              <div className="w-[44px] h-[44px] rounded-[10px] bg-gradient-to-br from-[var(--color-gold)] to-[#7a5f18] mb-[14px] flex items-center justify-center font-bebas text-[#0a0a0a] text-[16px]">T</div>
-              <h4 className="font-bebas text-[19px] tracking-[.02em] mb-[4px]">Team Titans</h4>
-              <p className="text-[12.5px] text-[var(--color-muted)]">Captain to be added</p>
-            </div>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <div className="p-[22px_18px] glass-panel">
-              <div className="w-[44px] h-[44px] rounded-[10px] bg-gradient-to-br from-[var(--color-gold)] to-[#7a5f18] mb-[14px] flex items-center justify-center font-bebas text-[#0a0a0a] text-[16px]">C</div>
-              <h4 className="font-bebas text-[19px] tracking-[.02em] mb-[4px]">Cream & Craze</h4>
-              <p className="text-[12.5px] text-[var(--color-muted)]">Pickleball champions</p>
-            </div>
-          </Reveal>
-          <Reveal delay={0.3}>
-            <div className="p-[22px_18px] glass-panel">
-              <div className="w-[44px] h-[44px] rounded-[10px] bg-gradient-to-br from-[var(--color-gold)] to-[#7a5f18] mb-[14px] flex items-center justify-center font-bebas text-[#0a0a0a] text-[16px]">A</div>
-              <h4 className="font-bebas text-[19px] tracking-[.02em] mb-[4px]">Aura Farmers</h4>
-              <p className="text-[12.5px] text-[var(--color-muted)]">Pickleball · 3rd place</p>
-            </div>
-          </Reveal>
-        </div>
+          </div>
+        </Reveal>
       </div>
+
+      <style jsx>{`
+        .marquee-scroll {
+          animation: marquee 30s linear infinite;
+        }
+        .pause {
+          animation-play-state: paused;
+        }
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-33.3333%); }
+        }
+      `}</style>
     </section>
   );
 }
