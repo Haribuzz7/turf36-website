@@ -31,15 +31,12 @@ export default function HeroSection() {
   return (
     <section ref={ref} id="home" className="relative z-10 min-h-screen flex items-center justify-center pt-20 overflow-hidden border-b border-[var(--color-line)]">
       {/* Field Background - fades in after floodlights */}
-      <motion.div 
-        className="absolute inset-0 z-0 opacity-0 pointer-events-none animate-[fadeIn_2s_ease-out_3s_forwards] w-[150%] h-[150%] -left-[25%] -top-[25%]"
+      <div 
+        className="absolute inset-0 z-0 opacity-0 pointer-events-none animate-[fadeIn_2s_ease-out_3s_forwards] w-full h-full"
         style={{
-          y: backgroundY,
-          background: "repeating-linear-gradient(90deg, rgba(0,230,118,.05) 0 2px, transparent 2px 90px)",
-          maskImage: "linear-gradient(180deg, transparent, black 40%, black 70%, transparent)",
-          WebkitMaskImage: "linear-gradient(180deg, transparent, black 40%, black 70%, transparent)",
+          background: "repeating-linear-gradient(90deg, rgba(0,230,118,.05) 0 2px, transparent 2px 90px)"
         }}
-      ></motion.div>
+      ></div>
 
       {/* Floating Particles / Haze - fades in */}
       <div className="absolute inset-0 z-0 opacity-0 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,rgba(140,255,90,0.05)_0%,transparent_70%)] mix-blend-screen animate-[fadeIn_3s_ease-out_3.5s_forwards]"></div>
