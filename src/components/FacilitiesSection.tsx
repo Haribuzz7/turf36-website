@@ -103,20 +103,19 @@ export default function FacilitiesSection() {
             className="relative mt-[44px] rounded-[16px] overflow-hidden border border-[var(--color-card-stroke)] aspect-[16/8] cursor-ew-resize select-none"
           >
             {/* Day Layer */}
-            <div className="absolute inset-0 z-0" style={{
-              background: `radial-gradient(circle at 80% 15%, rgba(255,236,180,.5), transparent 40%), linear-gradient(180deg,#bfe0f2 0%, #e8f3da 45%, #6f9e57 46%, #3f6b3a 100%)`
+            <div className="absolute inset-0 z-0 bg-cover bg-center" style={{
+              backgroundImage: `url('/day_turf.png')`
             }}></div>
             
             {/* Night Layer */}
             <div 
-              className="absolute inset-0 z-10" 
+              className="absolute inset-0 z-10 bg-cover bg-center" 
               style={{
                 clipPath: `inset(0 0 0 ${sliderPct}%)`,
-                background: `linear-gradient(180deg,#050608 0%, #0b0d12 45%, #0c1f14 46%, #061007 100%)`
+                backgroundImage: `url('/night_turf.png')`
               }}
             >
-              <div className="absolute top-[8%] left-[15%] w-[70%] h-[40%] bg-[radial-gradient(ellipse_at_center,rgba(255,246,216,0.18),transparent_70%)]"></div>
-              <div className="absolute top-[6%] left-[10%] w-[8%] h-[14%] bg-[radial-gradient(circle,var(--color-flood),transparent_70%)]" style={{boxShadow: '82% 0 0 0 rgba(255,246,216,.7), 82% 0 40px 10px rgba(255,246,216,.25)'}}></div>
+              <div className="absolute inset-0 bg-black/10"></div>
             </div>
 
             <div className="absolute bottom-[16px] left-[16px] font-space text-[11px] tracking-[.1em] uppercase p-[6px_12px] rounded-[20px] bg-[rgba(0,0,0,0.4)] z-20 text-[var(--color-white)]">DAY</div>
