@@ -19,7 +19,7 @@ export default function Footer() {
               </div>
             </Reveal>
             <p className="text-[var(--color-muted)] text-[15.5px] leading-[1.8] max-w-[380px] font-light">
-              Premium cricket & pickleball turf in Gobichettipalayam. Fully floodlit, perfectly maintained, built for matches that go past sundown.
+              Premium cricket, football & pickleball turf in Gobichettipalayam. Fully floodlit, perfectly maintained, built for matches that go past sundown.
             </p>
           </div>
 
