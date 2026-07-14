@@ -49,7 +49,7 @@ function Digit({ value, inView }: { value: string; inView: boolean }) {
     <div className="relative flex flex-col justify-start overflow-hidden h-[1em] w-[0.6em] items-center">
       <motion.div
         initial={{ y: 0 }}
-        animate={{ y: inView ? `-${index * 10}0%` : 0 }}
+        animate={{ y: inView ? `-${index * 10}%` : 0 }}
         transition={{
           duration: 2,
           ease: [0.22, 1, 0.36, 1], // Custom cubic-bezier for satisfying snap
