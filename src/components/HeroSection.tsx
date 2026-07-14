@@ -31,11 +31,11 @@ export default function HeroSection() {
     };
 
     const timer = setTimeout(() => {
-      animateValue(setMatches, 1000, 1400);
-      animateValue(setTournaments, 50, 1400);
-      animateValue(setTeams, 100, 1400);
-      animateValue(setDays, 365, 1400);
-    }, 4000); // delay counters until intro is almost done
+      animateValue(setMatches, 1000, 2000);
+      animateValue(setTournaments, 50, 2000);
+      animateValue(setTeams, 100, 2000);
+      animateValue(setDays, 365, 2000);
+    }, 5500); // delay counters until grid fades in
 
     return () => {
       clearTimeout(timer);
