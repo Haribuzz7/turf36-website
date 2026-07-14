@@ -33,18 +33,18 @@ export default function FluidCursor() {
         PRESSURE: 0.1,
         PRESSURE_ITERATIONS: 20,
         CURL: 3, // Less swirling
-        SPLAT_RADIUS: 0.05, // Much smaller splats
-        SPLAT_FORCE: 2000, // Less violent
+        SPLAT_RADIUS: 0.15, // Increased so it's visible under a finger
+        SPLAT_FORCE: 4000, 
         SPLAT_COUNT: 0,
-        // RGB for a darker/subtle Neon Green, because mix-blend-screen adds brightness
-        SPLAT_COLOR: { r: 0, g: 0.3, b: 0.15 }, 
-        SHADING: false, // Turn off heavy shading
+        // Brighter neon green so it shows up on mobile
+        SPLAT_COLOR: { r: 0, g: 0.6, b: 0.3 }, 
+        SHADING: false,
         COLORFUL: false,
         PAUSED: false,
         BACK_COLOR: { r: 0, g: 0, b: 0 },
         TRANSPARENT: true,
-        BLOOM: false, // Turn off bloom to prevent blinding effect
-        SUNRAYS: false, // Turn off sunrays for cleaner look
+        BLOOM: false,
+        SUNRAYS: false,
       });
     }
   }, []);
@@ -52,7 +52,7 @@ export default function FluidCursor() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none w-screen h-screen z-50 mix-blend-screen opacity-50"
+      className="fixed inset-0 pointer-events-none w-screen h-screen z-50 mix-blend-screen opacity-80"
       style={{
         width: "100vw",
         height: "100vh",
