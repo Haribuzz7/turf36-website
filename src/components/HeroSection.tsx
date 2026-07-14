@@ -31,12 +31,23 @@ export default function HeroSection() {
   return (
     <section ref={ref} id="home" className="relative z-10 min-h-screen flex items-center justify-center pt-20 overflow-hidden border-b border-[var(--color-line)]">
       {/* Field Background - fades in after floodlights */}
-      <div 
-        className="absolute inset-0 z-0 opacity-0 pointer-events-none animate-[fadeIn_2s_ease-out_3s_forwards]"
-        style={{
-          background: "repeating-linear-gradient(90deg, rgba(0,230,118,.05) 0 2px, transparent 2px 90px)"
-        }}
-      ></div>
+      <div className="absolute inset-0 z-0 opacity-0 pointer-events-none animate-[fadeIn_2s_ease-out_3s_forwards]">
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-luminosity"
+        >
+          <source src="/turf-drone.webm" type="video/webm" />
+        </video>
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: "repeating-linear-gradient(90deg, rgba(0,230,118,.03) 0 2px, transparent 2px 90px)"
+          }}
+        ></div>
+      </div>
 
       {/* Floating Particles / Haze - fades in */}
       <div className="absolute inset-0 z-0 opacity-0 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,rgba(140,255,90,0.05)_0%,transparent_70%)] mix-blend-screen animate-[fadeIn_3s_ease-out_3.5s_forwards]"></div>
