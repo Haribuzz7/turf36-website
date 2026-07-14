@@ -17,7 +17,7 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
 
         <form action={login} className="flex flex-col gap-4 relative z-10">
           <div>
-            <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 tracking-[.1em] uppercase">Email Address</label>
+            <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 tracking-[.1em] uppercase">Admin ID (Email)</label>
             <input 
               id="email" 
               name="email" 
