@@ -60,18 +60,18 @@ export default function EventsSection({ events }: any) {
                 TSL PREMIUM EDITION: 2 <span className="text-[var(--color-gold-hot)] block sm:inline mt-2 sm:mt-0">— COMING SOON</span>
               </h3>
               
-              <div className="flex flex-wrap justify-center gap-[16px] md:gap-[24px]">
+              <div className="flex justify-center gap-[8px] sm:gap-[16px] md:gap-[24px]">
                 {mounted && timeBlocks.map((block, idx) => (
                   <div key={idx} className="flex flex-col items-center">
-                    <div className="w-[80px] h-[90px] md:w-[120px] md:h-[130px] rounded-[16px] bg-gradient-to-b from-[#0a1a13] to-[#04120a] border border-[var(--color-gold-hot)]/40 flex items-center justify-center mb-[12px] shadow-[0_0_20px_rgba(0,230,118,0.2),inset_0_0_15px_rgba(140,255,90,0.1)] relative overflow-hidden group animate-[pulse_2s_infinite]">
+                    <div className="w-[60px] h-[70px] sm:w-[80px] sm:h-[90px] md:w-[120px] md:h-[130px] rounded-[12px] md:rounded-[16px] bg-gradient-to-b from-[#0a1a13] to-[#04120a] border border-[var(--color-gold-hot)]/40 flex items-center justify-center mb-[10px] sm:mb-[12px] shadow-[0_0_20px_rgba(0,230,118,0.2),inset_0_0_15px_rgba(140,255,90,0.1)] relative overflow-hidden group animate-[pulse_2s_infinite]">
                       {/* Neon glow effect line on top */}
                       <div className="absolute top-0 left-0 right-0 h-[2px] bg-[var(--color-gold-hot)] shadow-[0_0_10px_var(--color-gold-hot)]"></div>
                       
-                      <span className="font-bebas text-[42px] md:text-[64px] text-[var(--color-gold-hot)] tracking-[.05em] drop-shadow-[0_0_12px_rgba(140,255,90,0.8)]">
+                      <span className="font-bebas text-[32px] sm:text-[42px] md:text-[64px] text-[var(--color-gold-hot)] tracking-[.05em] drop-shadow-[0_0_12px_rgba(140,255,90,0.8)]">
                         {String(block.value).padStart(2, '0')}
                       </span>
                     </div>
-                    <span className="font-space text-[12px] md:text-[14px] text-[var(--color-muted)] tracking-[.2em] uppercase">
+                    <span className="font-space text-[10px] sm:text-[12px] md:text-[14px] text-[var(--color-muted)] tracking-[.2em] uppercase">
                       {block.label}
                     </span>
                   </div>
