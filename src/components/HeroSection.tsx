@@ -1,7 +1,8 @@
 "use client";
 
 import Reveal from "./Reveal";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function HeroSection() {
   const [matches, setMatches] = useState(0);
@@ -9,6 +10,14 @@ export default function HeroSection() {
   const [teams, setTeams] = useState(0);
   const [days, setDays] = useState(0);
   const [introFinished, setIntroFinished] = useState(false);
+  
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
   useEffect(() => {
     // End intro sequence after 4.5 seconds
@@ -44,15 +53,16 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden border-b border-[var(--color-line)] bg-[#010402]">
+    <section ref={ref} id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden border-b border-[var(--color-line)] bg-[#010402]">
       {/* Field Background - fades in after floodlights */}
-      <div 
-        className="absolute inset-0 z-0 opacity-0 pointer-events-none animate-[fadeIn_2s_ease-out_3s_forwards]"
+      <motion.div 
+        className="absolute inset-0 z-0 opacity-0 pointer-events-none animate-[fadeIn_2s_ease-out_3s_forwards] w-[150%] h-[150%] -left-[25%] -top-[25%]"
         style={{
+          y: backgroundY,
           background: "repeating-linear-gradient(90deg, rgba(0,230,118,.05) 0 2px, transparent 2px 90px)",
           maskImage: "linear-gradient(180deg, transparent, black 40%, black 70%, transparent)",
         }}
-      ></div>
+      ></motion.div>
 
       {/* Floating Particles / Haze - fades in */}
       <div className="absolute inset-0 z-0 opacity-0 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,rgba(140,255,90,0.05)_0%,transparent_70%)] mix-blend-screen animate-[fadeIn_3s_ease-out_3.5s_forwards]"></div>
@@ -76,7 +86,10 @@ export default function HeroSection() {
              style={{ background: "linear-gradient(180deg, rgba(140,255,90,.4), transparent 50%)" }}></div>
       </div>
 
-      <div className="max-w-[1120px] mx-auto px-7 relative z-70 w-full flex flex-col items-center opacity-0 animate-[fadeInUp_1.5s_ease-out_3.8s_forwards]">
+      <motion.div 
+        className="max-w-[1120px] mx-auto px-7 relative z-70 w-full flex flex-col items-center opacity-0 animate-[fadeInUp_1.5s_ease-out_3.8s_forwards]"
+        style={{ y: textY }}
+      >
         
         <div className="mb-6 flex items-center justify-center opacity-0 animate-[fadeIn_1s_ease-out_4s_forwards]">
           <img src="/turf%2036%20white%20logo.png" alt="TURF 36" className="h-[180px] md:h-[220px] w-auto opacity-90 animate-glitch" />
@@ -115,7 +128,7 @@ export default function HeroSection() {
             <span className="text-[11px] text-[var(--color-muted)] uppercase tracking-[.08em]">Days of Game On</span>
           </div>
         </div>
-      </div>
+      </motion.div>
 
 
       

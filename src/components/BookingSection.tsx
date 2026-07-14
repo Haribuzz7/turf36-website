@@ -5,6 +5,7 @@
 import Reveal from "./Reveal";
 import { useState } from "react";
 import PremiumIcon from "./PremiumIcon";
+import MagneticButton from "./MagneticButton";
 
 export default function BookingSection() {
   const [name, setName] = useState("");
@@ -97,9 +98,11 @@ export default function BookingSection() {
                 <option value="Pickleball">Pickleball</option>
               </select>
             </div>
-            <button type="submit" className="font-space text-[12.5px] tracking-[.08em] uppercase py-[14px] px-[26px] rounded-lg flex items-center justify-center gap-[10px] cursor-pointer glass-button mt-[6px]">
-              Proceed to WhatsApp
-            </button>
+            <MagneticButton className="w-full">
+              <button type="submit" className="font-space text-[12.5px] tracking-[.08em] uppercase py-[14px] px-[26px] rounded-lg flex items-center justify-center gap-[10px] cursor-pointer glass-button mt-[6px] w-full">
+                Proceed to WhatsApp
+              </button>
+            </MagneticButton>
           </form>
         </div>
       </div>

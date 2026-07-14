@@ -2,6 +2,7 @@
 
 import Reveal from "./Reveal";
 import { useState, useEffect } from "react";
+import MagneticButton from "./MagneticButton";
 
 export default function EventsSection({ events }: any) {
   // Set target date for October 1st, 2026
@@ -78,9 +79,11 @@ export default function EventsSection({ events }: any) {
               </div>
               
               <div className="mt-[50px]">
-                <a href="#book" className="font-space text-[14px] tracking-[.08em] uppercase py-[16px] px-[32px] rounded-lg inline-flex items-center gap-[10px] cursor-pointer glass-button justify-center text-center">
-                  Register Interest
-                </a>
+                <MagneticButton>
+                  <a href="#book" className="font-space text-[14px] tracking-[.08em] uppercase py-[16px] px-[32px] rounded-lg inline-flex items-center gap-[10px] cursor-pointer glass-button justify-center text-center">
+                    Register Interest
+                  </a>
+                </MagneticButton>
               </div>
             </div>
           </div>

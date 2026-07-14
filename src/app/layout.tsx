@@ -25,6 +25,8 @@ export const metadata: Metadata = {
   description: "Turf 36, Gobichettipalayam — cricket & pickleball turf. Book slots, follow live matches, browse the Hall of Fame.",
 };
 
+import CustomCursor from "@/components/CustomCursor";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -35,7 +37,10 @@ export default function RootLayout({
       lang="en"
       className={`${bebas.variable} ${spaceMono.variable} ${poppins.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <CustomCursor />
+        {children}
+      </body>
     </html>
   );
 }

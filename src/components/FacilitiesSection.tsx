@@ -3,6 +3,7 @@
 import Reveal from "./Reveal";
 import { useState, useRef, useEffect } from "react";
 import PremiumIcon from "./PremiumIcon";
+import TiltCard from "./TiltCard";
 
 export default function FacilitiesSection() {
   const [sliderPct, setSliderPct] = useState(50);
@@ -50,34 +51,44 @@ export default function FacilitiesSection() {
         
         <div className="grid grid-cols-2 md:grid-cols-5 gap-[14px] mt-[44px]">
           <Reveal>
-            <div className="flex flex-col items-center justify-center text-center p-[26px_12px] glass-panel">
-              <PremiumIcon name="floodlight" size="md" containerClassName="mb-[12px]" />
-              <b className="text-[13px] font-medium block mt-[8px]">Floodlights</b>
-            </div>
+            <TiltCard>
+              <div className="flex flex-col items-center justify-center text-center p-[26px_12px] glass-panel h-full hover:shadow-[0_10px_30px_rgba(0,230,118,0.15)] hover:border-[var(--color-gold)]/40 transition-all duration-300">
+                <PremiumIcon name="floodlight" size="md" containerClassName="mb-[12px]" />
+                <b className="text-[13px] font-medium block mt-[8px]">Floodlights</b>
+              </div>
+            </TiltCard>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="flex flex-col items-center justify-center text-center p-[26px_12px] glass-panel">
-              <PremiumIcon name="parking" size="md" containerClassName="mb-[12px]" />
-              <b className="text-[13px] font-medium block mt-[8px]">Parking</b>
-            </div>
+            <TiltCard>
+              <div className="flex flex-col items-center justify-center text-center p-[26px_12px] glass-panel h-full hover:shadow-[0_10px_30px_rgba(0,230,118,0.15)] hover:border-[var(--color-gold)]/40 transition-all duration-300">
+                <PremiumIcon name="parking" size="md" containerClassName="mb-[12px]" />
+                <b className="text-[13px] font-medium block mt-[8px]">Parking</b>
+              </div>
+            </TiltCard>
           </Reveal>
           <Reveal delay={0.2}>
-            <div className="flex flex-col items-center justify-center text-center p-[26px_12px] glass-panel">
-              <PremiumIcon name="seat" size="md" containerClassName="mb-[12px]" />
-              <b className="text-[13px] font-medium block mt-[8px]">Seating</b>
-            </div>
+            <TiltCard>
+              <div className="flex flex-col items-center justify-center text-center p-[26px_12px] glass-panel h-full hover:shadow-[0_10px_30px_rgba(0,230,118,0.15)] hover:border-[var(--color-gold)]/40 transition-all duration-300">
+                <PremiumIcon name="seat" size="md" containerClassName="mb-[12px]" />
+                <b className="text-[13px] font-medium block mt-[8px]">Seating</b>
+              </div>
+            </TiltCard>
           </Reveal>
           <Reveal delay={0.3}>
-            <div className="flex flex-col items-center justify-center text-center p-[26px_12px] glass-panel">
-              <PremiumIcon name="restroom" size="md" containerClassName="mb-[12px]" />
-              <b className="text-[13px] font-medium block mt-[8px]">Washrooms</b>
-            </div>
+            <TiltCard>
+              <div className="flex flex-col items-center justify-center text-center p-[26px_12px] glass-panel h-full hover:shadow-[0_10px_30px_rgba(0,230,118,0.15)] hover:border-[var(--color-gold)]/40 transition-all duration-300">
+                <PremiumIcon name="restroom" size="md" containerClassName="mb-[12px]" />
+                <b className="text-[13px] font-medium block mt-[8px]">Washrooms</b>
+              </div>
+            </TiltCard>
           </Reveal>
           <Reveal delay={0.4}>
-            <div className="flex flex-col items-center justify-center text-center p-[26px_12px] glass-panel">
-              <PremiumIcon name="water" size="md" containerClassName="mb-[12px]" />
-              <b className="text-[13px] font-medium block mt-[8px]">Drinking Water</b>
-            </div>
+            <TiltCard>
+              <div className="flex flex-col items-center justify-center text-center p-[26px_12px] glass-panel h-full hover:shadow-[0_10px_30px_rgba(0,230,118,0.15)] hover:border-[var(--color-gold)]/40 transition-all duration-300">
+                <PremiumIcon name="water" size="md" containerClassName="mb-[12px]" />
+                <b className="text-[13px] font-medium block mt-[8px]">Drinking Water</b>
+              </div>
+            </TiltCard>
           </Reveal>
         </div>
 

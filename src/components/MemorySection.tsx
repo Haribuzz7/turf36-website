@@ -1,6 +1,7 @@
 "use client";
 
 import Reveal from "./Reveal";
+import TiltCard from "./TiltCard";
 
 export default function MemorySection() {
   const codes = [
@@ -41,18 +42,20 @@ export default function MemorySection() {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
           {codes.map((code, index) => (
-            <Reveal key={index} delay={index * 0.15}>
-              <div className="p-[34px_28px] glass-panel h-full flex flex-col items-center text-center group hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(140,255,90,0.15)] transition-all duration-300 relative overflow-hidden before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_50%_0%,rgba(0,230,118,0.1),transparent_70%)] before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500">
-                <div className="w-[64px] h-[64px] rounded-full bg-gradient-to-br from-[rgba(0,230,118,0.1)] to-[rgba(4,51,28,0.3)] border border-[var(--color-gold-hot)] flex items-center justify-center text-[var(--color-gold-hot)] mb-[24px] shadow-[0_0_15px_rgba(0,230,118,0.3)] group-hover:shadow-[0_0_25px_rgba(140,255,90,0.6)] group-hover:scale-110 transition-all duration-500">
-                  {code.icon}
+            <Reveal key={index} delay={index * 0.15} className="h-full [perspective:1000px]">
+              <TiltCard className="h-full">
+                <div className="p-[34px_28px] glass-panel h-full flex flex-col items-center text-center group hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(140,255,90,0.15)] transition-all duration-300 relative overflow-hidden before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_50%_0%,rgba(0,230,118,0.1),transparent_70%)] before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500">
+                  <div className="w-[64px] h-[64px] rounded-full bg-gradient-to-br from-[rgba(0,230,118,0.1)] to-[rgba(4,51,28,0.3)] border border-[var(--color-gold-hot)] flex items-center justify-center text-[var(--color-gold-hot)] mb-[24px] shadow-[0_0_15px_rgba(0,230,118,0.3)] group-hover:shadow-[0_0_25px_rgba(140,255,90,0.6)] group-hover:scale-110 transition-all duration-500">
+                    {code.icon}
+                  </div>
+                  <h4 className="font-bebas text-[24px] tracking-[.04em] mb-[12px] group-hover:text-[var(--color-white)] text-[var(--color-white)]">
+                    {code.title}
+                  </h4>
+                  <p className="text-[14px] text-[var(--color-muted)] leading-[1.6]">
+                    {code.desc}
+                  </p>
                 </div>
-                <h4 className="font-bebas text-[24px] tracking-[.04em] mb-[12px] group-hover:text-[var(--color-white)] text-[var(--color-white)]">
-                  {code.title}
-                </h4>
-                <p className="text-[14px] text-[var(--color-muted)] leading-[1.6]">
-                  {code.desc}
-                </p>
-              </div>
+              </TiltCard>
             </Reveal>
           ))}
         </div>
