@@ -52,7 +52,7 @@ export default function FluidCursor() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none w-screen h-screen z-50 mix-blend-screen opacity-80"
+      className="fixed inset-0 pointer-events-none w-screen h-screen z-0"
       style={{
         width: "100vw",
         height: "100vh",

@@ -47,7 +47,7 @@ export default function EventsSection({ events }: any) {
   ];
 
   return (
-    <section id="events" className="relative py-[110px] border-b border-[var(--color-line)]">
+    <section id="events" className="relative z-10 py-[110px] border-b border-[rgba(255,255,255,0.05)] bg-[#030805]/70 backdrop-blur-[12px]">
       <div className="max-w-[1120px] mx-auto px-7">
         <div className="font-space tracking-[.22em] uppercase text-[11.5px] text-[var(--color-gold)] flex items-center justify-center gap-[10px] mb-[16px] before:content-[''] before:w-[26px] before:h-[1px] before:bg-[var(--color-gold)] after:content-[''] after:w-[26px] after:h-[1px] after:bg-[var(--color-gold)]">
           Next Big Kickoff

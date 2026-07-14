@@ -29,7 +29,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section ref={ref} id="home" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden border-b border-[var(--color-line)]">
+    <section ref={ref} id="home" className="relative z-10 min-h-screen flex items-center justify-center pt-20 overflow-hidden border-b border-[var(--color-line)]">
       {/* Field Background - fades in after floodlights */}
       <motion.div 
         className="absolute inset-0 z-0 opacity-0 pointer-events-none animate-[fadeIn_2s_ease-out_3s_forwards] w-[150%] h-[150%] -left-[25%] -top-[25%]"
