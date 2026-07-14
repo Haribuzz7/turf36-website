@@ -35,6 +35,7 @@
       radial-gradient(ellipse 1000px 650px at 85% -8%, rgba(0, 230, 118, 0.15), transparent 60%),
       radial-gradient(ellipse 800px 500px at 8% 25%, rgba(140, 255, 90, 0.08), transparent 60%),
       linear-gradient(180deg, #07120D, #0A0A0A);
+    background-attachment: fixed;
     color: var(--color-white);
     font-family: var(--font-poppins);
     font-weight: 300;
