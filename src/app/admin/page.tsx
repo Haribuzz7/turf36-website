@@ -71,15 +71,15 @@ export default async function AdminDashboard() {
           </form>
         </div>
         
-        {/* Turf Memory */}
+        {/* Team Extreme */}
         <div className="flex flex-col gap-5">
           <div className="bg-[var(--color-card)] border border-[var(--color-card-stroke)] rounded-[16px] p-6 shadow-xl">
             <div className="font-bebas text-[28px] mb-2 flex items-center gap-3">
               <PremiumIcon name="camera" size="md" /> 
-              Turf Memory
+              Team Extreme
             </div>
             <p className="text-[var(--color-muted)] text-[13.5px] mb-6 leading-relaxed">
-              Upload photos directly to your turf's Turf Memory section. Images will appear instantly on the homepage.
+              Upload photos directly to your turf's Team Extreme section. Images will appear instantly on the homepage.
             </p>
 
             <form action={uploadGalleryImage} className="flex flex-col gap-4 mb-8">
@@ -104,7 +104,7 @@ export default async function AdminDashboard() {
             </form>
 
             <div className="space-y-3">
-              <h3 className="font-space text-[11px] text-[var(--color-gold)] uppercase tracking-[.05em] mb-3">Live Turf Memory</h3>
+              <h3 className="font-space text-[11px] text-[var(--color-gold)] uppercase tracking-[.05em] mb-3">Live Team Extreme</h3>
               <div className="grid grid-cols-2 gap-3">
                 {gallery.length > 0 ? gallery.map((img: { id: string; image_url: string; file_name: string; event_date: string }) => (
                   <div key={img.id} className="relative group rounded-lg overflow-hidden border border-[var(--color-card-stroke)]">
