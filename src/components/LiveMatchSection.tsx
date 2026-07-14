@@ -36,7 +36,7 @@ export default function LiveMatchSection({ liveMatch }: LiveMatchProps) {
         </div>
         
         <Reveal>
-          <div className="glass-panel overflow-hidden p-0 overflow-hidden mt-[32px]">
+          <div className="glass-panel overflow-hidden p-0 mt-[32px]">
             {hasLiveMatch ? (
               <div className="w-full h-[600px] bg-black">
                  {/* Try to parse as iframe HTML string first, otherwise use as URL */}
@@ -49,7 +49,7 @@ export default function LiveMatchSection({ liveMatch }: LiveMatchProps) {
             ) : (
               // Offline fallback UI
               <div className="p-[60px_22px] text-center flex flex-col items-center justify-center min-h-[300px]">
-                <PremiumIcon name="cricket" size="lg" containerClassName="mb-[16px] opacity-60" />
+                <PremiumIcon name="live" size="lg" containerClassName="mb-[16px] opacity-60" />
                 <h3 className="font-bebas text-[24px] text-[var(--color-muted-2)]">No matches currently live</h3>
                 <p className="text-[13px] text-[var(--color-muted)] mt-[8px]">When a match goes live on CricHeroes, the scorecard will appear here.</p>
               </div>

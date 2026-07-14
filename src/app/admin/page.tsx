@@ -31,7 +31,7 @@ export default async function AdminDashboard() {
           <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-[radial-gradient(circle_at_top_right,rgba(201,162,39,0.1),transparent_70%)] pointer-events-none"></div>
           
           <div className="font-bebas text-[28px] mb-2 flex items-center gap-3">
-            <PremiumIcon name="cricket" size="md" /> 
+            <PremiumIcon name="live" size="md" /> 
             Live Match Center
           </div>
           <p className="text-[var(--color-muted)] text-[13.5px] mb-6 leading-relaxed">
