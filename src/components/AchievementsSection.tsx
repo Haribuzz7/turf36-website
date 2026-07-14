@@ -11,17 +11,6 @@ export default function AchievementsSection() {
         <div className="font-space tracking-[.22em] uppercase text-[11.5px] text-[var(--color-gold)] flex items-center gap-[10px] mb-[16px] before:content-[''] before:w-[26px] before:h-[1px] before:bg-[var(--color-gold)]">
           Track record
         </div>
-"use client";
-
-import Reveal from "./Reveal";
-
-export default function AchievementsSection() {
-  return (
-    <section id="achievements" className="relative py-[110px] border-b border-[var(--color-line)]">
-      <div className="max-w-[1120px] mx-auto px-7">
-        <div className="font-space tracking-[.22em] uppercase text-[11.5px] text-[var(--color-gold)] flex items-center gap-[10px] mb-[16px] before:content-[''] before:w-[26px] before:h-[1px] before:bg-[var(--color-gold)]">
-          Track record
-        </div>
         <Reveal>
           <h2 className="font-bebas font-normal tracking-[.01em] text-[clamp(34px,5.4vw,58px)] leading-[1.02] uppercase">
             Wins & <span className="text-[var(--color-gold-hot)]">Milestones</span>
