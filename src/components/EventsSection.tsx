@@ -1,99 +1,90 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react/no-unescaped-entities */
 "use client";
 
 import Reveal from "./Reveal";
-import PremiumIcon from "./PremiumIcon";
+import { useState, useEffect } from "react";
 
-type EventsProps = {
-  events: { id?: string; [key: string]: any }[];
-};
+export default function EventsSection({ events }: any) {
+  // Set target date for October 1st, 2026
+  const targetDate = new Date("2026-10-01T00:00:00").getTime();
+  
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0
+  });
 
-export default function EventsSection({ events }: EventsProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        return;
+      }
+
+      setTimeLeft({
+        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((distance % (1000 * 60)) / 1000)
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [targetDate]);
+
+  const timeBlocks = [
+    { label: "DAYS", value: timeLeft.days },
+    { label: "HOURS", value: timeLeft.hours },
+    { label: "MINS", value: timeLeft.minutes },
+    { label: "SECS", value: timeLeft.seconds }
+  ];
+
   return (
     <section id="events" className="relative py-[110px] border-b border-[var(--color-line)]">
       <div className="max-w-[1120px] mx-auto px-7">
-        <div className="font-space tracking-[.22em] uppercase text-[11.5px] text-[var(--color-gold)] flex items-center gap-[10px] mb-[16px] before:content-[''] before:w-[26px] before:h-[1px] before:bg-[var(--color-gold)]">
-          What's coming up
+        <div className="font-space tracking-[.22em] uppercase text-[11.5px] text-[var(--color-gold)] flex items-center justify-center gap-[10px] mb-[16px] before:content-[''] before:w-[26px] before:h-[1px] before:bg-[var(--color-gold)] after:content-[''] after:w-[26px] after:h-[1px] after:bg-[var(--color-gold)]">
+          Next Big Kickoff
         </div>
-        <Reveal>
-          <h2 className="font-bebas font-normal tracking-[.01em] text-[clamp(34px,5.4vw,58px)] leading-[1.02] uppercase">
-            Events & <span className="text-[var(--color-gold-hot)]">Tournaments</span>
-          </h2>
-        </Reveal>
         
-        {events.length > 0 ? events.map((event, index) => {
-          const date = new Date(event.event_date);
-          const month = date.toLocaleString('default', { month: 'short' }).toUpperCase();
-          const day = String(date.getDate()).padStart(2, '0');
-          const year = date.getFullYear();
-
-          const now = new Date();
-          const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
-          const eventDayTime = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
-          
-          const diffTime = eventDayTime - today;
-          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-          
-          let statusContent: React.ReactNode = "";
-          let statusClasses = "";
-          let isPast = false;
-          
-          if (diffDays < 0) {
-            statusContent = "Past Tournament";
-            statusClasses = "text-[var(--color-muted)] border-[var(--color-card-stroke)] bg-black/40";
-            isPast = true;
-          } else if (diffDays === 0) {
-            statusContent = (
-              <div className="flex items-center gap-2">
-                <PremiumIcon name="live" noContainer className="w-[16px] h-[16px]" />
-                Tournament is Live
-              </div>
-            );
-            statusClasses = "text-red-400 border-red-500/30 bg-red-500/10";
-          } else {
-            statusContent = `${diffDays} Days to go`;
-            statusClasses = "text-[var(--color-gold)] border-[var(--color-gold)]/30 bg-[var(--color-gold)]/10";
-          }
-
-          return (
-            <Reveal key={event.id} delay={index * 0.1}>
-              <div className={`flex flex-col gap-0 mt-[16px] glass-panel overflow-hidden transition-colors ${!isPast ? 'hover:border-[var(--color-gold)]/30' : ''}`}>
-                {event.poster_url && (
-                  <img src={event.poster_url} alt={event.title} className={`w-full h-[200px] sm:h-[300px] object-cover object-center border-b border-[var(--color-card-stroke)] ${isPast ? 'grayscale opacity-70' : ''}`} />
-                )}
-                <div className="grid grid-cols-1 sm:grid-cols-[120px_1fr_auto] items-center gap-[22px] p-[22px]">
-                  <div className={`font-space text-center p-[12px_8px] border border-[var(--color-card-stroke)] rounded-[10px] bg-black/40 ${isPast ? 'opacity-60' : ''}`}>
-                    <b className="block text-[14px] text-[var(--color-muted)] font-bold mb-1">{month}</b>
-                    <b className="block text-[32px] text-[var(--color-gold-hot)] font-bold leading-none mb-1">{day}</b>
-                    <span className="text-[10px] uppercase text-[var(--color-muted)] tracking-[.1em]">{year}</span>
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-3 mb-2 flex-wrap">
-                      <h3 className={`font-bebas text-[22px] sm:text-[28px] tracking-[.02em] text-white ${isPast ? 'opacity-70' : ''}`}>{event.title}</h3>
-                      <span className={`font-space text-[10px] uppercase tracking-wider px-2 py-1 rounded-md border flex items-center ${statusClasses}`}>
-                        {statusContent}
+        <Reveal>
+          <div className="p-[40px_20px] md:p-[60px_40px] mt-[44px] glass-panel relative overflow-hidden text-center before:content-[''] before:absolute before:inset-0 before:bg-[radial-gradient(ellipse_800px_400px_at_50%_0%,rgba(0,230,118,0.15),transparent_70%)] before:z-0">
+            <div className="relative z-10">
+              <h3 className="font-bebas text-[clamp(28px,5vw,48px)] mb-[40px] uppercase tracking-[.04em] text-white drop-shadow-[0_0_15px_rgba(140,255,90,0.3)]">
+                TSL PREMIUM EDITION: 2 <span className="text-[var(--color-gold-hot)] block sm:inline mt-2 sm:mt-0">— COMING SOON</span>
+              </h3>
+              
+              <div className="flex flex-wrap justify-center gap-[16px] md:gap-[24px]">
+                {mounted && timeBlocks.map((block, idx) => (
+                  <div key={idx} className="flex flex-col items-center">
+                    <div className="w-[80px] h-[90px] md:w-[120px] md:h-[130px] rounded-[16px] bg-gradient-to-b from-[#0a1a13] to-[#04120a] border border-[var(--color-gold-hot)]/40 flex items-center justify-center mb-[12px] shadow-[0_0_20px_rgba(0,230,118,0.2),inset_0_0_15px_rgba(140,255,90,0.1)] relative overflow-hidden group animate-[pulse_2s_infinite]">
+                      {/* Neon glow effect line on top */}
+                      <div className="absolute top-0 left-0 right-0 h-[2px] bg-[var(--color-gold-hot)] shadow-[0_0_10px_var(--color-gold-hot)]"></div>
+                      
+                      <span className="font-bebas text-[42px] md:text-[64px] text-[var(--color-gold-hot)] tracking-[.05em] drop-shadow-[0_0_12px_rgba(140,255,90,0.8)]">
+                        {String(block.value).padStart(2, '0')}
                       </span>
                     </div>
-                    <p className="text-[13px] sm:text-[14px] text-[var(--color-muted)]">{event.subtitle}</p>
+                    <span className="font-space text-[12px] md:text-[14px] text-[var(--color-muted)] tracking-[.2em] uppercase">
+                      {block.label}
+                    </span>
                   </div>
-                  
-                  {!isPast && (
-                    <a href="#book" className="font-space text-[12.5px] tracking-[.08em] uppercase py-[14px] px-[26px] rounded-lg inline-flex items-center gap-[10px] cursor-pointer glass-button justify-center text-center">
-                      Register Now
-                    </a>
-                  )}
-                </div>
+                ))}
               </div>
-            </Reveal>
-          );
-        }) : (
-          <Reveal>
-             <div className="p-[32px] mt-[24px] text-center border border-[var(--color-card-stroke)] rounded-[14px] bg-[var(--color-card)]">
-               <p className="text-[var(--color-muted)]">No tournaments scheduled at the moment.</p>
-             </div>
-          </Reveal>
-        )}
+              
+              <div className="mt-[50px]">
+                <a href="#book" className="font-space text-[14px] tracking-[.08em] uppercase py-[16px] px-[32px] rounded-lg inline-flex items-center gap-[10px] cursor-pointer glass-button justify-center text-center">
+                  Register Interest
+                </a>
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
