@@ -1,6 +1,5 @@
 "use client";
 
-import Reveal from "./Reveal";
 import { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import TiltCard from "./TiltCard";
@@ -14,7 +13,6 @@ export default function HeroSection() {
     target: ref,
     offset: ["start start", "end start"],
   });
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
   useEffect(() => {
@@ -90,7 +88,7 @@ export default function HeroSection() {
         </h1>
         
         <p className="mt-[24px] text-[var(--color-muted)] text-[14px] md:text-[16px] leading-[1.6] text-center font-space tracking-[.05em] max-w-[600px] opacity-0 animate-[fadeIn_1s_ease-out_4.5s_forwards]">
-          Gobichettipalayam's Premium Cricket, Football & Pickleball Arena
+          Gobichettipalayam&apos;s Premium Cricket, Football & Pickleball Arena
         </p>
 
 

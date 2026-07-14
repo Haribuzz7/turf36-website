@@ -13,6 +13,7 @@ export default function FluidCursor() {
       // Hack to allow canvas to have pointer-events: none
       // We intercept the addEventListener calls and bind them to the window instead
       const originalAddEventListener = canvas.addEventListener.bind(canvas);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       canvas.addEventListener = (type: string, listener: any, options?: any) => {
         if (['mousemove', 'mousedown', 'mouseup', 'touchstart', 'touchmove', 'touchend'].includes(type)) {
           window.addEventListener(type, listener, options);

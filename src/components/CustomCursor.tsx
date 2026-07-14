@@ -43,20 +43,22 @@ export default function CustomCursor() {
       {/* Floating Ambient Particles Layer */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         {Array.from({ length: 15 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full bg-[var(--color-gold-hot)] opacity-30 blur-[2px]"
-            style={{
-              width: Math.random() * 4 + 2 + "px",
-              height: Math.random() * 4 + 2 + "px",
-              left: Math.random() * 100 + "%",
-              top: Math.random() * 100 + "%",
-              animation: `float ${Math.random() * 15 + 10}s ease-in-out infinite`,
-              animationDelay: `-${Math.random() * 10}s`,
-            }}
-          />
-        ))}
-      </div>
-    </>
+            <div
+              key={i}
+              className="absolute rounded-full bg-[var(--color-gold-hot)] opacity-30 blur-[2px]"
+              style={{
+                /* eslint-disable react-hooks/purity */
+                width: Math.random() * 4 + 2 + "px",
+                height: Math.random() * 4 + 2 + "px",
+                left: Math.random() * 100 + "%",
+                top: Math.random() * 100 + "%",
+                animation: `float ${Math.random() * 15 + 10}s ease-in-out infinite`,
+                animationDelay: `-${Math.random() * 10}s`,
+                /* eslint-enable react-hooks/purity */
+              }}
+            />
+          ))}
+        </div>
+      </>
   );
 }

@@ -6,7 +6,7 @@ import Reveal from "./Reveal";
 import { useState, useEffect } from "react";
 import MagneticButton from "./MagneticButton";
 
-export default function EventsSection({ events }: any) {
+export default function EventsSection() {
   // Set target date for October 1st, 2026
   const targetDate = new Date("2026-10-01T00:00:00").getTime();
   
@@ -20,6 +20,7 @@ export default function EventsSection({ events }: any) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     const timer = setInterval(() => {
       const now = new Date().getTime();

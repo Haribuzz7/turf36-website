@@ -20,8 +20,7 @@ export default async function Home() {
   // Fetch Live Match
   const { data: liveMatch } = await supabase.from('live_match').select('*').limit(1).single();
 
-  // Fetch Events
-  const { data: events } = await supabase.from('events').select('*').order('event_date', { ascending: true });
+
 
   // Fetch Hall of Fame
   const { data: hallOfFame } = await supabase.from('hall_of_fame').select('*').order('order_index', { ascending: true });
@@ -45,7 +44,7 @@ export default async function Home() {
       <HallOfFameSection hallOfFame={hallOfFame || []} />
       <TeamsSection />
       <FacilitiesSection />
-      <EventsSection events={events || []} />
+      <EventsSection />
       <TestimonialsSection />
       <MemorySection />
       <Footer />
