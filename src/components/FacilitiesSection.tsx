@@ -38,7 +38,7 @@ export default function FacilitiesSection() {
   }, [isDragging]);
 
   return (
-    <section id="facilities" className="relative z-10 py-[110px] border-b border-[rgba(255,255,255,0.05)] bg-[#030805]/70 backdrop-blur-[12px]">
+    <section id="facilities" className="relative z-10 py-[110px] border-b border-[rgba(255,255,255,0.05)] ">
       <div className="max-w-[1120px] mx-auto px-7">
         <div className="font-space tracking-[.22em] uppercase text-[11.5px] text-[var(--color-gold)] flex items-center gap-[10px] mb-[16px] before:content-[''] before:w-[26px] before:h-[1px] before:bg-[var(--color-gold)]">
           On the ground
