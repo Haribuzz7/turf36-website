@@ -93,12 +93,7 @@ export default function HeroSection() {
           Gobichettipalayam's Premium Cricket, Football & Pickleball Arena
         </p>
 
-        <div className="flex gap-[14px] mt-[38px] flex-wrap justify-center opacity-0 animate-[fadeInUp_1s_ease-out_4.8s_forwards]">
-          <a href="#book" className="font-space text-[12.5px] tracking-[.08em] uppercase py-[14px] px-[26px] rounded-[30px] inline-flex items-center gap-[10px] cursor-pointer glass-button border-[rgba(140,255,90,0.5)] bg-[rgba(0,230,118,0.1)] text-[var(--color-white)] shadow-[0_0_15px_rgba(0,230,118,0.3)] hover:bg-[var(--color-gold-hot)] hover:text-[#0a0a0a] hover:shadow-[0_0_25px_rgba(140,255,90,0.8)] hover:-translate-y-1 transition-all duration-300">
-            Book Your Slot
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-          </a>
-        </div>
+
 
         <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-[1px] mt-[80px] bg-[var(--color-line)] border border-[var(--color-line)] rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.5)] opacity-0 animate-[fadeInUp_1.5s_ease-out_5.2s_forwards]">
           <div className="bg-[rgba(0,230,118,0.03)] backdrop-blur-md py-[22px] px-[20px] text-center">
@@ -120,10 +115,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div className="absolute bottom-[26px] left-1/2 -translate-x-1/2 z-10 font-space text-[11px] tracking-[.2em] text-[var(--color-muted)] opacity-0 drop-shadow-[0_0_4px_rgba(0,0,0,0.5)] animate-[fadeIn_2s_ease-out_6s_forwards]">
-        SCROLL TO EXPLORE
-        <div className="w-[1px] h-[30px] bg-gradient-to-b from-[var(--color-muted)] to-transparent mx-auto mt-2"></div>
-      </div>
+
       
       <style jsx>{`
         .text-sweep-container {
