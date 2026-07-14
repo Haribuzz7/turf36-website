@@ -26,6 +26,7 @@ export const metadata: Metadata = {
 };
 
 import CustomCursor from "@/components/CustomCursor";
+import FluidCursor from "@/components/FluidCursor";
 
 export default function RootLayout({
   children,
@@ -38,6 +39,7 @@ export default function RootLayout({
       className={`${bebas.variable} ${spaceMono.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <FluidCursor />
         <CustomCursor />
         {children}
       </body>
