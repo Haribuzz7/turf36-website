@@ -1,3 +1,4 @@
+"use client";
 
 import SectionHighlight from "./SectionHighlight";
 
