@@ -8,8 +8,20 @@ export default function FluidCursor() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && canvasRef.current) {
-      WebGLFluid(canvasRef.current, {
+    const canvas = canvasRef.current;
+    if (typeof window !== "undefined" && canvas) {
+      // Hack to allow canvas to have pointer-events: none
+      // We intercept the addEventListener calls and bind them to the window instead
+      const originalAddEventListener = canvas.addEventListener.bind(canvas);
+      canvas.addEventListener = (type: string, listener: any, options?: any) => {
+        if (['mousemove', 'mousedown', 'mouseup', 'touchstart', 'touchmove', 'touchend'].includes(type)) {
+          window.addEventListener(type, listener, options);
+        } else {
+          originalAddEventListener(type, listener, options);
+        }
+      };
+
+      WebGLFluid(canvas, {
         TRIGGER: "hover",
         IMMEDIATE: true,
         AUTO: false,
@@ -48,7 +60,7 @@ export default function FluidCursor() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none w-screen h-screen z-0"
+      className="fixed inset-0 pointer-events-none w-screen h-screen z-50 mix-blend-screen"
       style={{
         width: "100vw",
         height: "100vh",
