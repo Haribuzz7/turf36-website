@@ -104,7 +104,7 @@ export default function FacilitiesSection() {
           >
             {/* Day Layer */}
             <div className="absolute inset-0 z-0 bg-cover bg-center" style={{
-              backgroundImage: `url('/day_turf.png')`
+              backgroundImage: `url('/Day.png')`
             }}></div>
             
             {/* Night Layer */}
@@ -112,7 +112,7 @@ export default function FacilitiesSection() {
               className="absolute inset-0 z-10 bg-cover bg-center" 
               style={{
                 clipPath: `inset(0 0 0 ${sliderPct}%)`,
-                backgroundImage: `url('/night_turf.png')`
+                backgroundImage: `url('/Night.png')`
               }}
             >
               <div className="absolute inset-0 bg-black/10"></div>
