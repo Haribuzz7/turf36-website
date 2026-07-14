@@ -34,9 +34,7 @@ export default function Header() {
 
       {/* Floating Quick Actions */}
       <div className="fixed right-5 bottom-5 z-[80] flex flex-col gap-[10px] items-end">
-        <a href="#book" className="w-auto h-[50px] rounded-[30px] px-[18px] flex items-center justify-center gap-[8px] font-space text-[12px] tracking-[.08em] font-bold glass-button shadow-[0_6px_20px_rgba(0,230,118,0.5)] hover:-translate-y-[3px] hover:scale-105 transition-transform hover:shadow-[0_10px_30px_rgba(140,255,90,0.8)]">
-          <PremiumIcon name="lightning" noContainer className="w-[18px] h-[18px]" /> Book Now
-        </a>
+
         <a href="https://wa.me/917708929267" target="_blank" rel="noreferrer" title="WhatsApp" className="w-[50px] h-[50px] rounded-full flex items-center justify-center glass-panel text-[var(--color-gold-hot)] shadow-[0_6px_20px_rgba(0,0,0,0.5)] hover:-translate-y-[3px] hover:scale-105 hover:bg-[var(--color-gold)] hover:text-[#0a0a0a] transition-all">
           <PremiumIcon name="message" noContainer className="w-[20px] h-[20px]" />
         </a>
