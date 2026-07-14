@@ -32,7 +32,7 @@ export default function HeroSection() {
     <section ref={ref} id="home" className="relative z-10 min-h-screen flex items-center justify-center pt-20 overflow-hidden border-b border-[var(--color-line)]">
       {/* Field Background - fades in after floodlights */}
       <div 
-        className="absolute inset-0 z-0 opacity-0 pointer-events-none animate-[fadeIn_2s_ease-out_3s_forwards] w-full h-full"
+        className="absolute inset-0 z-0 opacity-0 pointer-events-none animate-[fadeIn_2s_ease-out_3s_forwards]"
         style={{
           background: "repeating-linear-gradient(90deg, rgba(0,230,118,.05) 0 2px, transparent 2px 90px)"
         }}
