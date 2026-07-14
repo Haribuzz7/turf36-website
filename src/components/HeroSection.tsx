@@ -7,6 +7,7 @@ export default function HeroSection() {
   const [matches, setMatches] = useState(0);
   const [tournaments, setTournaments] = useState(0);
   const [teams, setTeams] = useState(0);
+  const [days, setDays] = useState(0);
   const [introFinished, setIntroFinished] = useState(false);
 
   useEffect(() => {
@@ -30,9 +31,10 @@ export default function HeroSection() {
     };
 
     const timer = setTimeout(() => {
-      animateValue(setMatches, 42, 1400);
-      animateValue(setTournaments, 6, 1400);
-      animateValue(setTeams, 24, 1400);
+      animateValue(setMatches, 1000, 1400);
+      animateValue(setTournaments, 50, 1400);
+      animateValue(setTeams, 100, 1400);
+      animateValue(setDays, 365, 1400);
     }, 4000); // delay counters until intro is almost done
 
     return () => {
@@ -109,7 +111,7 @@ export default function HeroSection() {
             <span className="text-[11px] text-[var(--color-muted)] uppercase tracking-[.08em]">Teams Played</span>
           </div>
           <div className="bg-[rgba(0,230,118,0.03)] backdrop-blur-md py-[22px] px-[20px] text-center">
-            <b className="font-space text-[clamp(24px,3vw,34px)] text-[var(--color-gold-hot)] block font-bold">365</b>
+            <b className="font-space text-[clamp(24px,3vw,34px)] text-[var(--color-gold-hot)] block font-bold">{days}</b>
             <span className="text-[11px] text-[var(--color-muted)] uppercase tracking-[.08em]">Days of Game On</span>
           </div>
         </div>
