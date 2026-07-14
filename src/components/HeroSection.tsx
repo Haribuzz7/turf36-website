@@ -3,12 +3,10 @@
 import Reveal from "./Reveal";
 import { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import TiltCard from "./TiltCard";
+import Odometer from "./Odometer";
 
 export default function HeroSection() {
-  const [matches, setMatches] = useState(0);
-  const [tournaments, setTournaments] = useState(0);
-  const [teams, setTeams] = useState(0);
-  const [days, setDays] = useState(0);
   const [introFinished, setIntroFinished] = useState(false);
   
   const ref = useRef(null);
@@ -25,29 +23,7 @@ export default function HeroSection() {
       setIntroFinished(true);
     }, 4500);
 
-    // Simple counter animation
-    const animateValue = (setFn: (val: number) => void, end: number, duration: number) => {
-      let startTimestamp: number | null = null;
-      const step = (timestamp: number) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        setFn(Math.floor(progress * end));
-        if (progress < 1) {
-          window.requestAnimationFrame(step);
-        }
-      };
-      window.requestAnimationFrame(step);
-    };
-
-    const timer = setTimeout(() => {
-      animateValue(setMatches, 1000, 2000);
-      animateValue(setTournaments, 50, 2000);
-      animateValue(setTeams, 100, 2000);
-      animateValue(setDays, 365, 2000);
-    }, 5500); // delay counters until grid fades in
-
     return () => {
-      clearTimeout(timer);
       clearTimeout(introTimer);
     };
   }, []);
@@ -110,23 +86,31 @@ export default function HeroSection() {
 
 
 
-        <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-[1px] mt-[80px] bg-[var(--color-line)] border border-[var(--color-line)] rounded-xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.5)] opacity-0 animate-[fadeInUp_1.5s_ease-out_5.2s_forwards]">
-          <div className="bg-[rgba(0,230,118,0.03)] backdrop-blur-md py-[22px] px-[20px] text-center">
-            <b className="font-space text-[clamp(24px,3vw,34px)] text-[var(--color-gold-hot)] block font-bold">{matches}+</b>
-            <span className="text-[11px] text-[var(--color-muted)] uppercase tracking-[.08em]">Matches Played</span>
-          </div>
-          <div className="bg-[rgba(0,230,118,0.03)] backdrop-blur-md py-[22px] px-[20px] text-center">
-            <b className="font-space text-[clamp(24px,3vw,34px)] text-[var(--color-gold-hot)] block font-bold">{tournaments}+</b>
-            <span className="text-[11px] text-[var(--color-muted)] uppercase tracking-[.08em]">Tournaments Hosted</span>
-          </div>
-          <div className="bg-[rgba(0,230,118,0.03)] backdrop-blur-md py-[22px] px-[20px] text-center">
-            <b className="font-space text-[clamp(24px,3vw,34px)] text-[var(--color-gold-hot)] block font-bold">{teams}+</b>
-            <span className="text-[11px] text-[var(--color-muted)] uppercase tracking-[.08em]">Teams Played</span>
-          </div>
-          <div className="bg-[rgba(0,230,118,0.03)] backdrop-blur-md py-[22px] px-[20px] text-center">
-            <b className="font-space text-[clamp(24px,3vw,34px)] text-[var(--color-gold-hot)] block font-bold">{days}</b>
-            <span className="text-[11px] text-[var(--color-muted)] uppercase tracking-[.08em]">Days of Game On</span>
-          </div>
+        <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-[14px] mt-[80px] opacity-0 animate-[fadeInUp_1.5s_ease-out_5.2s_forwards]">
+          <TiltCard className="w-full h-full">
+            <div className="bg-[rgba(0,230,118,0.03)] backdrop-blur-md py-[26px] px-[20px] text-center border border-[var(--color-line)] rounded-xl h-full flex flex-col justify-center shadow-[0_10px_30px_rgba(0,0,0,0.3)]">
+              <b className="font-space text-[clamp(24px,3vw,34px)] text-[var(--color-gold-hot)] flex justify-center font-bold mb-[6px]"><Odometer value={1000} suffix="+" /></b>
+              <span className="text-[11px] text-[var(--color-muted)] uppercase tracking-[.08em]">Matches Played</span>
+            </div>
+          </TiltCard>
+          <TiltCard className="w-full h-full">
+            <div className="bg-[rgba(0,230,118,0.03)] backdrop-blur-md py-[26px] px-[20px] text-center border border-[var(--color-line)] rounded-xl h-full flex flex-col justify-center shadow-[0_10px_30px_rgba(0,0,0,0.3)]">
+              <b className="font-space text-[clamp(24px,3vw,34px)] text-[var(--color-gold-hot)] flex justify-center font-bold mb-[6px]"><Odometer value={50} suffix="+" /></b>
+              <span className="text-[11px] text-[var(--color-muted)] uppercase tracking-[.08em]">Tournaments Hosted</span>
+            </div>
+          </TiltCard>
+          <TiltCard className="w-full h-full">
+            <div className="bg-[rgba(0,230,118,0.03)] backdrop-blur-md py-[26px] px-[20px] text-center border border-[var(--color-line)] rounded-xl h-full flex flex-col justify-center shadow-[0_10px_30px_rgba(0,0,0,0.3)]">
+              <b className="font-space text-[clamp(24px,3vw,34px)] text-[var(--color-gold-hot)] flex justify-center font-bold mb-[6px]"><Odometer value={100} suffix="+" /></b>
+              <span className="text-[11px] text-[var(--color-muted)] uppercase tracking-[.08em]">Teams Played</span>
+            </div>
+          </TiltCard>
+          <TiltCard className="w-full h-full">
+            <div className="bg-[rgba(0,230,118,0.03)] backdrop-blur-md py-[26px] px-[20px] text-center border border-[var(--color-line)] rounded-xl h-full flex flex-col justify-center shadow-[0_10px_30px_rgba(0,0,0,0.3)]">
+              <b className="font-space text-[clamp(24px,3vw,34px)] text-[var(--color-gold-hot)] flex justify-center font-bold mb-[6px]"><Odometer value={365} /></b>
+              <span className="text-[11px] text-[var(--color-muted)] uppercase tracking-[.08em]">Days of Game On</span>
+            </div>
+          </TiltCard>
         </div>
       </motion.div>
 
