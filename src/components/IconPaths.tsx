@@ -31,12 +31,19 @@ export type IconName =
   | "sun"
   | "moon"
   | "info"
-  | "message";
+  | "message"
+  | "cctv";
 
 export const IconPaths: Record<IconName, React.ReactNode> = {
   message: (
     <>
       <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    </>
+  ),
+  cctv: (
+    <>
+      <path d="M23 7l-7 5 7 5V7z" />
+      <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
     </>
   ),
   play: (

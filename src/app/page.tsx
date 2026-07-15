@@ -9,6 +9,7 @@ import HighlightsSection from "@/components/HighlightsSection";
 import HallOfFameSection from "@/components/HallOfFameSection";
 import TeamsSection from "@/components/TeamsSection";
 import FacilitiesSection from "@/components/FacilitiesSection";
+import DayNightSliderSection from "@/components/DayNightSliderSection";
 import EventsSection from "@/components/EventsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import MemorySection from "@/components/MemorySection";
@@ -37,6 +38,7 @@ export default async function Home() {
       <Header />
       <HeroSection />
       <BookingSection />
+      <DayNightSliderSection />
       <LiveMatchSection liveMatch={liveMatch} />
       <AchievementsSection />
       <GallerySection images={gallery} />
