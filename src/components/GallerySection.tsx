@@ -6,7 +6,6 @@ import { useState } from "react";
 import SectionHighlight from "./SectionHighlight";
 
 import Parallax3DCard from "./Parallax3DCard";
-import MobileCoverflowCarousel from "./MobileCoverflowCarousel";
 import Reveal from "./Reveal";
 
 type GalleryProps = {
@@ -36,8 +35,8 @@ export default function GallerySection({ images }: GalleryProps) {
             Together We can, TE.
           </p>
           
-          {/* Desktop View: Grid of Parallax 3D Cards */}
-          <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-[24px] mt-[44px]">
+          {/* All Views: Grid of Parallax 3D Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[24px] mt-[44px]">
             {displayImages.map((img, idx) => {
               return (
                 <Parallax3DCard 
@@ -83,14 +82,6 @@ export default function GallerySection({ images }: GalleryProps) {
                 </Parallax3DCard>
               );
             })}
-          </div>
-
-          {/* Mobile View: 3D Swipe Coverflow Carousel */}
-          <div className="block md:hidden mt-[44px] -mx-7">
-            <MobileCoverflowCarousel 
-              images={displayImages} 
-              onImageClick={(img) => setSelectedImage(img)}
-            />
           </div>
         </div>
             </SectionHighlight>

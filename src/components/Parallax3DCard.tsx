@@ -58,6 +58,48 @@ export default function Parallax3DCard({ children, className = "", onClick }: Pa
     y.set(yPct);
   };
 
+  React.useEffect(() => {
+    const handleOrientation = (event: DeviceOrientationEvent) => {
+      // Gamma is the left-to-right tilt in degrees, where right is positive
+      let gamma = event.gamma || 0;
+      // Beta is the front-to-back tilt in degrees, where front is positive
+      let beta = event.beta || 0;
+
+      // Clamp values to a reasonable range for a handheld phone
+      // Assume neutral beta is around 45 degrees (holding phone tilted up slightly)
+      const maxTilt = 25; // max degrees to tilt before maxing out effect
+      
+      let deltaBeta = beta - 45;
+      
+      // Clamp
+      if (gamma > maxTilt) gamma = maxTilt;
+      if (gamma < -maxTilt) gamma = -maxTilt;
+      
+      if (deltaBeta > maxTilt) deltaBeta = maxTilt;
+      if (deltaBeta < -maxTilt) deltaBeta = -maxTilt;
+
+      // Convert to -0.5 to 0.5 range to match mouse behavior
+      const xPct = gamma / (maxTilt * 2);
+      const yPct = deltaBeta / (maxTilt * 2);
+
+      x.set(xPct);
+      y.set(yPct);
+      
+      if (!isHovered) setIsHovered(true); // Turn on glare and shadows
+    };
+
+    // Check if device orientation is supported
+    if (typeof window !== 'undefined' && window.DeviceOrientationEvent) {
+      window.addEventListener("deviceorientation", handleOrientation);
+    }
+
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener("deviceorientation", handleOrientation);
+      }
+    };
+  }, [x, y, isHovered]);
+
   const handleMouseEnter = () => {
     setIsHovered(true);
   };
@@ -69,10 +111,26 @@ export default function Parallax3DCard({ children, className = "", onClick }: Pa
     y.set(0);
   };
 
+  const handleCardClick = () => {
+    // Request iOS gyroscope permission if it exists
+    if (typeof window !== 'undefined' && typeof (window as any).DeviceOrientationEvent !== 'undefined' && typeof (window as any).DeviceOrientationEvent.requestPermission === 'function') {
+      (window as any).DeviceOrientationEvent.requestPermission()
+        .then((response: string) => {
+          if (response === 'granted') {
+            // Permission granted, gyroscope will now work
+          }
+        })
+        .catch(console.error);
+    }
+    
+    // Call original onClick (e.g. open lightbox)
+    if (onClick) onClick();
+  };
+
   return (
     <div
       className={`[perspective:1000px] ${className}`}
-      onClick={onClick}
+      onClick={handleCardClick}
     >
       <motion.div
         ref={ref}
