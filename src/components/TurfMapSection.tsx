@@ -10,9 +10,7 @@ export default function TurfMapSection() {
   const getDetails = () => {
     switch(activeElement) {
       case 'pitch1':
-        return { title: "Pitch 1", desc: "Main 7v7 Football / Box Cricket Turf", specs: "High-grade artificial grass, FIFA approved padding." };
-      case 'pitch2':
-        return { title: "Pitch 2", desc: "5v5 Football / Fast-paced Cricket", specs: "Perfect for quick matches and practice sessions." };
+        return { title: "Main Pitch", desc: "7v7 Football / Box Cricket Turf", specs: "High-grade artificial grass, FIFA approved padding." };
       case 'pickleball':
         return { title: "Pickleball Court", desc: "Standard Size Court", specs: "Professional hard court surface, dedicated lighting." };
       case 'boardgames':
@@ -62,57 +60,46 @@ export default function TurfMapSection() {
                 {/* Main Outer Boundary */}
                 <rect x="50" y="50" width="700" height="500" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="4" rx="10" />
 
-                {/* Pitch 1 (Left) */}
+                {/* Main Pitch (Top) */}
                 <g 
                   className="cursor-pointer transition-all duration-300"
                   onMouseEnter={() => setActiveElement('pitch1')}
                   onMouseLeave={() => setActiveElement(null)}
                   onTouchStart={() => setActiveElement('pitch1')}
                 >
-                  <rect x="70" y="70" width="300" height="460" fill="url(#grass)" stroke={activeElement === 'pitch1' ? "var(--color-gold-hot)" : "var(--color-gold)"} strokeWidth={activeElement === 'pitch1' ? "4" : "2"} rx="8" />
-                  <rect x="70" y="240" width="40" height="120" fill="none" stroke="rgba(140,255,90,0.3)" strokeWidth="2" />
-                  <rect x="330" y="240" width="40" height="120" fill="none" stroke="rgba(140,255,90,0.3)" strokeWidth="2" />
-                  <circle cx="220" cy="300" r="40" fill="none" stroke="rgba(140,255,90,0.3)" strokeWidth="2" />
-                  <line x1="220" y1="70" x2="220" y2="530" stroke="rgba(140,255,90,0.3)" strokeWidth="2" />
-                  <text x="220" y="305" fill={activeElement === 'pitch1' ? "var(--color-gold-hot)" : "var(--color-gold)"} fontSize="24" fontFamily="Bebas Neue" textAnchor="middle" className="pointer-events-none drop-shadow-md">PITCH 1</text>
+                  <rect x="70" y="70" width="660" height="280" fill="url(#grass)" stroke={activeElement === 'pitch1' ? "var(--color-gold-hot)" : "var(--color-gold)"} strokeWidth={activeElement === 'pitch1' ? "4" : "2"} rx="8" />
+                  
+                  {/* Penalty Boxes & Center Line */}
+                  <rect x="70" y="140" width="80" height="140" fill="none" stroke="rgba(140,255,90,0.3)" strokeWidth="2" />
+                  <rect x="650" y="140" width="80" height="140" fill="none" stroke="rgba(140,255,90,0.3)" strokeWidth="2" />
+                  <circle cx="400" cy="210" r="40" fill="none" stroke="rgba(140,255,90,0.3)" strokeWidth="2" />
+                  <line x1="400" y1="70" x2="400" y2="350" stroke="rgba(140,255,90,0.3)" strokeWidth="2" />
+                  
+                  <text x="400" y="218" fill={activeElement === 'pitch1' ? "var(--color-gold-hot)" : "var(--color-gold)"} fontSize="24" fontFamily="Bebas Neue" textAnchor="middle" className="pointer-events-none drop-shadow-md">MAIN PITCH</text>
                 </g>
 
-                {/* Pitch 2 (Right Top) */}
-                <g 
-                  className="cursor-pointer transition-all duration-300"
-                  onMouseEnter={() => setActiveElement('pitch2')}
-                  onMouseLeave={() => setActiveElement(null)}
-                  onTouchStart={() => setActiveElement('pitch2')}
-                >
-                  <rect x="390" y="70" width="340" height="260" fill="url(#grass)" stroke={activeElement === 'pitch2' ? "var(--color-gold-hot)" : "var(--color-gold)"} strokeWidth={activeElement === 'pitch2' ? "4" : "2"} rx="8" />
-                  <circle cx="560" cy="200" r="30" fill="none" stroke="rgba(140,255,90,0.3)" strokeWidth="2" />
-                  <line x1="560" y1="70" x2="560" y2="330" stroke="rgba(140,255,90,0.3)" strokeWidth="2" />
-                  <text x="560" y="205" fill={activeElement === 'pitch2' ? "var(--color-gold-hot)" : "var(--color-gold)"} fontSize="24" fontFamily="Bebas Neue" textAnchor="middle" className="pointer-events-none drop-shadow-md">PITCH 2</text>
-                </g>
-
-                {/* Pickleball Court (Right Bottom Left) */}
-                <g 
-                  className="cursor-pointer transition-all duration-300"
-                  onMouseEnter={() => setActiveElement('pickleball')}
-                  onMouseLeave={() => setActiveElement(null)}
-                  onTouchStart={() => setActiveElement('pickleball')}
-                >
-                  <rect x="390" y="350" width="160" height="180" fill="rgba(0,100,255,0.05)" stroke={activeElement === 'pickleball' ? "#3b82f6" : "rgba(59, 130, 246, 0.5)"} strokeWidth={activeElement === 'pickleball' ? "4" : "2"} rx="4" />
-                  <line x1="390" y1="440" x2="550" y2="440" stroke="rgba(59, 130, 246, 0.3)" strokeWidth="2" strokeDasharray="4 2" />
-                  <text x="470" y="445" fill={activeElement === 'pickleball' ? "#60a5fa" : "rgba(96, 165, 250, 0.7)"} fontSize="18" fontFamily="Bebas Neue" textAnchor="middle" className="pointer-events-none drop-shadow-md">PICKLEBALL</text>
-                </g>
-
-                {/* Board Games Shed (Right Bottom Right) */}
+                {/* Board Games Shed (Bottom Left) */}
                 <g 
                   className="cursor-pointer transition-all duration-300"
                   onMouseEnter={() => setActiveElement('boardgames')}
                   onMouseLeave={() => setActiveElement(null)}
                   onTouchStart={() => setActiveElement('boardgames')}
                 >
-                  <rect x="570" y="350" width="160" height="180" fill="rgba(255,165,0,0.05)" stroke={activeElement === 'boardgames' ? "#f59e0b" : "rgba(245, 158, 11, 0.5)"} strokeWidth={activeElement === 'boardgames' ? "4" : "2"} rx="4" />
-                  {/* Simple Roof/Shed pattern */}
-                  <path d="M 570 350 L 650 330 L 730 350" fill="none" stroke={activeElement === 'boardgames' ? "#f59e0b" : "rgba(245, 158, 11, 0.5)"} strokeWidth="2" />
-                  <text x="650" y="445" fill={activeElement === 'boardgames' ? "#fbbf24" : "rgba(251, 191, 36, 0.7)"} fontSize="18" fontFamily="Bebas Neue" textAnchor="middle" className="pointer-events-none drop-shadow-md">BOARD GAMES</text>
+                  <rect x="70" y="370" width="320" height="160" fill="rgba(255,165,0,0.05)" stroke={activeElement === 'boardgames' ? "#f59e0b" : "rgba(245, 158, 11, 0.5)"} strokeWidth={activeElement === 'boardgames' ? "4" : "2"} rx="4" />
+                  <path d="M 70 370 L 230 330 L 390 370" fill="none" stroke={activeElement === 'boardgames' ? "#f59e0b" : "rgba(245, 158, 11, 0.5)"} strokeWidth="2" />
+                  <text x="230" y="455" fill={activeElement === 'boardgames' ? "#fbbf24" : "rgba(251, 191, 36, 0.7)"} fontSize="22" fontFamily="Bebas Neue" textAnchor="middle" className="pointer-events-none drop-shadow-md">BOARD GAMES SHED</text>
+                </g>
+
+                {/* Pickleball Court (Bottom Right) */}
+                <g 
+                  className="cursor-pointer transition-all duration-300"
+                  onMouseEnter={() => setActiveElement('pickleball')}
+                  onMouseLeave={() => setActiveElement(null)}
+                  onTouchStart={() => setActiveElement('pickleball')}
+                >
+                  <rect x="410" y="370" width="320" height="160" fill="rgba(0,100,255,0.05)" stroke={activeElement === 'pickleball' ? "#3b82f6" : "rgba(59, 130, 246, 0.5)"} strokeWidth={activeElement === 'pickleball' ? "4" : "2"} rx="4" />
+                  <line x1="570" y1="370" x2="570" y2="530" stroke="rgba(59, 130, 246, 0.3)" strokeWidth="2" strokeDasharray="4 2" />
+                  <text x="570" y="455" fill={activeElement === 'pickleball' ? "#60a5fa" : "rgba(96, 165, 250, 0.7)"} fontSize="22" fontFamily="Bebas Neue" textAnchor="middle" className="pointer-events-none drop-shadow-md">PICKLEBALL</text>
                 </g>
               </svg>
             </div>
