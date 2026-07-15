@@ -6,6 +6,7 @@ import { useState } from "react";
 import SectionHighlight from "./SectionHighlight";
 
 import Parallax3DCard from "./Parallax3DCard";
+import MobileCoverflowCarousel from "./MobileCoverflowCarousel";
 import Reveal from "./Reveal";
 
 type GalleryProps = {
@@ -20,7 +21,7 @@ export default function GallerySection({ images }: GalleryProps) {
 
   return (
     <>
-      <section id="gallery" className="relative z-10  border-b border-[rgba(255,255,255,0.05)] ">
+      <section id="gallery" className="relative z-10  border-b border-[rgba(255,255,255,0.05)] overflow-hidden">
         <SectionHighlight glowColor="emerald" glowPosition="left" className="py-[110px]">
         <div className="max-w-[1120px] mx-auto px-7">
           <div className="font-space tracking-[.22em] uppercase text-[11.5px] text-[var(--color-gold)] flex items-center gap-[10px] mb-[16px] before:content-[''] before:w-[26px] before:h-[1px] before:bg-[var(--color-gold)]">
@@ -35,7 +36,8 @@ export default function GallerySection({ images }: GalleryProps) {
             Together We can, TE.
           </p>
           
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-[24px] mt-[44px]">
+          {/* Desktop View: Grid of Parallax 3D Cards */}
+          <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-[24px] mt-[44px]">
             {displayImages.map((img, idx) => {
               return (
                 <Parallax3DCard 
@@ -81,6 +83,14 @@ export default function GallerySection({ images }: GalleryProps) {
                 </Parallax3DCard>
               );
             })}
+          </div>
+
+          {/* Mobile View: 3D Swipe Coverflow Carousel */}
+          <div className="block md:hidden mt-[44px] -mx-7">
+            <MobileCoverflowCarousel 
+              images={displayImages} 
+              onImageClick={(img) => setSelectedImage(img)}
+            />
           </div>
         </div>
             </SectionHighlight>
