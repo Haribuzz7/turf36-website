@@ -8,6 +8,7 @@ import GallerySection from "@/components/GallerySection";
 import HighlightsSection from "@/components/HighlightsSection";
 import HallOfFameSection from "@/components/HallOfFameSection";
 import TeamsSection from "@/components/TeamsSection";
+import TurfMapSection from "@/components/TurfMapSection";
 import FacilitiesSection from "@/components/FacilitiesSection";
 import DayNightSliderSection from "@/components/DayNightSliderSection";
 import EventsSection from "@/components/EventsSection";
@@ -45,6 +46,7 @@ export default async function Home() {
       <HighlightsSection highlights={highlights || []} />
       <HallOfFameSection hallOfFame={hallOfFame || []} />
       <TeamsSection />
+      <TurfMapSection />
       <FacilitiesSection />
       <EventsSection />
       <TestimonialsSection />

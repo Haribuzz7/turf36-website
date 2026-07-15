@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import PremiumIcon from "./PremiumIcon";
+import WeatherWidget from "./WeatherWidget";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -27,9 +28,12 @@ export default function Header() {
           <a href="#events" className="hover:text-[var(--color-gold-hot)] hover:drop-shadow-[0_0_8px_rgba(140,255,90,0.8)] transition-all">Events</a>
           <a href="#facilities" className="hover:text-[var(--color-gold-hot)] hover:drop-shadow-[0_0_8px_rgba(140,255,90,0.8)] transition-all">Facilities</a>
         </nav>
-        <a href="#book" className="font-space text-[12.5px] tracking-[.08em] uppercase py-[9px] px-[18px] rounded-lg glass-button">
-          Book Now
-        </a>
+        <div className="flex items-center gap-4">
+          <WeatherWidget />
+          <a href="#book" className="font-space text-[12.5px] tracking-[.08em] uppercase py-[9px] px-[18px] rounded-lg glass-button">
+            Book Now
+          </a>
+        </div>
       </header>
 
       {/* Floating Quick Actions */}
