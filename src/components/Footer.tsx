@@ -53,6 +53,12 @@ export default function Footer() {
                 </span>
                 Instagram
               </a>
+              <a href="https://youtube.com/@teamextreme-36?si=f-D39LpQ7UNhMc3B" target="_blank" rel="noreferrer" className="group flex items-center gap-3 text-[14.5px] text-[var(--color-muted)] hover:text-white transition-colors">
+                <span className="w-9 h-9 rounded-full border border-[rgba(255,255,255,0.1)] group-hover:border-[var(--color-gold)] group-hover:bg-[rgba(140,255,90,0.1)] flex items-center justify-center transition-all duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:text-[var(--color-gold)] transition-colors"><path d="M2.5 7.1C2.3 8.3 2 10.7 2 12s.3 3.7.5 4.9c.3 1.4 1.4 2.5 2.8 2.8 1.4.3 6.7.3 6.7.3s5.3 0 6.7-.3c1.4-.3 2.5-1.4 2.8-2.8.2-1.2.5-3.6.5-4.9s-.3-3.7-.5-4.9c-.3-1.4-1.4-2.5-2.8-2.8-1.4-.3-6.7-.3-6.7-.3s-5.3 0-6.7.3c-1.4.3-2.5 1.4-2.8 2.8z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+                </span>
+                YouTube
+              </a>
             </div>
           </div>
 
