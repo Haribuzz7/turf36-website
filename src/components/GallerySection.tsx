@@ -5,6 +5,7 @@
 import { useState } from "react";
 import SectionHighlight from "./SectionHighlight";
 
+import Parallax3DCard from "./Parallax3DCard";
 import Reveal from "./Reveal";
 
 type GalleryProps = {
@@ -34,37 +35,50 @@ export default function GallerySection({ images }: GalleryProps) {
             Together We can, TE.
           </p>
           
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-[16px] mt-[44px]">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-[24px] mt-[44px]">
             {displayImages.map((img, idx) => {
               return (
-                <div 
+                <Parallax3DCard 
                   key={idx} 
                   onClick={() => {
                     if (!img.isPlaceholder) setSelectedImage(img);
                   }}
-                  className={`aspect-[16/9] rounded-[12px] relative overflow-hidden border border-[var(--color-card-stroke)] flex flex-col justify-end p-[14px] cursor-pointer bg-[var(--color-card)] group`}
+                  className="aspect-[16/9] w-full"
                 >
-                  {img.image_url !== '/placeholder' ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={img.image_url} alt="Gallery image" className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                  ) : (
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#1a1712] to-[#2b2313] before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-b before:from-transparent before:from-40% before:to-[rgba(0,0,0,0.75)] before:z-0"></div>
-                  )}
-                  
-                  {/* Always show a dark gradient at bottom so text is readable */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-70"></div>
+                  <div className={`w-full h-full rounded-[12px] relative overflow-hidden border border-[var(--color-card-stroke)] flex flex-col justify-end p-[20px] bg-[var(--color-card)] group shadow-[0_15px_35px_rgba(0,0,0,0.25)]`}>
+                    
+                    {/* Background Layer - slightly scaled down and moves in opposite direction */}
+                    <div 
+                      className="absolute inset-[-10%] w-[120%] h-[120%] transition-transform duration-300 group-hover:scale-105"
+                      style={{ transform: "translateZ(-20px)" }}
+                    >
+                      {img.image_url !== '/placeholder' ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={img.image_url} alt="Gallery image" className="absolute inset-0 w-full h-full object-cover" />
+                      ) : (
+                        <div className="absolute inset-0 bg-gradient-to-br from-[#1a1712] to-[#2b2313] before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-b before:from-transparent before:from-40% before:to-[rgba(0,0,0,0.75)] before:z-0"></div>
+                      )}
+                    </div>
+                    
+                    {/* Always show a dark gradient at bottom so text is readable */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80" style={{ transform: "translateZ(10px)" }}></div>
 
-                  <div className="relative z-10 flex flex-col">
-                    {img.subtitle && (
-                      <span className="text-white font-medium text-[13px] sm:text-[14px] leading-tight mb-1 drop-shadow-md">
-                        {img.subtitle}
+                    {/* Content Layer - Pops out heavily */}
+                    <div 
+                      className="relative z-10 flex flex-col items-start transition-transform duration-300 group-hover:-translate-y-2"
+                      style={{ transform: "translateZ(60px)" }}
+                    >
+                      {img.subtitle && (
+                        <span className="text-white font-medium text-[15px] sm:text-[17px] leading-tight mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+                          {img.subtitle}
+                        </span>
+                      )}
+                      <span className="font-space text-[10px] sm:text-[11px] tracking-[.08em] text-[var(--color-gold-hot)] font-bold drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] uppercase px-2 py-1 bg-black/40 rounded border border-white/10">
+                        {img.isPlaceholder ? 'MEMORY' : new Date(img.event_date).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
                       </span>
-                    )}
-                    <span className="font-space text-[10px] sm:text-[11px] tracking-[.05em] text-[var(--color-gold)] font-bold drop-shadow-md uppercase">
-                      {img.isPlaceholder ? 'MEMORY' : new Date(img.event_date).toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
-                    </span>
+                    </div>
                   </div>
-                </div>
+                </Parallax3DCard>
               );
             })}
           </div>
