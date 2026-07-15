@@ -26,7 +26,7 @@ export default function TurfMapSection() {
 
   return (
     <section id="map" className="relative z-10 border-b border-[rgba(255,255,255,0.05)] bg-[var(--color-void)]">
-      <SectionHighlight glowColor="gold" glowPosition="right" className="py-[110px]">
+      <SectionHighlight glowColor="emerald" glowPosition="right" className="py-[110px]">
         <div className="max-w-[1120px] mx-auto px-7">
           <div className="font-space tracking-[.22em] uppercase text-[11.5px] text-[var(--color-gold)] flex items-center gap-[10px] mb-[16px] before:content-[''] before:w-[26px] before:h-[1px] before:bg-[var(--color-gold)]">
             Facility Blueprint
