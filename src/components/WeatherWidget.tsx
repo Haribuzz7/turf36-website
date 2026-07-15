@@ -40,6 +40,15 @@ export default function WeatherWidget() {
     return () => clearInterval(interval);
   }, []);
 
+  const [vibeIndex, setVibeIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setVibeIndex((prev) => (prev + 1) % 4);
+    }, 3500);
+    return () => clearInterval(timer);
+  }, []);
+
   if (!weather) return null;
 
   // Map WMO weather codes to simple UI
@@ -52,7 +61,12 @@ export default function WeatherWidget() {
     </svg>
   );
 
-  let vibeText = "Perfect for a match!";
+  let vibes = [
+    "Perfect for a match!",
+    "Great weather for Football",
+    "Ideal for Box Cricket",
+    "Pickleball time!"
+  ];
 
   if (!weather.isDay) {
     Icon = () => (
@@ -60,7 +74,12 @@ export default function WeatherWidget() {
         <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
       </svg>
     );
-    vibeText = weather.temp < 25 ? "Cool night under the floodlights" : "Perfect night for turf action";
+    vibes = [
+      weather.temp < 25 ? "Cool night under the floodlights" : "Perfect night for turf action",
+      "7v7 Football under the lights",
+      "Box Cricket night matches",
+      "Evening Pickleball session"
+    ];
   }
 
   if (isRainy) {
@@ -69,15 +88,27 @@ export default function WeatherWidget() {
         <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M16 14v6"/><path d="M8 14v6"/><path d="M12 16v6"/>
       </svg>
     );
-    vibeText = "Rain check! Call us to confirm slots";
+    vibes = [
+      "Rain check! Call to confirm slots",
+      "Board Games shed is open!",
+      "Indoor Carrom & Chess available",
+      "Football might get muddy!"
+    ];
   } else if (isCloudy && weather.isDay) {
     Icon = () => (
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-300">
         <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>
       </svg>
     );
-    vibeText = "Nice & breezy. Ideal for football";
+    vibes = [
+      "Nice & breezy!",
+      "Ideal for long Football matches",
+      "Perfect for Cricket practice",
+      "Great Pickleball weather"
+    ];
   }
+
+  const currentVibe = vibes[vibeIndex] || vibes[0];
 
   return (
     <div 
@@ -100,7 +131,7 @@ export default function WeatherWidget() {
             className="absolute top-[120%] right-0 w-[180px] p-3 glass-panel z-50 text-center"
           >
             <div className="font-space text-[10px] text-[var(--color-gold)] uppercase tracking-wider mb-1">Gobichettipalayam</div>
-            <div className="text-[12px] text-white/80 leading-tight">{vibeText}</div>
+            <div className="text-[12px] text-white/80 leading-tight">{currentVibe}</div>
           </motion.div>
         )}
       </AnimatePresence>

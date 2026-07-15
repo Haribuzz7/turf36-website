@@ -7,18 +7,9 @@ export default function SplashScreen() {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    // Only show once per session to avoid annoyance
-    const hasSeenSplash = sessionStorage.getItem("hasSeenSplash");
-    
-    if (hasSeenSplash) {
-      setIsVisible(false);
-      return;
-    }
-
     // Set timer to hide splash screen
     const timer = setTimeout(() => {
       setIsVisible(false);
-      sessionStorage.setItem("hasSeenSplash", "true");
     }, 2000);
 
     return () => clearTimeout(timer);
