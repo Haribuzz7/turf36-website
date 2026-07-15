@@ -12,6 +12,7 @@ interface Parallax3DCardProps {
 export default function Parallax3DCard({ children, className = "", onClick }: Parallax3DCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const isTouching = useRef(false);
 
   // Motion values for the mouse position
   const x = useMotionValue(0);
@@ -43,6 +44,7 @@ export default function Parallax3DCard({ children, className = "", onClick }: Pa
     if ('touches' in e) {
       clientX = e.touches[0].clientX;
       clientY = e.touches[0].clientY;
+      isTouching.current = true;
     } else {
       clientX = e.clientX;
       clientY = e.clientY;
@@ -60,6 +62,8 @@ export default function Parallax3DCard({ children, className = "", onClick }: Pa
 
   React.useEffect(() => {
     const handleOrientation = (event: DeviceOrientationEvent) => {
+      if (isTouching.current) return; // Do not override active touch interaction
+
       // Gamma is the left-to-right tilt in degrees, where right is positive
       let gamma = event.gamma || 0;
       // Beta is the front-to-back tilt in degrees, where front is positive
@@ -106,6 +110,7 @@ export default function Parallax3DCard({ children, className = "", onClick }: Pa
 
   const handleMouseLeave = () => {
     setIsHovered(false);
+    isTouching.current = false;
     // Reset to center
     x.set(0);
     y.set(0);
