@@ -89,10 +89,10 @@ export default function WeatherWidget() {
       </svg>
     );
     vibes = [
-      "Rain check! Call to confirm slots",
-      "Board Games shed is open!",
-      "Indoor Carrom & Chess available",
-      "Football might get muddy!"
+      "Rain match? Football in the rain is elite! 🌧️",
+      "Zero mud. 100% action. Book a rain slot! ⚡",
+      "Perfect weather for sliding tackles ⚽",
+      "Wait out the rain in the Board Games shed ♟️"
     ];
   } else if (isCloudy && weather.isDay) {
     Icon = () => (
