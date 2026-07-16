@@ -7,6 +7,7 @@ type WeatherData = {
   temp: number;
   isDay: boolean;
   code: number;
+  windSpeed: number;
 };
 
 export default function WeatherWidget() {
@@ -19,7 +20,7 @@ export default function WeatherWidget() {
         // Gobichettipalayam coordinates
         const lat = 11.4542;
         const lon = 77.4419;
-        const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,is_day&timezone=Asia%2FKolkata`);
+        const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,is_day,wind_speed_10m&timezone=Asia%2FKolkata`);
         const data = await res.json();
         
         if (data && data.current) {
@@ -27,6 +28,7 @@ export default function WeatherWidget() {
             temp: Math.round(data.current.temperature_2m),
             isDay: data.current.is_day === 1,
             code: data.current.weather_code,
+            windSpeed: data.current.wind_speed_10m || 0,
           });
         }
       } catch (error) {
@@ -53,7 +55,10 @@ export default function WeatherWidget() {
 
   // Map WMO weather codes to simple UI
   const isRainy = [51, 53, 55, 61, 63, 65, 80, 81, 82].includes(weather.code);
+  const isThunder = [95, 96, 99].includes(weather.code);
   const isCloudy = [1, 2, 3, 45, 48].includes(weather.code);
+  const isWindy = weather.windSpeed > 15; // Wind > 15 km/h
+  const isSunny = weather.code === 0 && weather.isDay;
   
   let Icon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-yellow-400">
@@ -120,7 +125,7 @@ export default function WeatherWidget() {
         
         {/* Particle Effects Layer */}
         <div className="absolute inset-0 pointer-events-none opacity-40">
-          {isRainy && (
+          {isRainy && !isThunder && (
             <div className="absolute inset-0 flex justify-around w-full">
               {[...Array(6)].map((_, i) => (
                 <div 
@@ -131,7 +136,48 @@ export default function WeatherWidget() {
               ))}
             </div>
           )}
-          {!weather.isDay && !isRainy && (
+          
+          {isThunder && (
+            <div className="absolute inset-0">
+              <div className="absolute inset-0 bg-white opacity-0 animate-[lightning_3s_ease-out_infinite]" style={{ animationDelay: '1s' }}></div>
+              <div className="absolute inset-0 bg-white opacity-0 animate-[lightning_4s_ease-out_infinite]" style={{ animationDelay: '2.5s' }}></div>
+              <div className="absolute inset-0 flex justify-around w-full">
+                {[...Array(8)].map((_, i) => (
+                  <div 
+                    key={i} 
+                    className="w-[1px] h-[12px] bg-blue-400 rounded-full animate-[rain_0.5s_linear_infinite]"
+                    style={{ animationDelay: `${i * 0.1}s`, opacity: Math.random() * 0.6 + 0.4 }}
+                  ></div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {isWindy && !isRainy && !isThunder && (
+            <div className="absolute inset-0 overflow-hidden">
+              {[...Array(4)].map((_, i) => (
+                <div 
+                  key={i}
+                  className="absolute h-[1px] bg-gradient-to-r from-transparent via-white to-transparent rounded-full animate-[wind_2s_linear_infinite]"
+                  style={{ 
+                    top: `${Math.random() * 80 + 10}%`,
+                    width: `${Math.random() * 30 + 20}%`,
+                    animationDelay: `${Math.random() * 2}s`,
+                    animationDuration: `${Math.random() * 1 + 1}s`
+                  }}
+                ></div>
+              ))}
+            </div>
+          )}
+
+          {isSunny && !isWindy && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-[150%] h-[150%] bg-[radial-gradient(circle,rgba(255,235,59,0.15)_0%,transparent_60%)] animate-[sunRay_10s_linear_infinite]"></div>
+              <div className="absolute w-[100%] h-[100%] bg-[radial-gradient(circle,rgba(255,255,255,0.1)_0%,transparent_50%)] animate-[sunRay_8s_linear_infinite_reverse]"></div>
+            </div>
+          )}
+
+          {!weather.isDay && !isRainy && !isThunder && !isCloudy && (
             <div className="absolute inset-0">
               {[...Array(5)].map((_, i) => (
                 <div 

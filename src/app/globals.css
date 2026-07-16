@@ -106,4 +106,22 @@
     50% { opacity: 1; transform: scale(1.2); }
     100% { opacity: 0; transform: scale(0.5); }
   }
+
+  @keyframes lightning {
+    0%, 100% { opacity: 0; }
+    10%, 20% { opacity: 0.8; background: white; }
+    15% { opacity: 0; }
+  }
+
+  @keyframes wind {
+    0% { transform: translateX(200%) skewX(-15deg); opacity: 0; }
+    10% { opacity: 0.4; }
+    100% { transform: translateX(-200%) skewX(-15deg); opacity: 0; }
+  }
+
+  @keyframes sunRay {
+    0% { transform: rotate(0deg) scale(1); opacity: 0.2; }
+    50% { transform: rotate(180deg) scale(1.4); opacity: 0.5; }
+    100% { transform: rotate(360deg) scale(1); opacity: 0.2; }
+  }
 }
