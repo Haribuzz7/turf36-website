@@ -116,9 +116,42 @@ export default function WeatherWidget() {
       onMouseEnter={() => setIsOpen(true)}
       onMouseLeave={() => setIsOpen(false)}
     >
-      <div className="flex items-center gap-2 px-3 py-1.5 bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] hover:border-[var(--color-gold)]/40 hover:bg-[rgba(0,230,118,0.05)] rounded-full transition-colors cursor-default backdrop-blur-md">
-        <Icon />
-        <span className="text-[13px] font-medium text-white">{weather.temp}°C</span>
+      <div className="relative overflow-hidden flex items-center gap-2 px-3 py-1.5 bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] hover:border-[var(--color-gold)]/40 hover:bg-[rgba(0,230,118,0.05)] rounded-full transition-colors cursor-default backdrop-blur-md">
+        
+        {/* Particle Effects Layer */}
+        <div className="absolute inset-0 pointer-events-none opacity-40">
+          {isRainy && (
+            <div className="absolute inset-0 flex justify-around w-full">
+              {[...Array(6)].map((_, i) => (
+                <div 
+                  key={i} 
+                  className="w-[1px] h-[10px] bg-blue-300 rounded-full animate-[rain_0.7s_linear_infinite]"
+                  style={{ animationDelay: `${i * 0.15}s`, opacity: Math.random() * 0.5 + 0.3 }}
+                ></div>
+              ))}
+            </div>
+          )}
+          {!weather.isDay && !isRainy && (
+            <div className="absolute inset-0">
+              {[...Array(5)].map((_, i) => (
+                <div 
+                  key={i}
+                  className="absolute w-[2px] h-[2px] bg-white rounded-full animate-[twinkle_2s_ease-in-out_infinite]"
+                  style={{ 
+                    top: `${Math.random() * 100}%`, 
+                    left: `${Math.random() * 100}%`,
+                    animationDelay: `${Math.random() * 2}s` 
+                  }}
+                ></div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div className="relative z-10 flex items-center gap-2">
+          <Icon />
+          <span className="text-[13px] font-medium text-white">{weather.temp}°C</span>
+        </div>
       </div>
 
       <AnimatePresence>

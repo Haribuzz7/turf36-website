@@ -3,11 +3,84 @@
 /* eslint-disable react/no-unescaped-entities */
 
 import SectionHighlight from "./SectionHighlight";
-
 import Reveal from "./Reveal";
 import { useState } from "react";
 import PremiumIcon from "./PremiumIcon";
 import MagneticButton from "./MagneticButton";
+import { motion, useMotionValue, useTransform } from "framer-motion";
+
+function MatchTicket({ name, sport, date, time }: any) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  
+  const rotateX = useTransform(y, [-100, 100], [10, -10]);
+  const rotateY = useTransform(x, [-100, 100], [-10, 10]);
+
+  function handleMouseMove(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    const rect = event.currentTarget.getBoundingClientRect();
+    x.set(event.clientX - rect.left - rect.width / 2);
+    y.set(event.clientY - rect.top - rect.height / 2);
+  }
+
+  function handleMouseLeave() {
+    x.set(0);
+    y.set(0);
+  }
+
+  return (
+    <motion.div
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative w-full max-w-[400px] mx-auto aspect-[1.8/1] rounded-2xl p-[1px] bg-gradient-to-br from-[var(--color-gold-hot)] via-[var(--color-gold)] to-[rgba(0,100,50,0.5)] shadow-[0_20px_40px_rgba(0,230,118,0.15)] cursor-default mb-8"
+    >
+      <div 
+        className="w-full h-full bg-[#0a150f] rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden"
+        style={{ transform: "translateZ(30px)" }}
+      >
+        {/* Holographic overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(125deg,transparent_20%,rgba(140,255,90,0.1)_40%,transparent_60%)] animate-[float_4s_ease-in-out_infinite] opacity-50 pointer-events-none"></div>
+        
+        {/* Notch cutouts */}
+        <div className="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-[var(--color-void)] rounded-full border-r border-[var(--color-gold)]"></div>
+        <div className="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-[var(--color-void)] rounded-full border-l border-[rgba(0,100,50,0.5)]"></div>
+        {/* Perforation line */}
+        <div className="absolute left-[70%] top-0 bottom-0 w-[1px] border-l-2 border-dashed border-[rgba(255,255,255,0.1)]"></div>
+
+        <div className="flex justify-between items-start w-[65%]">
+          <div>
+            <div className="text-[10px] text-[var(--color-gold)] tracking-widest uppercase mb-1">VIP Access Pass</div>
+            <div className="font-bebas text-3xl tracking-wide leading-none">{sport || "SELECT SPORT"}</div>
+          </div>
+          <PremiumIcon name="trophy" noContainer className="w-6 h-6 text-white/20" />
+        </div>
+
+        <div className="mt-4 w-[65%] relative z-10">
+          <div className="text-[10px] text-[var(--color-muted)] uppercase tracking-wider mb-1">Player Name</div>
+          <div className="font-space text-lg text-white truncate">{name || "____________"}</div>
+        </div>
+
+        <div className="flex justify-between items-end w-[65%] mt-4 relative z-10">
+          <div>
+            <div className="text-[9px] text-[var(--color-muted)] uppercase tracking-wider mb-1">Date</div>
+            <div className="font-space text-sm text-white">{date || "--/--/----"}</div>
+          </div>
+          <div>
+            <div className="text-[9px] text-[var(--color-muted)] uppercase tracking-wider mb-1">Time</div>
+            <div className="font-space text-sm text-white">{time || "--:--"}</div>
+          </div>
+        </div>
+
+        {/* Right stub section */}
+        <div className="absolute right-0 top-0 bottom-0 w-[30%] flex flex-col justify-center items-center">
+          <div className="font-bebas text-4xl text-[var(--color-gold-hot)] -rotate-90 origin-center opacity-80 tracking-widest whitespace-nowrap">
+            TURF 36
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function BookingSection() {
   const [name, setName] = useState("");
@@ -26,7 +99,7 @@ export default function BookingSection() {
   };
 
   return (
-    <section id="book" className="relative z-10  border-b border-[rgba(255,255,255,0.05)] ">
+    <section id="book" className="relative z-10 border-b border-[rgba(255,255,255,0.05)] bg-[var(--color-void)]">
       <SectionHighlight glowColor="lime" glowPosition="right" className="py-[110px]">
       <div className="max-w-[1120px] mx-auto px-7">
         <div className="font-space tracking-[.22em] uppercase text-[11.5px] text-[var(--color-gold)] flex items-center gap-[10px] mb-[16px] before:content-[''] before:w-[26px] before:h-[1px] before:bg-[var(--color-gold)]">
@@ -38,12 +111,11 @@ export default function BookingSection() {
           </h2>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-[44px] mt-[52px]">
-          <div>
-            <p className="text-[var(--color-muted)] font-light text-[15.5px] leading-[1.7] max-w-[560px]">
-              Pick a session, tell us who's playing, and you're confirmed. No more calling around to check if the slot is free.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-[14px] mt-[20px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-[44px] mt-[52px]">
+          <div className="flex flex-col">
+            <MatchTicket name={name} sport={sport} date={date} time={startTime ? (endTime ? `${startTime} - ${endTime}` : startTime) : ""} />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-[14px]">
               <div className="p-[20px] rounded-xl glass-panel">
                 <div className="mb-[10px]"><PremiumIcon name="sun" noContainer className="w-[20px] h-[20px]" /></div>
                 Morning Session
@@ -101,15 +173,15 @@ export default function BookingSection() {
                 <option value="Pickleball">Pickleball</option>
               </select>
             </div>
-            <MagneticButton className="w-full">
-              <button type="submit" className="font-space text-[12.5px] tracking-[.08em] uppercase py-[14px] px-[26px] rounded-lg flex items-center justify-center gap-[10px] cursor-pointer glass-button mt-[6px] w-full">
+            <MagneticButton className="w-full mt-4">
+              <button type="submit" className="font-space text-[12.5px] tracking-[.08em] uppercase py-[14px] px-[26px] rounded-lg flex items-center justify-center gap-[10px] cursor-pointer glass-button w-full">
                 Proceed to WhatsApp
               </button>
             </MagneticButton>
           </form>
         </div>
       </div>
-          </SectionHighlight>
+      </SectionHighlight>
     </section>
   );
 }
