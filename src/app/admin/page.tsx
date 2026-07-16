@@ -280,20 +280,20 @@ export default async function AdminDashboard(props: { searchParams: Promise<{ ta
                 <form action={addHallOfFame} className="flex flex-col gap-4">
                   <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
                     <div>
-                      <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Player Image</label>
+                      <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Team Logo / Image</label>
                       <input required type="file" name="image" accept="image/*" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-[9px] text-[13px] text-[var(--color-muted)] file:bg-[var(--color-gold)] file:text-black hover:file:bg-white cursor-pointer" />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Name</label>
-                      <input required type="text" name="name" placeholder="e.g. MS Dhoni" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-3 text-[13px] text-white focus:outline-none focus:border-[var(--color-gold)]" />
+                      <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Team / Champion Name</label>
+                      <input required type="text" name="name" placeholder="e.g. Cream & Craze" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-3 text-[13px] text-white focus:outline-none focus:border-[var(--color-gold)]" />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Role</label>
-                      <input required type="text" name="role" placeholder="e.g. Captain" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-3 text-[13px] text-white focus:outline-none focus:border-[var(--color-gold)]" />
+                      <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Tournament / Subtitle</label>
+                      <input required type="text" name="role" placeholder="e.g. Turf Super League" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-3 text-[13px] text-white focus:outline-none focus:border-[var(--color-gold)]" />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Metadata (e.g. stats)</label>
-                      <input type="text" name="metadata" placeholder="e.g. 500 Runs" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-3 text-[13px] text-white focus:outline-none focus:border-[var(--color-gold)]" />
+                      <label className="block text-[11px] font-space text-[var(--color-gold)] mb-2 uppercase tracking-[.05em]">Extra Details (e.g. Year/Edition)</label>
+                      <input type="text" name="metadata" placeholder="e.g. Season 1 Winners" className="w-full bg-[#0a0a0a] border border-[var(--color-card-stroke)] rounded-lg p-3 text-[13px] text-white focus:outline-none focus:border-[var(--color-gold)]" />
                     </div>
                   </div>
                   <button type="submit" className="bg-white/5 hover:bg-[var(--color-gold)] hover:text-black border border-[var(--color-card-stroke)] text-white font-space text-[12.5px] uppercase tracking-[.1em] py-[14px] rounded-lg transition-all">Add to Hall of Fame</button>
