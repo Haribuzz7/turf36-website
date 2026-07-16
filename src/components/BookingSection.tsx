@@ -8,6 +8,7 @@ import { useState } from "react";
 import PremiumIcon from "./PremiumIcon";
 import MagneticButton from "./MagneticButton";
 import { motion, useMotionValue, useTransform } from "framer-motion";
+import { createBooking } from "@/app/admin/actions";
 
 function MatchTicket({ name, sport, date, time }: any) {
   const x = useMotionValue(0);
@@ -89,13 +90,23 @@ export default function BookingSection() {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [sport, setSport] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     const formattedTime = `${startTime} to ${endTime}`;
+    
+    try {
+      await createBooking(name, phone, date, formattedTime, sport);
+    } catch (err) {
+      console.error("Failed to log booking request", err);
+    }
+    
     const message = `Hi Turf 36! I'd like to book a slot.\n\nName: ${name}\nPhone: ${phone}\nDate: ${date}\nTime: ${formattedTime}\nSport: ${sport}`;
     const whatsappUrl = `https://wa.me/917708929267?text=${encodeURIComponent(message)}`;
     window.location.href = whatsappUrl;
+    setIsSubmitting(false);
   };
 
   return (

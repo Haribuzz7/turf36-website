@@ -34,9 +34,12 @@ export default async function Home() {
   const { data: galleryFiles } = await supabase.from('gallery').select('*').order('created_at', { ascending: false });
   const gallery = galleryFiles || [];
 
+  // Fetch Site Settings
+  const { data: siteSettings } = await supabase.from('site_settings').select('*').eq('id', 1).single();
+
   return (
     <main>
-      <Header />
+      <Header announcementText={siteSettings?.announcement_active ? siteSettings?.announcement_text : null} />
       <HeroSection />
       <BookingSection />
       <DayNightSliderSection />
@@ -46,7 +49,7 @@ export default async function Home() {
       <HighlightsSection highlights={highlights || []} />
       <HallOfFameSection hallOfFame={hallOfFame || []} />
       <TeamsSection />
-      <TurfMapSection />
+      <TurfMapSection maintenanceSettings={siteSettings} />
       <FacilitiesSection />
       <EventsSection />
       <TestimonialsSection />

@@ -280,3 +280,62 @@ export async function deleteHallOfFame(formData: FormData): Promise<void> {
   revalidatePath('/')
   revalidatePath('/admin')
 }
+
+export async function createBooking(name: string, phone: string, date: string, timeSlot: string, sport: string): Promise<void> {
+  const supabase = await createClient()
+  
+  const { error } = await supabase
+    .from('bookings')
+    .insert([{ name, phone, booking_date: date, time_slot: timeSlot, sport, status: 'pending' }])
+
+  if (error) {
+    console.error("Error creating booking:", error)
+    throw new Error(error.message)
+  }
+}
+
+export async function updateBookingStatus(formData: FormData): Promise<void> {
+  const supabase = await createClient()
+  const id = formData.get('id') as string
+  const status = formData.get('status') as string
+  
+  const { error } = await supabase
+    .from('bookings')
+    .update({ status })
+    .eq('id', id)
+
+  if (error) {
+    console.error("Error updating booking status:", error)
+    throw new Error(error.message)
+  }
+  revalidatePath('/admin')
+}
+
+export async function updateSiteSettings(formData: FormData): Promise<void> {
+  const supabase = await createClient()
+  
+  const announcement_text = formData.get('announcement_text') as string
+  const announcement_active = formData.get('announcement_active') === 'on'
+  const pitch1_maintenance = formData.get('pitch1_maintenance') === 'on'
+  const pickleball_maintenance = formData.get('pickleball_maintenance') === 'on'
+  const boardgames_maintenance = formData.get('boardgames_maintenance') === 'on'
+  
+  const { error } = await supabase
+    .from('site_settings')
+    .upsert({
+      id: 1,
+      announcement_text,
+      announcement_active,
+      pitch1_maintenance,
+      pickleball_maintenance,
+      boardgames_maintenance
+    })
+
+  if (error) {
+    console.error("Error updating site settings:", error)
+    throw new Error(error.message)
+  }
+
+  revalidatePath('/')
+  revalidatePath('/admin')
+}

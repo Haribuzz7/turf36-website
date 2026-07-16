@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PremiumIcon from "./PremiumIcon";
 import WeatherWidget from "./WeatherWidget";
 
-export default function Header() {
+export default function Header({ announcementText }: { announcementText?: string | null }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -16,7 +16,12 @@ export default function Header() {
 
   return (
     <>
-      <header className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between py-[18px] px-7 transition-all duration-500 ${scrolled ? 'bg-[rgba(0,230,118,0.05)] backdrop-blur-xl border-b border-[rgba(140,255,90,0.15)] shadow-[0_4px_30px_rgba(0,0,0,0.5)]' : 'bg-transparent border-b border-transparent'}`}>
+      {announcementText && (
+        <div className="bg-[var(--color-gold)] text-black text-center py-2 px-4 font-space text-[12px] uppercase tracking-wider font-bold z-[100] relative animate-[pulse_3s_infinite]">
+          {announcementText}
+        </div>
+      )}
+      <header className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between py-[18px] px-7 transition-all duration-500 ${scrolled ? 'bg-[rgba(0,230,118,0.05)] backdrop-blur-xl border-b border-[rgba(140,255,90,0.15)] shadow-[0_4px_30px_rgba(0,0,0,0.5)]' : 'bg-transparent border-b border-transparent'} ${announcementText ? 'mt-8' : ''}`}>
         <a href="#" className="flex items-center">
           <img src="/turf%2036%20white%20logo.png" alt="TURF 36" className="h-[64px] w-auto opacity-90 transition-opacity hover:opacity-100" />
         </a>
