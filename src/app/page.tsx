@@ -15,6 +15,7 @@ import EventsSection from "@/components/EventsSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import MemorySection from "@/components/MemorySection";
 import Footer from "@/components/Footer";
+import PanoramaViewer from "@/components/PanoramaViewer";
 
 export default async function Home() {
   const supabase = await createClient();
@@ -50,6 +51,7 @@ export default async function Home() {
       <HallOfFameSection hallOfFame={hallOfFame || []} />
       <TeamsSection />
       <TurfMapSection maintenanceSettings={siteSettings} />
+      <PanoramaViewer />
       <FacilitiesSection />
       <EventsSection />
       <TestimonialsSection />
