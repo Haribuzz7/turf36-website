@@ -30,7 +30,7 @@ export default function EventPlannerSection() {
 
   // Format WhatsApp Message
   const getWhatsAppLink = () => {
-    if (items.length === 0) return "https://wa.me/919876543210?text=I%20want%20to%20book%20an%20event%20at%20Turf%2036";
+    if (items.length === 0) return "https://wa.me/917708929267?text=I%20want%20to%20book%20an%20event%20at%20Turf%2036";
     
     const itemCounts: Record<string, number> = {};
     items.forEach(item => {
@@ -42,7 +42,7 @@ export default function EventPlannerSection() {
       .join(", ");
 
     const text = `Hi Turf 36! I used the Event Planner on your website. I want to book an event with the following setup: ${itemsText}.`;
-    return `https://wa.me/919876543210?text=${encodeURIComponent(text)}`;
+    return `https://wa.me/917708929267?text=${encodeURIComponent(text)}`;
   };
 
   return (
