@@ -1,25 +1,26 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { Headphones, Cake, Pizza, Trophy, Briefcase, Trash2 } from "lucide-react";
 import SectionHighlight from "./SectionHighlight";
 import Reveal from "./Reveal";
 
 const DRAGGABLE_ITEMS = [
-  { id: "dj", label: "DJ Booth", emoji: "🎧" },
-  { id: "cake", label: "Cake Table", emoji: "🎂" },
-  { id: "food", label: "Food Stall", emoji: "🍕" },
-  { id: "trophy", label: "Trophy Stand", emoji: "🏆" },
-  { id: "vip", label: "VIP Seating", emoji: "🪑" },
+  { id: "dj", label: "DJ Booth", Icon: Headphones, color: "text-blue-400" },
+  { id: "cake", label: "Cake Table", Icon: Cake, color: "text-pink-400" },
+  { id: "food", label: "Food Stall", Icon: Pizza, color: "text-orange-400" },
+  { id: "tournament", label: "Tournament Organizing", Icon: Trophy, color: "text-yellow-400" },
+  { id: "corporate", label: "Corporate Events", Icon: Briefcase, color: "text-purple-400" },
 ];
 
 export default function EventPlannerSection() {
   const constraintsRef = useRef(null);
-  const [items, setItems] = useState<{ id: string; type: string; emoji: string; label: string }[]>([]);
+  const [items, setItems] = useState<{ id: string; type: string; Icon: any; label: string; color: string }[]>([]);
 
   // Function to add a new item to the turf
-  const addItem = (type: string, emoji: string, label: string) => {
-    setItems((prev) => [...prev, { id: `${type}-${Date.now()}`, type, emoji, label }]);
+  const addItem = (type: string, Icon: any, label: string, color: string) => {
+    setItems((prev) => [...prev, { id: `${type}-${Date.now()}`, type, Icon, label, color }]);
   };
 
   // Function to clear all items
@@ -67,31 +68,33 @@ export default function EventPlannerSection() {
             
             {/* The Toolbox */}
             <Reveal delay={0.2} className="w-full lg:w-[300px] flex-shrink-0">
-              <div className="glass-panel p-6 h-full flex flex-col">
+              <div className="glass-panel p-6 h-full flex flex-col relative z-20">
                 <h3 className="font-bebas text-[24px] text-white tracking-widest mb-6 border-b border-white/10 pb-4">Equipment</h3>
                 
                 <div className="grid grid-cols-2 gap-3 mb-8">
                   {DRAGGABLE_ITEMS.map((item) => (
-                    <button
+                    <motion.button
                       key={item.id}
-                      onClick={() => addItem(item.id, item.emoji, item.label)}
-                      className="bg-black/40 border border-[var(--color-card-stroke)] hover:border-[var(--color-gold)] rounded-xl p-4 flex flex-col items-center justify-center gap-2 transition-all hover:bg-white/5 active:scale-95 cursor-pointer"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => addItem(item.id, item.Icon, item.label, item.color)}
+                      className="bg-black/40 border border-[var(--color-card-stroke)] hover:border-[var(--color-gold)] hover:shadow-[0_0_15px_rgba(201,162,39,0.3)] rounded-xl p-4 flex flex-col items-center justify-center gap-3 transition-colors cursor-pointer group"
                     >
-                      <span className="text-[28px]">{item.emoji}</span>
-                      <span className="font-space text-[10px] uppercase text-white/80 tracking-wider text-center">{item.label}</span>
-                    </button>
+                      <item.Icon className={`w-7 h-7 ${item.color} group-hover:scale-110 transition-transform`} />
+                      <span className="font-space text-[10px] uppercase text-white/80 tracking-wider text-center leading-tight">{item.label}</span>
+                    </motion.button>
                   ))}
                 </div>
 
                 <div className="mt-auto flex flex-col gap-3">
-                  <button onClick={clearItems} className="font-space text-[11px] uppercase tracking-widest text-[var(--color-muted)] hover:text-red-400 transition-colors py-2 text-center">
-                    Clear Layout
+                  <button onClick={clearItems} className="font-space text-[11px] uppercase tracking-widest text-[var(--color-muted)] hover:text-red-400 flex items-center justify-center gap-2 transition-colors py-2 text-center">
+                    <Trash2 className="w-3 h-3" /> Clear Layout
                   </button>
                   <a 
                     href={getWhatsAppLink()} 
                     target="_blank" 
                     rel="noreferrer"
-                    className="w-full bg-[var(--color-gold)] text-black font-space font-bold uppercase tracking-widest text-[12px] py-4 rounded-xl flex justify-center items-center gap-2 hover:bg-white transition-colors"
+                    className="w-full bg-[var(--color-gold)] text-black font-space font-bold uppercase tracking-widest text-[12px] py-4 rounded-xl flex justify-center items-center gap-2 hover:bg-white hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all"
                   >
                     Send to WhatsApp
                   </a>
@@ -100,10 +103,10 @@ export default function EventPlannerSection() {
             </Reveal>
 
             {/* The Canvas */}
-            <Reveal delay={0.3} className="flex-1 w-full">
+            <Reveal delay={0.3} className="flex-1 w-full relative z-10">
               <div 
                 ref={constraintsRef}
-                className="w-full aspect-[4/3] max-h-[600px] bg-[#1a2318] rounded-[24px] border border-[var(--color-card-stroke)] relative overflow-hidden shadow-2xl"
+                className="w-full aspect-[4/3] max-h-[600px] bg-[#1a2318] rounded-[24px] border border-[var(--color-card-stroke)] relative overflow-hidden shadow-[inset_0_0_50px_rgba(0,0,0,0.5)]"
                 style={{
                   backgroundImage: `
                     linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
@@ -113,7 +116,7 @@ export default function EventPlannerSection() {
                 }}
               >
                 {/* Turf pitch markings */}
-                <div className="absolute inset-[40px] border-2 border-white/20 rounded-lg pointer-events-none">
+                <div className="absolute inset-[40px] border-2 border-white/20 rounded-lg pointer-events-none shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                   {/* Center line */}
                   <div className="absolute top-0 bottom-0 left-1/2 -ml-[1px] w-[2px] bg-white/20"></div>
                   {/* Center circle */}
@@ -128,26 +131,31 @@ export default function EventPlannerSection() {
                 </div>
 
                 {/* Render Draggable Items */}
-                {items.map((item) => (
-                  <motion.div
-                    key={item.id}
-                    drag
-                    dragConstraints={constraintsRef}
-                    dragElastic={0.1}
-                    dragMomentum={false}
-                    whileHover={{ scale: 1.1 }}
-                    whileDrag={{ scale: 1.2, zIndex: 50, cursor: "grabbing" }}
-                    initial={{ scale: 0, opacity: 0, x: "50%", y: "50%" }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    className="absolute w-[60px] h-[60px] bg-black/60 backdrop-blur-md border border-[var(--color-gold)] rounded-full flex flex-col items-center justify-center cursor-grab shadow-[0_10px_20px_rgba(0,0,0,0.5)] z-10"
-                    style={{
-                      left: 'calc(50% - 30px)',
-                      top: 'calc(50% - 30px)'
-                    }}
-                  >
-                    <span className="text-[24px] pointer-events-none">{item.emoji}</span>
-                  </motion.div>
-                ))}
+                <AnimatePresence>
+                  {items.map((item) => (
+                    <motion.div
+                      key={item.id}
+                      drag
+                      dragConstraints={constraintsRef}
+                      dragElastic={0.2}
+                      dragMomentum={true}
+                      whileHover={{ scale: 1.15, boxShadow: "0px 0px 20px rgba(255,255,255,0.3)" }}
+                      whileTap={{ scale: 0.95, cursor: "grabbing" }}
+                      whileDrag={{ scale: 1.25, zIndex: 50, cursor: "grabbing", boxShadow: "0px 15px 30px rgba(0,0,0,0.6)" }}
+                      initial={{ scale: 0, opacity: 0, x: "50%", y: "50%", rotate: -45 }}
+                      animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                      exit={{ scale: 0, opacity: 0 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      className="absolute w-[80px] h-[80px] bg-black/70 backdrop-blur-md border border-[var(--color-card-stroke)] hover:border-[var(--color-gold)] rounded-full flex flex-col items-center justify-center cursor-grab shadow-[0_10px_20px_rgba(0,0,0,0.5)] z-10"
+                      style={{
+                        left: 'calc(50% - 40px)',
+                        top: 'calc(50% - 40px)'
+                      }}
+                    >
+                      <item.Icon className={`w-10 h-10 pointer-events-none ${item.color} drop-shadow-lg`} strokeWidth={1.5} />
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
 
               </div>
             </Reveal>
