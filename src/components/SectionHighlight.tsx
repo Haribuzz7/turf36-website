@@ -4,7 +4,7 @@ import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import { MouseEvent } from "react";
 
 type HighlightProps = {
-  glowColor?: "emerald" | "lime";
+  glowColor?: "emerald" | "lime" | "gold";
   glowPosition?: "left" | "right";
   className?: string;
   children: React.ReactNode;
@@ -29,7 +29,8 @@ export default function SectionHighlight({
   // Increased opacity heavily so it is visible against the dark green gradient
   const ambientColor = glowColor === "emerald" 
     ? "rgba(0, 230, 118, 0.12)" 
-    : "rgba(140, 255, 90, 0.12)";
+    : glowColor === "lime" ? "rgba(140, 255, 90, 0.12)"
+    : "rgba(201, 162, 39, 0.12)"; // gold
 
   // Fixed massive circle dimensions so it doesn't get squished by short sections
   const positionClasses = glowPosition === "left" 
@@ -40,7 +41,8 @@ export default function SectionHighlight({
   // Increased opacity to 0.18 to make the mouse spotlight stand out
   const spotlightColor = glowColor === "emerald" 
     ? "rgba(0, 230, 118, 0.18)" 
-    : "rgba(140, 255, 90, 0.18)";
+    : glowColor === "lime" ? "rgba(140, 255, 90, 0.18)"
+    : "rgba(201, 162, 39, 0.18)"; // gold
 
   return (
     <div 

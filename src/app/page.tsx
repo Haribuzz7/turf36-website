@@ -12,6 +12,7 @@ import TurfMapSection from "@/components/TurfMapSection";
 import FacilitiesSection from "@/components/FacilitiesSection";
 import DayNightSliderSection from "@/components/DayNightSliderSection";
 import EventsSection from "@/components/EventsSection";
+import EventPlannerSection from "@/components/EventPlannerSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import MemorySection from "@/components/MemorySection";
 import Footer from "@/components/Footer";
@@ -54,6 +55,7 @@ export default async function Home() {
       <PanoramaViewer />
       <FacilitiesSection />
       <EventsSection />
+      <EventPlannerSection />
       <TestimonialsSection />
       <MemorySection />
       <Footer />

@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   description: "Turf 36, Gobichettipalayam — cricket & pickleball turf. Book slots, follow live matches, browse the Hall of Fame.",
 };
 
+import NextTopLoader from 'nextjs-toploader';
 import CustomCursor from "@/components/CustomCursor";
 import FluidCursor from "@/components/FluidCursor";
 import SplashScreen from "@/components/SplashScreen";
@@ -40,6 +41,7 @@ export default function RootLayout({
       className={`${bebas.variable} ${spaceMono.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <NextTopLoader color="var(--color-gold-hot)" height={3} showSpinner={false} />
         <SplashScreen />
         <FluidCursor />
         <CustomCursor />
