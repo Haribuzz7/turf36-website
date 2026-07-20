@@ -19,9 +19,14 @@ export default async function AdminDashboard(props: { searchParams: Promise<{ ta
 
   // Optimize: Only fetch what is needed for the current tab
   if (currentTab === 'overview') {
-    const { data: lm } = await supabase.from('live_match').select('*').single();
+    const [
+      { data: lm },
+      { data: ss }
+    ] = await Promise.all([
+      supabase.from('live_match').select('*').single(),
+      supabase.from('site_settings').select('*').eq('id', 1).single()
+    ]);
     liveMatch = lm;
-    const { data: ss } = await supabase.from('site_settings').select('*').eq('id', 1).single();
     siteSettings = ss;
   }
 
@@ -37,13 +42,21 @@ export default async function AdminDashboard(props: { searchParams: Promise<{ ta
   }
 
   if (currentTab === 'content') {
-    const { data: gf } = await supabase.from('gallery').select('*').order('created_at', { ascending: false });
+    const [
+      { data: gf },
+      { data: ev },
+      { data: hl },
+      { data: hof }
+    ] = await Promise.all([
+      supabase.from('gallery').select('*').order('created_at', { ascending: false }),
+      supabase.from('events').select('*').order('event_date', { ascending: true }),
+      supabase.from('highlights').select('*').order('created_at', { ascending: false }),
+      supabase.from('hall_of_fame').select('*').order('order_index', { ascending: true })
+    ]);
+    
     gallery = gf || [];
-    const { data: ev } = await supabase.from('events').select('*').order('event_date', { ascending: true });
     events = ev || [];
-    const { data: hl } = await supabase.from('highlights').select('*').order('created_at', { ascending: false });
     highlights = hl || [];
-    const { data: hof } = await supabase.from('hall_of_fame').select('*').order('order_index', { ascending: true });
     hallOfFame = hof || [];
   }
 

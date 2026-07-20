@@ -21,23 +21,22 @@ import PanoramaViewer from "@/components/PanoramaViewer";
 export default async function Home() {
   const supabase = await createClient();
 
-  // Fetch Live Match
-  const { data: liveMatch } = await supabase.from('live_match').select('*').limit(1).single();
+  // Fetch all data in parallel for much faster load times
+  const [
+    { data: liveMatch },
+    { data: hallOfFame },
+    { data: highlights },
+    { data: galleryFiles },
+    { data: siteSettings }
+  ] = await Promise.all([
+    supabase.from('live_match').select('*').limit(1).single(),
+    supabase.from('hall_of_fame').select('*').order('order_index', { ascending: true }),
+    supabase.from('highlights').select('*').order('created_at', { ascending: false }),
+    supabase.from('gallery').select('*').order('created_at', { ascending: false }),
+    supabase.from('site_settings').select('*').eq('id', 1).single()
+  ]);
 
-
-
-  // Fetch Hall of Fame
-  const { data: hallOfFame } = await supabase.from('hall_of_fame').select('*').order('order_index', { ascending: true });
-
-  // Fetch Highlights
-  const { data: highlights } = await supabase.from('highlights').select('*').order('created_at', { ascending: false });
-
-  // Fetch Gallery Images
-  const { data: galleryFiles } = await supabase.from('gallery').select('*').order('created_at', { ascending: false });
   const gallery = galleryFiles || [];
-
-  // Fetch Site Settings
-  const { data: siteSettings } = await supabase.from('site_settings').select('*').eq('id', 1).single();
 
   return (
     <main>

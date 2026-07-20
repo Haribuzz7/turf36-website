@@ -28,7 +28,6 @@ export const metadata: Metadata = {
 import NextTopLoader from 'nextjs-toploader';
 import CustomCursor from "@/components/CustomCursor";
 import FluidCursor from "@/components/FluidCursor";
-import SplashScreen from "@/components/SplashScreen";
 
 export default function RootLayout({
   children,
@@ -42,7 +41,6 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <NextTopLoader color="var(--color-gold-hot)" height={3} showSpinner={false} />
-        <SplashScreen />
         <FluidCursor />
         <CustomCursor />
         {children}
